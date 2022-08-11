@@ -34,7 +34,9 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
                   ),
                 ),
                 InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.addOffersRoute);
+                    },
                     child: SvgPicture.asset(
                       ImageAssets.addItem,
                     ))
