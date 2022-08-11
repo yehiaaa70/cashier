@@ -20,6 +20,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   get_it: ^7.2.0
+  dio: ^4.0.6
   internet_connection_checker: ^0.0.1+4
   shared_preferences: ^2.0.15
   carousel_slider: ^4.1.1
