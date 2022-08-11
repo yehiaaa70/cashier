@@ -1,4 +1,5 @@
 import 'package:cashir/features/home_navigator/presentation/cubit/home_navigator_cubit.dart';
+import 'package:cashir/features/login/presentation/cubit/login_cubit.dart';
 import 'package:cashir/features/new_orders/presentation/cubit/order_cubit.dart';
 import 'package:cashir/features/order_status_tabbars/presentation/cubit/tabbar_status_cubit.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,10 @@ class CashirApp extends StatelessWidget {
         BlocProvider(
           create: (_) => serviceLocator<HomeNavigatorCubit>(),
         ),
+        BlocProvider<LoginCubit>(
+          create: (_) => serviceLocator<LoginCubit>(),
+        ),
+
         // BlocProvider(
         //   create: (_) => serviceLocator<TabBarStatusCubit>(),
         // ),

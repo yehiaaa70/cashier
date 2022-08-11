@@ -24,7 +24,11 @@ class AppRoutes {
     switch (settings.name) {
       case Routes.initialRoute:
         return MaterialPageRoute(
+
+          builder: (context) => const LoginScreen(),
+
           builder: (context) => const LocaleScreen(),
+
         );
       case Routes.loginRoute:
         return MaterialPageRoute(
