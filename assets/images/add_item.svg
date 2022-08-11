@@ -1,0 +1,6 @@
+<svg id="add_item" data-name="add item" xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42">
+  <g id="plus_add_sign" data-name="plus add sign">
+    <circle id="circle" cx="21" cy="21" r="21" fill="#71b24d"/>
+    <text id="_" data-name="+" transform="translate(14 28)" fill="#fff" font-size="24" font-family="Quicksand-Bold, Quicksand" font-weight="700"><tspan x="0" y="0">+</tspan></text>
+  </g>
+</svg>

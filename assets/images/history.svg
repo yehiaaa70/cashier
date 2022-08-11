@@ -1,0 +1,10 @@
+<svg id="icon_stats" data-name="icon stats" xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">
+  <g id="Rectangle" transform="translate(0 6.429)" fill="none" stroke="#535b72" stroke-miterlimit="10" stroke-width="1">
+    <rect width="6" height="11.571" rx="2" stroke="none"/>
+    <rect x="0.5" y="0.5" width="5" height="10.571" rx="1.5" fill="none"/>
+  </g>
+  <g id="Rectangle-2" data-name="Rectangle" transform="translate(8)" fill="none" stroke="#535b72" stroke-miterlimit="10" stroke-width="1">
+    <rect width="6" height="18" rx="2" stroke="none"/>
+    <rect x="0.5" y="0.5" width="5" height="17" rx="1.5" fill="none"/>
+  </g>
+</svg>

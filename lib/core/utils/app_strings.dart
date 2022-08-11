@@ -1,0 +1,61 @@
+class AppStrings {
+  static const String appName = 'Cashir';
+  static const String fontFamily = 'Cairo';
+  static const String noRouteFound = 'No Route Found';
+  static const String contentType = 'Content-Type';
+  static const String applicationJson = 'application/json';
+  static const String serverFailure = 'Server Failure';
+  static const String cacheFailure = 'Cache Failure';
+  static const String unexpectedError = 'Unexpected Error';
+  static const String englishCode = 'en';
+  static const String arabicCode = 'ar';
+  static const String locale = 'locale';
+  static const String menu = 'Menu';
+  static const String breakfast = 'Breakfast';
+  static const String lunch = 'Lunch';
+  static const String dinner = 'Dinner';
+  static const String lebnah = 'Lebnah';
+  static const String price = '100.0';
+  static const String calories = 'calories';
+  static const String caloriesValue = '500';
+  static const String description = 'description';
+  static const String addToCart = 'ADD TO CART';
+  static const String favorite = 'Favorite';
+  static const String offers = 'Offers';
+  static const String details = 'DETAILS';
+  static const String loginButton = 'Login';
+  static const String facebookButton = 'Connect with Facebook';
+  static const String login = 'LOGIN';
+  static const String emailAddress = 'Email Address';
+  static const String password = 'Password';
+  static const String orders = 'Orders';
+  static const String newOrder = "New";
+  static const String inProgressOrder = "InProgress";
+  static const String completedOrder = "Completed";
+  static const String orderId = "Order ID";
+  static const String skip = 'Skip >>';
+  static const String itemDetails = 'Item';
+  static const String orderStatus = 'Order Status';
+  static const String yourOrders = 'Your Orders';
+  static const String notificationsTitle = 'Notifications';
+  static const String delivery = 'Delivery';
+  static const String takeaway = 'Take away';
+  static const String accept = 'Accept';
+  static const String deny = 'Deny';
+  static const String insertReason = 'Insert Reason';
+  static const String denyReason = 'Deny Reason';
+  static const String newNotification = 'New Notification';
+  static const String earlierNotification = 'Earlier Notification';
+  static const String history = 'History';
+  static const String cancelled = 'Cancelled';
+  static const String logout = 'Logout';
+  static const String availableOffers = 'Available Offers';
+  static const String expiredOffers = 'Expired Offers';
+  static const String couponCode = 'Coupon Code';
+  static const String deactivate = 'Deactivate';
+  static const String go = 'continue';
+  static const String yourOrderIsTakenByRestaurant =
+      'your Order Is Taken By Restaurant';
+}
+
+enum TabItem { History, Cancelled, Orders, Offers, Logout }
