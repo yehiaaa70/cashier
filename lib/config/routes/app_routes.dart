@@ -1,3 +1,4 @@
+import 'package:cashir/features/add_offer/presentation/screens/add_offer_screen.dart';
 import 'package:cashir/features/locale/presentation/screens/locale_screen.dart';
 import 'package:cashir/features/login/presentation/screens/login_screen.dart';
 import 'package:cashir/features/notifications/presentation/screens/notification_screen.dart';
@@ -13,6 +14,7 @@ class Routes {
   static const String loginRoute = '/loginRoute';
   static const String homeNavigatorRoute = '/homeNavigatorRoute';
   static const String offersRoute = '/offersRoute';
+  static const String addOffersRoute = '/addOffersRoute';
   static const String notificationRoute = '/notificationRoute';
   static const String localeRoute = '/localeRoute';
 }
@@ -22,7 +24,11 @@ class AppRoutes {
     switch (settings.name) {
       case Routes.initialRoute:
         return MaterialPageRoute(
+
           builder: (context) => const LoginScreen(),
+
+          builder: (context) => const LocaleScreen(),
+
         );
       case Routes.loginRoute:
         return MaterialPageRoute(
@@ -43,6 +49,10 @@ class AppRoutes {
       case Routes.localeRoute:
         return MaterialPageRoute(
           builder: (context) => const LocaleScreen(),
+        );
+      case Routes.addOffersRoute:
+        return MaterialPageRoute(
+          builder: (context) => const AddOfferScreen(),
         );
       default:
         return undefinedRoute();
