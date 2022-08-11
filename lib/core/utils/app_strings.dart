@@ -56,6 +56,7 @@ class AppStrings {
   static const String go = 'continue';
   static const String yourOrderIsTakenByRestaurant =
       'your Order Is Taken By Restaurant';
+  static const String userToken = 'token';
 }
 
 enum TabItem { History, Cancelled, Orders, Offers, Logout }
