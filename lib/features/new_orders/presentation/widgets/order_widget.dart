@@ -21,26 +21,26 @@ class _OrderWidgetState extends State<OrderWidget> {
       children: [
         const SizedBox(height: 20),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Container(
-              width: 140,
-              height: 35,
-              decoration: BoxDecoration(
-                  color: widget.isDelivery
-                      ? AppColors.darkPurple
-                      : AppColors.orange,
-                  borderRadius: BorderRadius.circular(10)),
-              child: Center(
-                  child: Text(
-                      widget.isDelivery
-                          ? AppStrings.delivery
-                          : AppStrings.takeaway,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          ?.copyWith(color: AppColors.white))),
-            ),
+            // Container(
+            //   width: 140,
+            //   height: 35,
+            //   decoration: BoxDecoration(
+            //       color: widget.isDelivery
+            //           ? AppColors.darkPurple
+            //           : AppColors.orange,
+            //       borderRadius: BorderRadius.circular(10)),
+            //   child: Center(
+            //       child: Text(
+            //           widget.isDelivery
+            //               ? AppStrings.delivery
+            //               : AppStrings.takeaway,
+            //           style: Theme.of(context)
+            //               .textTheme
+            //               .headline6
+            //               ?.copyWith(color: AppColors.white))),
+            // ),
             InkWell(
                 onTap: () {
                   setState(() {
