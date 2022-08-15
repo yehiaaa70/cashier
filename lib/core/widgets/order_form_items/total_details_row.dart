@@ -15,12 +15,16 @@ class TotalDetails extends StatelessWidget {
           "$title :",
           style: Theme.of(context).textTheme.bodyText1,
         ),
-        Text(
-          "SR $money",
-          style: Theme.of(context)
-              .textTheme
-              .bodyText2
-              ?.copyWith(fontWeight: FontWeight.bold),
+        Expanded(
+          child: Text(
+
+            "SR $money",
+            textAlign: TextAlign.end,
+            style: Theme.of(context)
+                .textTheme
+                .bodyText2
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
         ),
       ],
     );

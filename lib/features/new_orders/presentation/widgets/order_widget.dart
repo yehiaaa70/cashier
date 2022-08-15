@@ -1,69 +1,54 @@
-import 'package:cashir/core/utils/app_colors.dart';
-import 'package:cashir/core/utils/app_strings.dart';
-import 'package:cashir/core/utils/assets_manager.dart';
+import 'package:cashir/features/new_orders/presentation/cubit/acceptor_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class OrderWidget extends StatefulWidget {
-  OrderWidget({Key? key, required this.isDelivery}) : super(key: key);
-  final bool isDelivery;
-  final GlobalKey<FormState> _globalKey = GlobalKey();
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_strings.dart';
+import '../../../../core/widgets/order_button.dart';
+import '../../../../core/widgets/order_form_items/line.dart';
+import '../../../../core/widgets/order_form_items/order_location.dart';
+import '../../../home_navigator/domain/entities/order_date.dart';
 
-  @override
-  State<OrderWidget> createState() => _OrderWidgetState();
-}
+class PendingOrderItem extends StatelessWidget {
+  const PendingOrderItem(
+      {Key? key,
+      required this.globalKey,
+      required this.orderDetails,
+      required this.cubitContext})
+      : super(key: key);
+  final GlobalKey<FormState> globalKey;
 
-class _OrderWidgetState extends State<OrderWidget> {
-  bool _openLocation = false;
+  final OrderDetails orderDetails;
+  final BuildContext cubitContext;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            // Container(
-            //   width: 140,
-            //   height: 35,
-            //   decoration: BoxDecoration(
-            //       color: widget.isDelivery
-            //           ? AppColors.darkPurple
-            //           : AppColors.orange,
-            //       borderRadius: BorderRadius.circular(10)),
-            //   child: Center(
-            //       child: Text(
-            //           widget.isDelivery
-            //               ? AppStrings.delivery
-            //               : AppStrings.takeaway,
-            //           style: Theme.of(context)
-            //               .textTheme
-            //               .headline6
-            //               ?.copyWith(color: AppColors.white))),
-            // ),
-            InkWell(
-                onTap: () {
-                  setState(() {
-                    _openLocation = !_openLocation;
-                  });
-                },
-                child: Image.asset(ImageAssets.message))
-          ],
-        ),
+        const NewLine(),
         const SizedBox(height: 10),
-        AnimatedContainer(
-          width: double.infinity,
-          height: _openLocation ? 200 : 0,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: AppColors.grey)),
-          duration: const Duration(milliseconds: 100),
-          child: Text("Address",
-              style: Theme.of(context)
-                  .textTheme
-                  .headline6
-                  ?.copyWith(color: AppColors.grey)),
-        ),
+        orderDetails.serviceType == "delivery"
+            ? OrderLocationWidget(
+                orderDetails: orderDetails,
+              )
+            : Column(
+                children: [
+                  Text(
+                    "Picked Up From",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4
+                        ?.copyWith(color: AppColors.black),
+                  ),
+                  Text(
+                    orderDetails.branch.addressDescriptionEn,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        ?.copyWith(color: AppColors.secondary),
+                  ),
+                ],
+              ),
         const SizedBox(height: 20),
         Text(AppStrings.denyReason,
             style: Theme.of(context).textTheme.headline6),
@@ -85,47 +70,31 @@ class _OrderWidgetState extends State<OrderWidget> {
         ),
         const SizedBox(height: 20),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            InkWell(
-              onTap: () async {
-                if (widget._globalKey.currentState!.validate()) {}
+            Expanded(
+                child: OrderButton(
+              text: 'Cancel',
+              onClick: () {
+                if (globalKey.currentState!.validate()) {}
               },
-              child: Container(
-                width: 140,
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    border: Border.all(color: AppColors.red)),
-                child: Center(
-                    child: Text(AppStrings.deny,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            ?.copyWith(color: AppColors.red))),
-              ),
-            ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                width: 140,
-                height: 50,
-                decoration: BoxDecoration(
-                    color: AppColors.lightGreen,
-                    borderRadius: BorderRadius.circular(50)),
-                child: Center(
-                    child: Text(AppStrings.accept,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            ?.copyWith(color: AppColors.white))),
-              ),
-            ),
+              textColor: AppColors.red,
+              buttonColor: AppColors.red,
+              radius: 25,
+            )),
+            const SizedBox(width: 8),
+            Expanded(
+                child: OrderButton(
+              text: 'Accept',
+              onClick: () {
+                BlocProvider.of<AcceptorCubit>(cubitContext).acceptOrders(orderDetails);
+              },
+              textColor: AppColors.white,
+              buttonColor: AppColors.darkGreen,
+              radius: 25,
+            )),
           ],
-        ),
-        const SizedBox(
-          height: 15,
-        ),
+        )
       ],
     );
   }

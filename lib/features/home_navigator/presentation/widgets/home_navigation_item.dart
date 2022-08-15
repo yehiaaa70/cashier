@@ -4,6 +4,8 @@ import 'package:cashir/features/home_navigator/presentation/cubit/home_navigator
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../../core/utils/app_strings.dart';
 
 class HomeNavigationItem extends StatelessWidget {
@@ -27,7 +29,7 @@ class HomeNavigationItem extends StatelessWidget {
             height: 20,
           ),
         },
-        Image.asset(imageAsset,
+        SvgPicture.asset(imageAsset,
             width: 25,
             height: 25,
             color: BlocProvider.of<HomeNavigatorCubit>(context).getCurrentTab ==
@@ -35,7 +37,13 @@ class HomeNavigationItem extends StatelessWidget {
                 ? AppColors.white
                 : Colors.grey[400]),
         BlocProvider.of<HomeNavigatorCubit>(context).getCurrentTab != tabItem
-            ? Text(text)
+            ? Text(
+                text,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    ?.copyWith(color: AppColors.black),
+              )
             : const SizedBox()
       ],
     );

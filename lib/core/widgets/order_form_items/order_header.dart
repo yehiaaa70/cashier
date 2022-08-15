@@ -11,22 +11,28 @@ class OrderHeader extends StatelessWidget {
       required this.orderKind,
       required this.date,
       required this.orderID,
-      required this.isDelivered})
+      required this.isDelivered,
+      this.header})
       : super(key: key);
   final OrderKind orderKind;
   final bool isDelivered;
   final String date;
   final String orderID;
+  final String? header;
 
   @override
   Widget build(BuildContext context) {
     Color statusColor;
-    if (orderKind == OrderKind.completed) {
-      statusColor=AppColors.darkGreen;
-    } else if (orderKind == OrderKind.inProgress) {
-      statusColor=AppColors.secondary;
+    if (header == "completed") {
+      statusColor = AppColors.darkGreen;
+    } else if (header == "pending") {
+      statusColor = AppColors.lightGreen;
+    } else if (header == "in-progress") {
+      statusColor = AppColors.secondary;
+    } else if (header == "canceled") {
+      statusColor = AppColors.red;
     } else {
-      statusColor=AppColors.red;
+      statusColor = AppColors.red;
     }
 
     return Row(
@@ -35,7 +41,7 @@ class OrderHeader extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("${orderKind.name.toUpperCase()} ON",
+            Text("${header!.toUpperCase()} ON",
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1
@@ -51,7 +57,7 @@ class OrderHeader extends StatelessWidget {
             ),
             OrderStatus(
                 containerColor: statusColor,
-                status: isDelivered ? "Delivery" : "Take away"),
+                status: isDelivered ? "Delivery" : "Takeaway"),
           ],
         ),
       ],

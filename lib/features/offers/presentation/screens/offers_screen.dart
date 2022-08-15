@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../core/utils/app_colors.dart';
 
-import '../../../../core/utils/assets_manager.dart';
+import '../../../../core/utils/app_colors.dart';
 import '../widgets/available_offer_widget.dart';
 
 class OffersScreen extends StatefulWidget {
