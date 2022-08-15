@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 
 import '../../core/utils/app_strings.dart';
 import '../../features/home_navigator/presentation/screens/home_navigator_screen.dart';
-import '../../features/splash/presentation/pages/splash_screen.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -17,6 +16,7 @@ class Routes {
   static const String addOffersRoute = '/addOffersRoute';
   static const String notificationRoute = '/notificationRoute';
   static const String localeRoute = '/localeRoute';
+  static const String logoutRoute = '/logoutRoute';
 }
 
 class AppRoutes {
@@ -24,15 +24,11 @@ class AppRoutes {
     switch (settings.name) {
       case Routes.initialRoute:
         return MaterialPageRoute(
-
           builder: (context) => const LoginScreen(),
-
-          builder: (context) => const LocaleScreen(),
-
         );
       case Routes.loginRoute:
         return MaterialPageRoute(
-          builder: (context) => LoginScreen(),
+          builder: (context) => const LoginScreen(),
         );
       case Routes.homeNavigatorRoute:
         return MaterialPageRoute(

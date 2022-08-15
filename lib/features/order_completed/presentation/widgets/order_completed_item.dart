@@ -3,84 +3,86 @@ import 'package:cashir/core/widgets/order_status.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/widgets/order_button.dart';
+import '../../../../core/widgets/order_form_items/line.dart';
+import '../../../../core/widgets/order_form_items/order_location.dart';
+import '../../../../core/widgets/order_form_items/total_details_row.dart';
+import '../../../home_navigator/domain/entities/order_date.dart';
 
 class OrderCompletedItem extends StatelessWidget {
-   OrderCompletedItem({Key? key}) : super(key: key);
-  List<String> orderItems = ["1x Pizza","2x Pepsi","3x "];
+   OrderCompletedItem({Key? key, required this.orderDetails, required this.printReceiptClick}) : super(key: key);
+   final OrderDetails orderDetails;
+   final VoidCallback printReceiptClick;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(color: AppColors.white,borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+    return  Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                RichText(
-                  text: TextSpan(
+            Padding(
+              padding: const EdgeInsets.only(right: 35),
+              child: OrderButton(
+                text: 'Print Receipt',
+                onClick: printReceiptClick,
+                textColor: AppColors.white,
+                buttonColor: AppColors.secondary,
+                radius: 12,
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Column(
+                children: [
+                  TotalDetails(title: "Subtotal", money: orderDetails.subtotal),
+                  TotalDetails(title: "Delivery Fee", money: orderDetails.deliveryFees),
+                  TotalDetails(title: "Service", money: "+0+"),
+                  TotalDetails(title: "Tax(5%)", money: orderDetails.taxes),
+                  TotalDetails(title: "Discount", money: "+0+"),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextSpan(
-                        text: 'Customer Name\n',
+                      Text(
+                        "Total :   ",
                         style: Theme.of(context).textTheme.headline4,
                       ),
-                      TextSpan(
-                        text: '+123456789',
-                        style: Theme.of(context).textTheme.headline6,
+                      Text(
+                        "SR ${orderDetails.total}",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline2
+                            ?.copyWith(color: AppColors.black),
                       ),
                     ],
                   ),
-                ),
-                Column(
-                  children: [
-                    SizedBox(height: 22,),
-                    Text("210.00\$",style: Theme.of(context).textTheme.headline2,),
-                    OrderStatus(containerColor: AppColors.darkGreen, status: "Completed"),
-                  ],
-                ),
-              ],
-            ),
-            ...List.generate(
-              orderItems.length,
-                  (index) => Text(
-                orderItems[index],
-                style: Theme.of(context).textTheme.headline6,
+                ],
               ),
             ),
-
-            SizedBox(height: 8),
-            Text("COMPLETED ON",style: Theme.of(context).textTheme.headline4,),
-            Text("June 2, 2021 at 7:00 PM",style: Theme.of(context).textTheme.bodyText1,),
-            SizedBox(height: 20),
-            Container(width: double.infinity-20,
-            height: 1,
-            color: AppColors.grey,),
-            SizedBox(height: 20,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-              Column(children: [
-                Text("Rated",style: Theme.of(context).textTheme.headline4?.copyWith(fontWeight: FontWeight.bold),),
-                Row(children: [
-                  Image.asset(ImageAssets.smileEmoji),
-                  SizedBox(width: 8),
-                  Text("Satisfiled",style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),)
-                ],)
-              ],),
-              Padding(
-                padding: const EdgeInsets.only(right: 25),
-                child: Image.asset(ImageAssets.callIcon),
-              )
-            ],)
-
-
           ],
         ),
-      ),
+        const SizedBox(height: 10),
+        const NewLine(),
+        const SizedBox(height: 10),
+        orderDetails.serviceType=="delivery"
+            ?  OrderLocationWidget(orderDetails: orderDetails,)
+            : Column(
+          children: [
+            Text(
+              "Picked Up From",
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4
+                  ?.copyWith(color: AppColors.black),
+            ),
+            Text(
+              orderDetails.branch.addressDescriptionEn,
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          ],
+        )
+      ],
     );
   }
 }

@@ -9,10 +9,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/secure_storage/secure_storage.dart';
+
 class CallApi {
   // String token = '';
   late SharedPreferences sharedPreferences;
-
+  late UserModel userModel;
   Future<void> login(String email, String password, context) async {
     try {
       var respose = await http.post(
@@ -29,8 +31,11 @@ class CallApi {
         //     .toList();
         // log(usersCachir[0].name.toString());
 
-        // var token = json.decode(respose.body)['data']['token'];
-        // log(token);
+        var tokenValue = json.decode(respose.body)['data']['token'];
+
+        // log(tokenValue);
+        SecureStorage.saveToken(tokenValue);
+
         Navigator.pushNamed(context, Routes.homeNavigatorRoute);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
