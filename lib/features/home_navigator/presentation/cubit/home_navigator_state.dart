@@ -2,18 +2,31 @@ part of 'home_navigator_cubit.dart';
 
 @immutable
 abstract class HomeNavigatorState extends Equatable {
-  final TabItem currentTab;
+  @override
+  List<Object> get props => [];
+}
 
-  const HomeNavigatorState({required this.currentTab});
+class HomeNavigatorInitial extends HomeNavigatorState {}
+
+class AllOrdersLoading extends HomeNavigatorState {}
+
+class AllOrdersLoaded extends HomeNavigatorState {
+  final AllCustomerOrders allCustomerOrders;
+
+   AllOrdersLoaded({required this.allCustomerOrders});
 
   @override
-  List<Object> get props => [currentTab];
+  List<Object> get props => [allCustomerOrders];
 }
 
-class HomeNavigatorInitial extends HomeNavigatorState {
-  const HomeNavigatorInitial({required super.currentTab});
+class AllOrdersError extends HomeNavigatorState {
+  final String message;
+
+   AllOrdersError({required this.message});
+
+  @override
+  List<Object> get props => [message];
 }
 
-class HomeNavigatorLoaded extends HomeNavigatorState {
-  const HomeNavigatorLoaded({required super.currentTab});
-}
+class OrdersChanges extends HomeNavigatorState {}
+

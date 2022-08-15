@@ -28,147 +28,167 @@ class HomeNavigatorScreen extends StatefulWidget {
 }
 
 class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
+   int _currentTab = 2;
+
+
+  // void _selectTab(TabItem tabItem) {
+  //   setState(() => _currentTab = tabItem);
+  // }
+
   @override
   void initState() {
     super.initState();
-    // init();
-  }
-
-  // Future init() async {
-  //   final userToken = await SecureStorage.getToken();
-  //   log('toooooken ${userToken.toString()}');
-  // }
-
-  var _currentTab = TabItem.Orders;
-
-  void _selectTab(TabItem tabItem) {
-    setState(() => _currentTab = tabItem);
+    BlocProvider.of<HomeNavigatorCubit>(context).getAllOrders();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: const AppBarWidget(),
-        bottomNavigationBar:
-            BlocBuilder<HomeNavigatorCubit, HomeNavigatorState>(
-                builder: (context, state) {
-          return CurvedNavigationBar(
-            index: BlocProvider.of<HomeNavigatorCubit>(context)
-                .getCurrentTab
-                .index,
-            backgroundColor: AppColors.transparent,
-            buttonBackgroundColor: AppColors.darkPurple,
-            items: [
-              Column(
-                children: [
-                  if (_currentTab != TabItem.History) ...{
-                    const SizedBox(
-                      height: 16,
-                    ),
-                  },
-                  SvgPicture.asset(ImageAssets.history,
-                      width: 25,
-                      height: 25,
-                      fit: BoxFit.fill,
-                      color: _currentTab == TabItem.History
-                          ? AppColors.white
-                          : Colors.grey[400]),
-                  _currentTab != TabItem.History
-                      ? const Text("History")
-                      : const SizedBox()
-                ],
+    return BlocBuilder<HomeNavigatorCubit,HomeNavigatorState>(
+      builder: (BuildContext context, state) {
+        if(state is AllOrdersLoading){
+          return Container(
+            color: AppColors.background,
+            child: Center(
+              child: CircularProgressIndicator(
+                color: AppColors.primary,
               ),
-              Column(
-                children: [
-                  if (_currentTab != TabItem.Cancelled) ...{
-                    const SizedBox(
-                      height: 20,
-                    ),
-                  },
-                  SvgPicture.asset(ImageAssets.cancelled,
-                      width: 25,
-                      height: 25,
-                      color: _currentTab == TabItem.Cancelled
-                          ? AppColors.white
-                          : Colors.grey[400]),
-                  _currentTab != TabItem.Cancelled
-                      ? const Text("cancelled")
-                      : const SizedBox()
-                ],
-              ),
-              Column(
-                children: [
-                  if (_currentTab != TabItem.Orders) ...{
-                    const SizedBox(
-                      height: 20,
-                    ),
-                  },
-                  SvgPicture.asset(ImageAssets.orders,
-                      width: 25,
-                      height: 25,
-                      color: _currentTab == TabItem.Orders
-                          ? AppColors.white
-                          : Colors.grey[400]),
-                  _currentTab != TabItem.Orders
-                      ? const Text("orders")
-                      : const SizedBox()
-                ],
-              ),
-              Column(
-                children: [
-                  if (_currentTab != TabItem.Offers) ...{
-                    const SizedBox(
-                      height: 20,
-                    ),
-                  },
-                  SvgPicture.asset(ImageAssets.offers,
-                      width: 25,
-                      height: 25,
-                      color: _currentTab == TabItem.Offers
-                          ? AppColors.white
-                          : Colors.grey[400]),
-                  _currentTab != TabItem.Offers
-                      ? const Text("offers")
-                      : const SizedBox()
-                ],
-              ),
-              Column(
-                children: [
-                  if (_currentTab != TabItem.Logout) ...{
-                    const SizedBox(
-                      height: 20,
-                    ),
-                  },
-                  SvgPicture.asset(ImageAssets.logout,
-                      width: 25,
-                      height: 25,
-                      color: _currentTab == TabItem.Logout
-                          ? AppColors.white
-                          : Colors.grey[400]),
-                  _currentTab != TabItem.Logout
-                      ? const Text("logout")
-                      : const SizedBox()
-                ],
-              ),
-            ],
-            onTap: (index) {
-              if (_currentTab.index != index) {
-                _selectTab(TabItem.values[index]);
-              }
-            },
+            ),
           );
-        }),
-        body: bottomNavigationBarViews()[_currentTab.index]);
-  }
+        }else if(state  is AllOrdersLoaded){
+          return Scaffold(
+              appBar:  AppBarWidget(currentTab: _currentTab,),
+              bottomNavigationBar: CurvedNavigationBar(
 
-  List<Widget> bottomNavigationBarViews() {
-    return [
-      const HistoryScreen(),
-      const CancelledOrdersTabBarScreen(),
-      const OrderStatusTabBar(),
-      const OffersScreen(),
-      const LogoutScreen(),
-      const Center(child: Text("You have been signed out"))
-    ];
+                index:2,
+                backgroundColor: AppColors.transparent,
+                buttonBackgroundColor: AppColors.darkPurple,
+                onTap: (index) {
+                  setState(() => _currentTab = index);
+                },
+                items: [
+                  Column(
+                    children: [
+                      if (_currentTab != 0) ...{
+                        const SizedBox(
+                          height: 16,
+                        ),
+                      },
+                      SvgPicture.asset(ImageAssets.history,
+                          width: 25,
+                          height: 25,
+                          fit: BoxFit.fill,
+                          color: _currentTab == 0
+                              ? AppColors.white
+                              : Colors.grey[400]),
+                      _currentTab != 0
+                          ? const Text("History")
+                          : const SizedBox()
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      if (_currentTab != 1) ...{
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      },
+                      SvgPicture.asset(ImageAssets.cancelled,
+                          width: 25,
+                          height: 25,
+                          color: _currentTab == 1
+                              ? AppColors.white
+                              : Colors.grey[400]),
+                      _currentTab != 1
+                          ? const Text("cancelled")
+                          : const SizedBox()
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      if (_currentTab != 2) ...{
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      },
+                      SvgPicture.asset(ImageAssets.orders,
+                          width: 25,
+                          height: 25,
+                          color: _currentTab == 2
+                              ? AppColors.white
+                              : Colors.grey[400]),
+                      _currentTab != 2
+                          ? const Text("orders")
+                          : const SizedBox()
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      if (_currentTab !=3) ...{
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      },
+                      SvgPicture.asset(ImageAssets.offers,
+                          width: 25,
+                          height: 25,
+                          color: _currentTab == 3
+                              ? AppColors.white
+                              : Colors.grey[400]),
+                      _currentTab != 3
+                          ? const Text("offers")
+                          : const SizedBox()
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      if (_currentTab != 4) ...{
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      },
+                      SvgPicture.asset(ImageAssets.logout,
+                          width: 25,
+                          height: 25,
+                          color: _currentTab == 4
+                              ? AppColors.white
+                              : Colors.grey[400]),
+                      _currentTab != 4
+                          ? const Text("logout")
+                          : const SizedBox()
+                    ],
+                  ),
+                ],
+
+              ),
+              body: [
+                HistoryScreen( stateOrderList: [
+                  context.read<HomeNavigatorCubit>().delivery,
+                  context.read<HomeNavigatorCubit>().takeAway,
+                  context.read<HomeNavigatorCubit>().canceled,
+                  context.read<HomeNavigatorCubit>().rejected,
+                ]),
+                CancelledOrdersTabBarScreen(
+                  stateOrderList: [
+                    context.read<HomeNavigatorCubit>().canceled,
+                    context.read<HomeNavigatorCubit>().rejected,
+                  ],
+                ),
+                OrderStatusTabBar(stateOrderList: [
+                  context.read<HomeNavigatorCubit>().pending,
+                  context.read<HomeNavigatorCubit>().progress,
+                  context.read<HomeNavigatorCubit>().completed
+                ]),
+                const OffersScreen(),
+                const Center(child: Text("You have been signed out"))
+              ][_currentTab]);
+        }else {
+          return Center(
+            child: CircularProgressIndicator(
+              color: AppColors.red,
+            ),
+          );
+        }
+      },
+    );
   }
 }

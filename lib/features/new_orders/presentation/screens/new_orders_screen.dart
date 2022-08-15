@@ -37,7 +37,7 @@ class NewOrdersScreen extends StatelessWidget {
                 );
               },
               separatorBuilder: (BuildContext context, int index) =>
-              const Divider(height: 20),
+              const SizedBox(height: 20),
               itemCount: orderDetails.length);
         } else {
           return  ListView.separated(
@@ -50,7 +50,7 @@ class NewOrdersScreen extends StatelessWidget {
                 );
               },
               separatorBuilder: (BuildContext context, int index) =>
-              const Divider(height: 20),
+              const SizedBox(height: 20),
               itemCount: orderDetails.length);
         }
       },

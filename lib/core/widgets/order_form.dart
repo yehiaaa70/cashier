@@ -1,4 +1,4 @@
-
+import 'package:cashir/core/utils/assets_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/home_navigator/domain/entities/order_date.dart';
@@ -11,7 +11,7 @@ import 'order_form_items/line.dart';
 import 'order_form_items/order_header.dart';
 import 'order_form_items/order_info.dart';
 
-class OrderForm extends StatelessWidget {
+class OrderForm extends StatefulWidget {
   OrderForm(
       {Key? key,
       required this.isDelivered,
@@ -24,8 +24,16 @@ class OrderForm extends StatelessWidget {
 
   final bool isDelivered;
   final OrderKind orderKind;
-  final GlobalKey<FormState> globalKey = GlobalKey();
   final BuildContext? cubitContext;
+
+  @override
+  State<OrderForm> createState() => _OrderFormState();
+}
+
+class _OrderFormState extends State<OrderForm> {
+  bool _openItem = false;
+
+  final GlobalKey<FormState> globalKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -43,25 +51,52 @@ class OrderForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               OrderHeader(
-                header: orderDetails!.state,
-                orderKind: orderKind,
-                date: orderDetails!.createdAt,
-                orderID: orderDetails!.id.toString(),
-                isDelivered:
-                    orderDetails!.serviceType == "delivery" ? true : false,
+                header: widget.orderDetails!.state,
+                orderKind: widget.orderKind,
+                date: widget.orderDetails!.createdAt,
+                orderID: widget.orderDetails!.id.toString(),
+                isDelivered: widget.orderDetails!.serviceType == "delivery"
+                    ? true
+                    : false,
               ),
               const SizedBox(height: 10),
-              const NewLine(),
-              OrderInfo(
-                customerName: orderDetails!.customer.name,
-                customerPhone: orderDetails!.customer.firstPhone,
-                email: orderDetails!.customer.email,
-                items: orderDetails!.items,
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 35,
+                    height: 35,
+                    child: IconButton(
+                        onPressed: () {
+                          setState((){
+                            _openItem =!_openItem;
+                          });
+                        },
+                        icon: _openItem
+                            ? Image.asset(ImageAssets.upArrow)
+                            : Image.asset(ImageAssets.downArrow)),
+                  ),
+                ],
               ),
-              const SizedBox(height: 10),
-              const NewLine(),
-              const SizedBox(height: 10),
-              order(orderDetails!, orderKind, context)
+
+              SizedBox(
+                height: _openItem ? null : 0,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    const NewLine(),
+                    OrderInfo(
+                      customerName: widget.orderDetails!.customer.name,
+                      customerPhone: widget.orderDetails!.customer.firstPhone,
+                      email: widget.orderDetails!.customer.email,
+                      items: widget.orderDetails!.items,
+                    ),
+                    const SizedBox(height: 10),
+                    order(widget.orderDetails!, widget.orderKind, context)
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -75,7 +110,11 @@ class OrderForm extends StatelessWidget {
         globalKey: globalKey,
       );
     } else if (orderDetails.state == "pending") {
-      return PendingOrderItem(globalKey: globalKey, orderDetails: orderDetails, cubitContext: cubitContext!,);
+      return PendingOrderItem(
+        globalKey: globalKey,
+        orderDetails: orderDetails,
+        cubitContext: widget.cubitContext!,
+      );
     } else if (orderDetails.state == "canceled") {
       // return PendingOrderItem(globalKey: globalKey, orderDetails: orderDetails);
       return OrderCompletedItem(

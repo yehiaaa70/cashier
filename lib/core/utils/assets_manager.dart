@@ -17,5 +17,7 @@ class ImageAssets {
   static const String orders = '$imagePath/orders.svg';
   static const String offers = '$imagePath/offers.svg';
   static const String logout = '$imagePath/logout.svg';
+  static const String upArrow = '$imagePath/up_arrow.png';
+  static const String downArrow = '$imagePath/down_arrow.png';
   static const String logoutVector = '$imagePath/logout_vector.png';
 }
