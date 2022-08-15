@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>748233792138-g56eoij2d41smq7ufqd39r5rm91m6106.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.748233792138-g56eoij2d41smq7ufqd39r5rm91m6106</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>748233792138-7mcvdkmhkdf9005pb447hh72aihrj4ls.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD4Ba8ahNxy4m1ZzaeGmDOpJjA0XgAU7bU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>748233792138</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.cashir</string>
+	<key>PROJECT_ID</key>
+	<string>kopp-977f0</string>
+	<key>STORAGE_BUCKET</key>
+	<string>kopp-977f0.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:748233792138:ios:626bb5b751a448a3b2ab73</string>
+	<key>DATABASE_URL</key>
+	<string>https://kopp-977f0.firebaseio.com</string>
+</dict>
+</plist>

@@ -1,3 +1,5 @@
+import 'package:cashir/config/routes/app_routes.dart';
+import 'package:cashir/core/secure_storage/secure_storage.dart';
 import 'package:cashir/features/login/data/data_sources/call_api.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,7 +10,8 @@ part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(InitialLoginState());
   static LoginCubit get(context) => BlocProvider.of<LoginCubit>(context);
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  // GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKeyLogin = GlobalKey<FormState>();
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();

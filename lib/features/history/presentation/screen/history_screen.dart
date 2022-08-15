@@ -20,11 +20,11 @@ class HistoryScreen extends StatefulWidget {
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
-  int newIndex=0;
+  int newIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return  BlocBuilder<TabBarStatusCubit, TabBarStatusState>(
+    return BlocBuilder<TabBarStatusCubit, TabBarStatusState>(
       builder: (BuildContext context, state) {
         if (state is AllOrdersLoading) {
           return Center(
@@ -42,7 +42,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     "${context.read<TabBarStatusCubit>().delivery.length}",
                     style: Theme.of(context).textTheme.headline1?.copyWith(
                         color:
-                        newIndex == 0 ? AppColors.primary : AppColors.grey),
+                            newIndex == 0 ? AppColors.primary : AppColors.grey),
                   ),
                   Text(AppStrings.delivery,
                       style: Theme.of(context).textTheme.headline6?.copyWith(
@@ -57,7 +57,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     "${context.read<TabBarStatusCubit>().takeAway.length}",
                     style: Theme.of(context).textTheme.headline1?.copyWith(
                         color:
-                        newIndex == 1 ? AppColors.primary : AppColors.grey),
+                            newIndex == 1 ? AppColors.primary : AppColors.grey),
                   ),
                   Text(AppStrings.takeaway,
                       style: Theme.of(context).textTheme.headline6?.copyWith(
@@ -72,7 +72,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     "${context.read<TabBarStatusCubit>().canceled.length}",
                     style: Theme.of(context).textTheme.headline1?.copyWith(
                         color:
-                        newIndex == 2 ? AppColors.primary : AppColors.grey),
+                            newIndex == 2 ? AppColors.primary : AppColors.grey),
                   ),
                   Text(AppStrings.cancelled,
                       style: Theme.of(context).textTheme.headline6?.copyWith(
@@ -87,7 +87,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     "${context.read<TabBarStatusCubit>().rejected.length}",
                     style: Theme.of(context).textTheme.headline1?.copyWith(
                         color:
-                        newIndex == 3 ? AppColors.primary : AppColors.grey),
+                            newIndex == 3 ? AppColors.primary : AppColors.grey),
                   ),
                   Text(AppStrings.rejected,
                       style: Theme.of(context).textTheme.headline6?.copyWith(

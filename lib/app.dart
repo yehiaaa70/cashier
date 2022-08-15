@@ -1,6 +1,12 @@
+import 'dart:developer';
+
 import 'package:cashir/features/home_navigator/presentation/cubit/home_navigator_cubit.dart';
 
 import 'package:cashir/features/login/presentation/cubit/login_cubit.dart';
+import 'package:cashir/features/logout/presentation/cubit/logout_cubit.dart';
+import 'package:cashir/features/offers/presentation/cubit/offers_cubit.dart';
+import 'package:cashir/features/order_status_tabbars/presentation/cubit/tabbar_status_cubit.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cashir/features/order_status_tabbars/presentation/cubit/tabbar_status_cubit.dart';
 import 'package:cashir/features/order_status_tabbars/presentation/screens/orders_status_tabbars.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +43,12 @@ class CashirApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => serviceLocator<AcceptorCubit>(),
+        ),
+        BlocProvider<OffersCubit>(
+          create: (_) => serviceLocator<OffersCubit>(),
+        ),
+        BlocProvider<LogoutCubit>(
+          create: (_) => serviceLocator<LogoutCubit>(),
         ),
       ],
       child: MaterialApp(
