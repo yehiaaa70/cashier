@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
+import '../../../../core/utils/assets_manager.dart';
+import '../../../../core/widgets/alert_dialog.dart';
 import '../../../../core/widgets/order_button.dart';
 import '../../../../core/widgets/order_form_items/line.dart';
 import '../../../../core/widgets/order_form_items/order_location.dart';
@@ -50,25 +52,25 @@ class PendingOrderItem extends StatelessWidget {
                 ],
               ),
         const SizedBox(height: 20),
-        Text(AppStrings.denyReason,
-            style: Theme.of(context).textTheme.headline6),
-        TextFormField(
-          decoration: InputDecoration(
-              fillColor: AppColors.white,
-              filled: true,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              )),
-          validator: (value) {
-            if (value != null && value.isNotEmpty) {
-              return null;
-            } else {
-              return AppStrings.insertReason;
-            }
-          },
-          onSaved: (value) {},
-        ),
-        const SizedBox(height: 20),
+        // Text(AppStrings.denyReason,
+        //     style: Theme.of(context).textTheme.headline6),
+        // TextFormField(
+        //   decoration: InputDecoration(
+        //       fillColor: AppColors.white,
+        //       filled: true,
+        //       border: OutlineInputBorder(
+        //         borderRadius: BorderRadius.circular(10),
+        //       )),
+        //   validator: (value) {
+        //     if (value != null && value.isNotEmpty) {
+        //       return null;
+        //     } else {
+        //       return AppStrings.insertReason;
+        //     }
+        //   },
+        //   onSaved: (value) {},
+        // ),
+        // const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -76,7 +78,14 @@ class PendingOrderItem extends StatelessWidget {
                 child: OrderButton(
               text: 'Cancel',
               onClick: () {
-                if (globalKey.currentState!.validate()) {}
+                CustomAlert.alert(
+                        title: "Cancel To Cancel Order \n Reject to Reject Order",
+                        context: context,
+                  desc: "hint : you should fill the Reason"
+                )
+                    .show();
+
+                // if (globalKey.currentState!.validate()) {}
               },
               textColor: AppColors.red,
               buttonColor: AppColors.red,
@@ -87,7 +96,8 @@ class PendingOrderItem extends StatelessWidget {
                 child: OrderButton(
               text: 'Accept',
               onClick: () {
-                BlocProvider.of<AcceptorCubit>(cubitContext).acceptOrders(orderDetails);
+                BlocProvider.of<AcceptorCubit>(cubitContext)
+                    .acceptOrders(orderDetails);
               },
               textColor: AppColors.white,
               buttonColor: AppColors.darkGreen,

@@ -1,3 +1,5 @@
+import 'package:cashir/core/utils/assets_manager.dart';
+import 'package:cashir/core/widgets/alert_dialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_colors.dart';
