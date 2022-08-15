@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
 
-import 'order_date.dart';
+import 'package:cashir/features/home_navigator/domain/entities/order_date.dart';
+import 'package:equatable/equatable.dart';
 
 class AllCustomerOrders extends Equatable {
   final bool success;

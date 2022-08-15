@@ -1,6 +1,9 @@
 import 'package:cashir/core/utils/assets_manager.dart';
+import 'package:cashir/core/widgets/order_item_details.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../../features/home_navigator/domain/entities/order_date.dart';
 import '../../utils/app_colors.dart';
 
 class OrderInfo extends StatelessWidget {
@@ -8,14 +11,84 @@ class OrderInfo extends StatelessWidget {
       {Key? key,
       required this.customerName,
       required this.customerPhone,
-      required this.orders,
-      required this.email})
+      required this.email, required this.items})
       : super(key: key);
 
   final String customerName;
   final String customerPhone;
   final String email;
-  final List<String> orders;
+  final List<Items> items;
+
+
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future<void> _launchInWebViewOrVC(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.inAppWebView,
+      webViewConfiguration: const WebViewConfiguration(
+          headers: <String, String>{'my_header_key': 'my_header_value'}),
+    )) {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future<void> _launchInWebViewWithoutJavaScript(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.inAppWebView,
+      webViewConfiguration: const WebViewConfiguration(enableJavaScript: false),
+    )) {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future<void> _launchInWebViewWithoutDomStorage(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.inAppWebView,
+      webViewConfiguration: const WebViewConfiguration(enableDomStorage: false),
+    )) {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future<void> _launchUniversalLinkIos(Uri url) async {
+    final bool nativeAppLaunchSucceeded = await launchUrl(
+      url,
+      mode: LaunchMode.externalNonBrowserApplication,
+    );
+    if (!nativeAppLaunchSucceeded) {
+      await launchUrl(
+        url,
+        mode: LaunchMode.inAppWebView,
+      );
+    }
+  }
+
+  Widget _launchStatus(BuildContext context, AsyncSnapshot<void> snapshot) {
+    if (snapshot.hasError) {
+      return Text('Error: ${snapshot.error}');
+    } else {
+      return const Text('');
+    }
+  }
+
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +114,19 @@ class OrderInfo extends StatelessWidget {
                   ?.copyWith(color: AppColors.darkBlue, fontSize: 14),
               overflow: TextOverflow.ellipsis,
             ),
-            Image.asset(ImageAssets.callIcon,
-                width: 30, height: 30, fit: BoxFit.fill)
+            InkWell(
+              onTap:() async {
+
+                final Uri launchUri = Uri(
+                  scheme: 'tel',
+                  path: customerPhone,
+                );
+                await launchUrl(launchUri);
+               // customerPhone.isNotEmpty? launch("tel://$customerPhone"):launch("tel://00112233445566");
+              },
+              child: Image.asset(ImageAssets.callIcon,
+                  width: 30, height: 30, fit: BoxFit.fill),
+            )
           ],
         ),
         Text(
@@ -57,30 +141,8 @@ class OrderInfo extends StatelessWidget {
           height: 10,
         ),
         ...List.generate(
-          orders.length,
-          (index) => Column(
-            children: [
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.grey, width: 1)),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
-                  child: Text(
-                    orders[index],
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        ?.copyWith(color: AppColors.darkBlue),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ),
-              SizedBox(height: 8)
-            ],
-          ),
+          items.length,
+          (index) => OrderItemDetails(items: items[index]),
         ),
       ],
     );

@@ -38,20 +38,11 @@ class DioConsumer implements BaseApiConsumer {
   }
 
   @override
-  Future get(String path, {Map<String, dynamic>? queryParameters}) async {
-    try {
-      final response = await client.get(path, queryParameters: queryParameters);
-      return _handleResponseAsJson(response);
-    } on DioError catch (error) {
-      _handleDioError(error);
-    }
-  }
-
-  @override
   Future post(String path,
       {Map<String, dynamic>? body,
       bool formDataIsEnabled = false,
-      Map<String, dynamic>? queryParameters}) async {
+      Map<String, dynamic>? queryParameters,
+      Options? options}) async {
     try {
       final response = await client.post(path,
           data: formDataIsEnabled ? FormData.fromMap(body!) : body,
@@ -65,10 +56,11 @@ class DioConsumer implements BaseApiConsumer {
   @override
   Future put(String path,
       {Map<String, dynamic>? body,
-      Map<String, dynamic>? queryParameters}) async {
+      Map<String, dynamic>? queryParameters,
+      Options? options}) async {
     try {
       final response =
-          await client.put(path, data: body, queryParameters: queryParameters);
+          await client.put(path, data: body, queryParameters: queryParameters,options:options );
       return _handleResponseAsJson(response);
     } on DioError catch (error) {
       _handleDioError(error);
@@ -104,6 +96,18 @@ class DioConsumer implements BaseApiConsumer {
       case DioErrorType.cancel:
       case DioErrorType.other:
         throw const NoInternetConnectionException();
+    }
+  }
+
+  @override
+  Future get(String path,
+      {Map<String, dynamic>? queryParameters, Options? options}) async {
+    try {
+      final response = await client.get(path,
+          queryParameters: queryParameters, options: options);
+      return _handleResponseAsJson(response);
+    } on DioError catch (error) {
+      _handleDioError(error);
     }
   }
 }

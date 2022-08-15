@@ -1,3 +1,6 @@
+
+import 'package:cashir/features/home_navigator/data/models/address_model.dart';
+import 'package:cashir/features/home_navigator/data/models/city_model.dart';
 import 'package:equatable/equatable.dart';
 
 class OrderDetails extends Equatable {
@@ -11,19 +14,19 @@ class OrderDetails extends Equatable {
   final String total;
   final String state;
   final String cancellationReason;
-  final String deletedAt;
+  final Null deletedAt;
   final String createdAt;
   final String updatedAt;
-  final String createdBy;
-  final String updatedBy;
+  final Null createdBy;
+  final Null updatedBy;
   final String addressId;
   final String pointsPaid;
-  final String offerType;
+  final Null offerType;
   final String orderFrom;
   final Customer customer;
   final Branch branch;
   final List<Items> items;
-  final Address address;
+  final Address? address;
 
   const OrderDetails(
       {required this.id,
@@ -81,19 +84,19 @@ class Customer extends Equatable {
   final String middleName;
   final String lastName;
   final String firstPhone;
-  final String secondPhone;
+  final Null secondPhone;
   final String image;
   final String email;
   final String age;
   final String emailVerifiedAt;
   final String active;
-  final String deletedAt;
+  final Null deletedAt;
   final String createdAt;
   final String updatedAt;
-  final String createdBy;
-  final String updatedBy;
-  final String branchId;
-  final String deviceToken;
+  final Null createdBy;
+  final Null updatedBy;
+  final Null branchId;
+  final Null deviceToken;
   final String firstOfferAvailable;
 
   const Customer(
@@ -156,9 +159,9 @@ class Branch extends Equatable {
   final String email;
   final String deliveryFees;
   final String serviceType;
-  final String createdBy;
-  final String updatedBy;
-  final String deletedAt;
+  final Null createdBy;
+  final Null updatedBy;
+  final Null deletedAt;
   final String createdAt;
   final String updatedAt;
 
@@ -218,7 +221,7 @@ class Items extends Equatable {
   final String view;
   final String recommended;
   final String categoryId;
-  final String deletedAt;
+  final Null deletedAt;
   final String createdAt;
   final String updatedAt;
   final List<Extras> extras;
@@ -279,7 +282,7 @@ class Extras extends Equatable {
   final String price;
   final String calories;
   final String categoryId;
-  final String deletedAt;
+  final Null deletedAt;
   final String createdAt;
   final String updatedAt;
   final String image;
@@ -334,9 +337,9 @@ class Pivot extends Equatable {
   final String doughTypeAr;
   final String doughTypeEn;
   final String price;
-  final String offerPrice;
+  final Null offerPrice;
   final String quantity;
-  final String offerId;
+  final Null offerId;
 
   const Pivot(
       {required this.orderId,
@@ -397,6 +400,23 @@ class Address extends Equatable {
       required this.city,
       required this.area});
 
+  factory Address.fromJson(Map<String, dynamic> json) => Address(
+    id: json["id"],
+    name: json["name"],
+    street: json["street"],
+    buildingNumber: json["building_number"]??"no data",
+    floorNumber: json["floor_number"]??"no data",
+    landmark: json["landmark"],
+    cityId: json["city_id"],
+    areaId: json["area_id"],
+    customerId: json["customer_id"],
+    deletedAt: json["deleted_at"]??"no data",
+    createdAt:json["created_at"]??"no data",
+    updatedAt: json["updated_at"]??"no data",
+    city: CityModel.fromJson(json["city"]),
+    area: AreaModel.fromJson(json["area"]),
+  );
+
   @override
   List<Object?> get props => [
         id,
@@ -422,7 +442,7 @@ class City extends Equatable {
   final String nameEn;
   final String descriptionAr;
   final String descriptionEn;
-  final String deletedAt;
+  final Null deletedAt;
   final String createdAt;
   final String updatedAt;
 
@@ -458,7 +478,7 @@ class Area extends Equatable {
   final String descriptionEn;
   final String deliveryFees;
   final String minDeliveryAmmount;
-  final String deletedAt;
+  final Null deletedAt;
   final String createdAt;
   final String updatedAt;
 

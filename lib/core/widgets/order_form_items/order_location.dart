@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../../features/home_navigator/domain/entities/order_date.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/assets_manager.dart';
 
 class OrderLocationWidget extends StatefulWidget {
-  const OrderLocationWidget({Key? key}) : super(key: key);
+  const OrderLocationWidget({Key? key, required this.orderDetails}) : super(key: key);
+
+ final OrderDetails orderDetails;
 
   @override
   State<OrderLocationWidget> createState() => _OrderLocationWidgetState();
@@ -36,16 +39,16 @@ class _OrderLocationWidgetState extends State<OrderLocationWidget> {
         const SizedBox(height: 20),
         AnimatedContainer(
           width: double.infinity,
-          height: _openLocation ? 200 : 0,
+          height: _openLocation ? 100 : 0,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: AppColors.grey)),
           duration: const Duration(milliseconds: 100),
-          child: Text("Address",
+          child: Text("   - ${widget.orderDetails.address!.name}",
               style: Theme.of(context)
                   .textTheme
                   .headline6
-                  ?.copyWith(color: AppColors.grey)),
+                  ?.copyWith(color: AppColors.secondary)),
         ),
       ],
     );

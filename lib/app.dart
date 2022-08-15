@@ -1,6 +1,7 @@
 import 'package:cashir/features/home_navigator/presentation/cubit/home_navigator_cubit.dart';
-import 'package:cashir/features/new_orders/presentation/cubit/order_cubit.dart';
+import 'package:cashir/features/new_orders/presentation/cubit/acceptor_cubit.dart';
 import 'package:cashir/features/order_status_tabbars/presentation/cubit/tabbar_status_cubit.dart';
+import 'package:cashir/features/order_status_tabbars/presentation/screens/orders_status_tabbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,11 +21,12 @@ class CashirApp extends StatelessWidget {
         BlocProvider(
           create: (_) => serviceLocator<HomeNavigatorCubit>(),
         ),
-        // BlocProvider(
-        //   create: (_) => serviceLocator<TabBarStatusCubit>(),
-        // ),
         BlocProvider(
-          create: (_) => serviceLocator<OrderCubit>(),
+          create: (_) => serviceLocator<TabBarStatusCubit>(),
+          child: const OrderStatusTabBar(),
+        ),
+        BlocProvider(
+          create: (_) => serviceLocator<AcceptorCubit>(),
         ),
       ],
       child: MaterialApp(
