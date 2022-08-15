@@ -43,8 +43,8 @@ class _OrderLocationWidgetState extends State<OrderLocationWidget> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: AppColors.grey)),
-          duration: const Duration(milliseconds: 100),
-          child: Text("   - ${widget.orderDetails.address!.name}",
+          duration: const Duration(milliseconds: 200),
+          child: Text("     ${widget.orderDetails.address!.name}",
               style: Theme.of(context)
                   .textTheme
                   .headline6

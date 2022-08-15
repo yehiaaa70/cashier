@@ -10,8 +10,6 @@ class OrderItemDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if(items.doughType.isEmpty)print(""),
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Container(
@@ -70,27 +68,26 @@ class OrderItemDetails extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
-              Text(
-                "Extras",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    ?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              if (items.extras.isEmpty) ...{
-                const Text("No Extras")
+              if (items.doughType.isEmpty) ...{
+                const Text("No Dough Type")
               } else ...{
-                ...List.generate(
-                  items.extras.length,
-                  (index) => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Name : ${items.extras[index].nameEn}"),
-                      Text("Price : ${items.extras[index].price}"),
-                      Text("Calories : ${items.extras[index].calories}"),
-                    ],
-                  ),
-                ),
+                Row(
+                  children: [
+                    Text(
+                      "Dough type",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const Spacer(),
+                    ...List.generate(
+                      items.doughType.length,
+                      (index) => Text(items.doughType[index].nameEn),
+                    ),
+                    const Spacer(),
+                  ],
+                )
               },
               const SizedBox(height: 8),
               Row(
@@ -104,19 +101,26 @@ class OrderItemDetails extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
-              Text(
-                "Dough type",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    ?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              if (items.doughType.isEmpty) ...{
-                const Text("No Dough Type")
+              if (items.extras.isEmpty) ...{
+                const Text("No Extras")
               } else ...{
+                Text(
+                  "Extras",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
                 ...List.generate(
-                  items.doughType.length,
-                  (index) => Text("Name : ${items.doughType[index].nameEn}"),
+                  items.extras.length,
+                  (index) => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Name : ${items.extras[index].nameEn}"),
+                      Text("Price : ${items.extras[index].price}"),
+                      Text("Calories : ${items.extras[index].calories}"),
+                    ],
+                  ),
                 ),
               },
             ],

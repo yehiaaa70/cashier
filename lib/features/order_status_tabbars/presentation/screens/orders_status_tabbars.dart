@@ -7,10 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/error_widget.dart' as error_widget;
+import '../../../home_navigator/domain/entities/order_date.dart';
 import '../../../new_orders/presentation/screens/new_orders_screen.dart';
 
 class OrderStatusTabBar extends StatefulWidget {
-  const OrderStatusTabBar({Key? key}) : super(key: key);
+  const OrderStatusTabBar({Key? key, required this.stateOrderList})
+      : super(key: key);
+  final List<List<OrderDetails>> stateOrderList;
 
   @override
   State<OrderStatusTabBar> createState() => _OrderStatusTabBarState();
@@ -22,107 +25,72 @@ class _OrderStatusTabBarState extends State<OrderStatusTabBar> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<TabBarStatusCubit>(context).getAllOrders();
+    // BlocProvider.of<TabBarStatusCubit>(context).getAllOrders();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TabBarStatusCubit, TabBarStatusState>(
-      builder: (BuildContext context, state) {
-        if(state is OrdersChanges){
-          setState((){
-
-          });
-        }if (state is AllOrdersLoading) {
-          return Center(
-            child: CircularProgressIndicator(
-              color: AppColors.primary,
+    return ContainedTabBarView(
+      tabBarProperties: const TabBarProperties(height: 100),
+      tabs: [
+        Column(
+          children: [
+            Text(
+              "${widget.stateOrderList[0].length}",
+              style: Theme.of(context).textTheme.headline1?.copyWith(
+                  color: newIndex == 0 ? AppColors.primary : AppColors.grey),
             ),
-          );
-        } else if (state is AllOrdersLoaded) {
-          return ContainedTabBarView(
-            tabBarProperties: const TabBarProperties(height: 100),
-            tabs: [
-              Column(
-                children: [
-                  Text(
-                    "${context.read<TabBarStatusCubit>().pending.length}",
-                    style: Theme.of(context).textTheme.headline1?.copyWith(
-                        color:
-                            newIndex == 0 ? AppColors.primary : AppColors.grey),
-                  ),
-                  Text(AppStrings.newOrder,
-                      style: Theme.of(context).textTheme.headline6?.copyWith(
-                          color: newIndex == 0
-                              ? AppColors.primary
-                              : AppColors.grey)),
-                ],
-              ),
-              Column(
-                children: [
-                  Text(
-                    "${context.read<TabBarStatusCubit>().progress.length}",
-                    style: Theme.of(context).textTheme.headline1?.copyWith(
-                        color:
-                            newIndex == 1 ? AppColors.primary : AppColors.grey),
-                  ),
-                  Text(AppStrings.inProgressOrder,
-                      style: Theme.of(context).textTheme.headline6?.copyWith(
-                          color: newIndex == 1
-                              ? AppColors.primary
-                              : AppColors.grey)),
-                ],
-              ),
-              Column(
-                children: [
-                  Text(
-                    "${context.read<TabBarStatusCubit>().completed.length}",
-                    style: Theme.of(context).textTheme.headline1?.copyWith(
-                        color:
-                            newIndex == 2 ? AppColors.primary : AppColors.grey),
-                  ),
-                  Text(AppStrings.completedOrder,
-                      style: Theme.of(context).textTheme.headline6?.copyWith(
-                          color: newIndex == 2
-                              ? AppColors.primary
-                              : AppColors.grey)),
-                ],
-              ),
-            ],
-            views: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: NewOrdersScreen(
-                    orderDetails: context.read<TabBarStatusCubit>().pending),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: OrderProgressScreen(
-                    orderDetails: context.read<TabBarStatusCubit>().progress),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: OrderCompletedScreen(
-                    orderDetails: context.read<TabBarStatusCubit>().completed),
-              ),
-            ],
-            onChange: (index) {
-              setState(() {
-                newIndex = index;
-              });
-            },
-          );
-        } else if (state is AllOrdersError) {
-          return error_widget.ErrorWidget(
-            onPressed: () => context.read<TabBarStatusCubit>().getAllOrders(),
-          );
-        } else {
-          return Center(
-            child: CircularProgressIndicator(
-              color: AppColors.red,
+            Text(AppStrings.newOrder,
+                style: Theme.of(context).textTheme.headline6?.copyWith(
+                    color: newIndex == 0 ? AppColors.primary : AppColors.grey)),
+          ],
+        ),
+        Column(
+          children: [
+            Text(
+              "${widget.stateOrderList[1].length}",
+              style: Theme.of(context).textTheme.headline1?.copyWith(
+                  color: newIndex == 1 ? AppColors.primary : AppColors.grey),
             ),
-          );
-        }
+            Text(AppStrings.inProgressOrder,
+                style: Theme.of(context).textTheme.headline6?.copyWith(
+                    color: newIndex == 1 ? AppColors.primary : AppColors.grey)),
+          ],
+        ),
+        Column(
+          children: [
+            Text(
+              "${widget.stateOrderList[2].length}",
+              style: Theme.of(context).textTheme.headline1?.copyWith(
+                  color: newIndex == 2 ? AppColors.primary : AppColors.grey),
+            ),
+            Text(AppStrings.completedOrder,
+                style: Theme.of(context).textTheme.headline6?.copyWith(
+                    color: newIndex == 2 ? AppColors.primary : AppColors.grey)),
+          ],
+        ),
+      ],
+      views: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          child: NewOrdersScreen(
+              orderDetails: widget.stateOrderList[0]),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          child: OrderProgressScreen(
+              orderDetails: widget.stateOrderList[1]),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          child: OrderCompletedScreen(
+              orderDetails: widget.stateOrderList[2]),
+        ),
+      ],
+      onChange: (index) {
+        setState(() {
+          newIndex = index;
+        });
       },
     );
   }

@@ -9,50 +9,14 @@ import '../utils/app_colors.dart';
 import '../utils/assets_manager.dart';
 
 class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
-  const AppBarWidget({Key? key}) : super(key: key);
+  const AppBarWidget({Key? key, required this.currentTab}) : super(key: key);
+  final int currentTab;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      title: BlocBuilder<HomeNavigatorCubit, HomeNavigatorState>(
-          builder: (context, state) {
-        if (state.currentTab == TabItem.Offers) {
-          return Padding(
-            padding:
-                EdgeInsets.only(left: MediaQuery.of(context).size.width / 4),
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: Text(
-                    AppStrings.offers,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline3
-                        ?.copyWith(color: AppColors.darkBlue),
-                  ),
-                ),
-                InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.addOffersRoute);
-                    },
-                    child: SvgPicture.asset(
-                      ImageAssets.addItem,
-                    ))
-              ],
-            ),
-          );
-        } else {
-          return Text(
-            state.currentTab.name,
-            style: Theme.of(context)
-                .textTheme
-                .headline1
-                ?.copyWith(color: AppColors.darkBlue),
-          );
-        }
-      }),
+      title: appBarTitle(context),
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 20, top: 12),
@@ -82,6 +46,67 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
         )
       ],
     );
+  }
+
+  Widget appBarTitle(context) {
+    if (currentTab == 3) {
+      return Padding(
+        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width / 4),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: Text(
+                AppStrings.offers,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline3
+                    ?.copyWith(color: AppColors.darkBlue),
+              ),
+            ),
+            InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, Routes.addOffersRoute);
+                },
+                child: SvgPicture.asset(
+                  ImageAssets.addItem,
+                ))
+          ],
+        ),
+      );
+    } else if (currentTab == 0) {
+      return Text(
+        AppStrings.history,
+        style: Theme.of(context)
+            .textTheme
+            .headline1
+            ?.copyWith(color: AppColors.darkBlue),
+      );
+    } else if (currentTab == 1) {
+      return Text(
+        AppStrings.cancelled,
+        style: Theme.of(context)
+            .textTheme
+            .headline1
+            ?.copyWith(color: AppColors.darkBlue),
+      );
+    } else if (currentTab == 2) {
+      return Text(
+        AppStrings.orders,
+        style: Theme.of(context)
+            .textTheme
+            .headline1
+            ?.copyWith(color: AppColors.darkBlue),
+      );
+    } else {
+      return Text(
+        AppStrings.logout,
+        style: Theme.of(context)
+            .textTheme
+            .headline1
+            ?.copyWith(color: AppColors.darkBlue),
+      );
+    }
   }
 
   @override

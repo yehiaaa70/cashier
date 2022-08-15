@@ -11,6 +11,7 @@ import 'package:cashir/features/order_status_tabbars/presentation/cubit/tabbar_s
 import 'package:cashir/features/order_status_tabbars/presentation/screens/orders_status_tabbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 // import 'package:flutter_bloc/flutter_bloc.dart';
 import 'config/local/app_localizations_setup.dart';
 import 'config/routes/app_routes.dart';
@@ -39,7 +40,6 @@ class CashirApp extends StatelessWidget {
         // ),
         BlocProvider(
           create: (_) => serviceLocator<TabBarStatusCubit>(),
-          child: const OrderStatusTabBar(),
         ),
         BlocProvider(
           create: (_) => serviceLocator<AcceptorCubit>(),
@@ -63,15 +63,5 @@ class CashirApp extends StatelessWidget {
         localizationsDelegates: AppLocalizationsSetup.localizationsDelegates,
       ),
     );
-    // return MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   title: AppStrings.appName,
-    //   // locale: state.locale,
-    //   theme: appTheme(),
-    //   onGenerateRoute: AppRoutes.onGenerateRoute,
-    //   supportedLocales: AppLocalizationsSetup.supportedLocales,
-    //   localeResolutionCallback: AppLocalizationsSetup.localeResolutionCallback,
-    //   localizationsDelegates: AppLocalizationsSetup.localizationsDelegates,
-    // );
   }
 }
