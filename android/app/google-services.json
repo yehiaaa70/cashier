@@ -1,0 +1,223 @@
+{
+  "project_info": {
+    "project_number": "748233792138",
+    "firebase_url": "https://kopp-977f0.firebaseio.com",
+    "project_id": "kopp-977f0",
+    "storage_bucket": "kopp-977f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748233792138:android:13e26eb7d3db3427b2ab73",
+        "android_client_info": {
+          "package_name": "app.wahfy.kop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "748233792138-uark0emb2alifil3fdgjdoukkqmq7pr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGa-yVvyTZfV58FkqjUVqPzfM0SyrHWtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "748233792138-p7a5opjgqo14u59ceg95dq97c6lc8rnm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "748233792138-99h37qmssa85femo949o9ee301k77jkn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.212Solutions.wahfyServices"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748233792138:android:5d154fb135cb909bb2ab73",
+        "android_client_info": {
+          "package_name": "com.Two12Restaurant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "748233792138-dftkmn4ajup39mc5bdiqtos4n52g0a24.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Two12Restaurant",
+            "certificate_hash": "e57f6fe0919af80d49718dd2b49496b910b03271"
+          }
+        },
+        {
+          "client_id": "748233792138-uark0emb2alifil3fdgjdoukkqmq7pr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGa-yVvyTZfV58FkqjUVqPzfM0SyrHWtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "748233792138-p7a5opjgqo14u59ceg95dq97c6lc8rnm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "748233792138-99h37qmssa85femo949o9ee301k77jkn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.212Solutions.wahfyServices"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748233792138:android:9fcf69bcdd7dfe92b2ab73",
+        "android_client_info": {
+          "package_name": "com.cashiernew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "748233792138-j4us5jiftidf8epaa019ifrurpsn75f0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cashiernew",
+            "certificate_hash": "1e886b8695eefc9972e1a9ccf245e9e1f0eeac12"
+          }
+        },
+        {
+          "client_id": "748233792138-uark0emb2alifil3fdgjdoukkqmq7pr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGa-yVvyTZfV58FkqjUVqPzfM0SyrHWtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "748233792138-p7a5opjgqo14u59ceg95dq97c6lc8rnm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "748233792138-99h37qmssa85femo949o9ee301k77jkn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.212Solutions.wahfyServices"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748233792138:android:2e65734f03adccc8b2ab73",
+        "android_client_info": {
+          "package_name": "com.example.cashir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "748233792138-uark0emb2alifil3fdgjdoukkqmq7pr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGa-yVvyTZfV58FkqjUVqPzfM0SyrHWtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "748233792138-p7a5opjgqo14u59ceg95dq97c6lc8rnm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "748233792138-99h37qmssa85femo949o9ee301k77jkn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.212Solutions.wahfyServices"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748233792138:android:15e63537bf2749a2b2ab73",
+        "android_client_info": {
+          "package_name": "com.wahfyservices"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "748233792138-7mcvdkmhkdf9005pb447hh72aihrj4ls.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wahfyservices",
+            "certificate_hash": "1e886b8695eefc9972e1a9ccf245e9e1f0eeac12"
+          }
+        },
+        {
+          "client_id": "748233792138-q0qt1sa21uoc2qq735vn1vh26gjcg6il.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wahfyservices",
+            "certificate_hash": "48f336bfe2f169cbbb85a96532f8c1dcf4b97380"
+          }
+        },
+        {
+          "client_id": "748233792138-uark0emb2alifil3fdgjdoukkqmq7pr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGa-yVvyTZfV58FkqjUVqPzfM0SyrHWtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "748233792138-p7a5opjgqo14u59ceg95dq97c6lc8rnm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "748233792138-99h37qmssa85femo949o9ee301k77jkn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.212Solutions.wahfyServices"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,8 +6,6 @@ import 'package:cashir/features/login/presentation/cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../config/routes/app_routes.dart';
-
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -19,13 +17,9 @@ class LoginScreen extends StatelessWidget {
           if (state is LoadingLoginState) {
             return const Center(child: CircularProgressIndicator());
           }
-          // if (state is LoadedLoginState) {
-          //   Future.delayed(Duration.zero, () {
-          //     Navigator.pushNamed(context, Routes.homeNavigatorRoute);
-          //   });
-          // }
+
           return Form(
-            key: LoginCubit.get(context).formKey,
+            key: LoginCubit.get(context).formKeyLogin,
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               children: [
@@ -51,7 +45,6 @@ class LoginScreen extends StatelessWidget {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide.none)),
-                  onSaved: (value) {},
                 ),
                 const SizedBox(height: 30),
                 Text(
@@ -70,15 +63,15 @@ class LoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide.none)),
                   obscureText: true,
-                  onSaved: (value) {},
                 ),
                 const SizedBox(height: 50),
                 InkWell(
                   onTap: () {
-                    // Navigator.pushNamed(context, Routes.homeNavigatorRoute);
-                    var key = LoginCubit.get(context).formKey;
+                    var key = LoginCubit.get(context).formKeyLogin;
                     if (key.currentState!.validate()) {
                       LoginCubit.get(context).userLogin(context);
+                      LoginCubit.get(context).emailController.text = '';
+                      LoginCubit.get(context).passwordController.text = '';
                     }
                   },
                   child: Container(
