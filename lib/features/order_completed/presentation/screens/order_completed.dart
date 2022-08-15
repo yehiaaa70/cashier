@@ -2,19 +2,21 @@ import 'package:cashir/features/order_completed/presentation/widgets/order_compl
 import 'package:flutter/material.dart';
 
 import '../../../../core/widgets/order_form.dart';
+import '../../../home_navigator/domain/entities/order_date.dart';
 
 enum OrderKind { completed, cancelled, rejected ,inProgress,newOrder}
 
 class OrderCompletedScreen extends StatelessWidget {
-  const OrderCompletedScreen({Key? key}) : super(key: key);
+  const OrderCompletedScreen({Key? key, required this.orderDetails}) : super(key: key);
+  final List<OrderDetails> orderDetails;
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
         itemBuilder: (BuildContext context, int index) {
-          return OrderForm(isDelivered: true, orderKind: OrderKind.completed,);
+          return OrderForm(isDelivered: true, orderKind: OrderKind.completed,orderDetails: orderDetails[index],);
         },
         separatorBuilder: (BuildContext context, int index) => const Divider(height: 20),
-        itemCount: 8);
+        itemCount: orderDetails.length);
   }
 }

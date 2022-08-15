@@ -1,7 +1,7 @@
-import 'package:cashir/features/order_status_tabbars/data/models/order_details_model.dart';
-import 'package:cashir/features/order_status_tabbars/domain/entities/order_date.dart';
 
-import '../../domain/entities/all_orders.dart';
+import 'package:cashir/features/home_navigator/data/models/order_details_model.dart';
+import 'package:cashir/features/home_navigator/domain/entities/all_orders.dart';
+import 'package:cashir/features/home_navigator/domain/entities/order_date.dart';
 
 class AllOrdersModel extends AllCustomerOrders{
   const AllOrdersModel({required super.success, required super.data, required super.message});
@@ -24,14 +24,14 @@ class DataModel extends Data{
     currentPage: json["current_page"],
     data: List<OrderDetails>.from(json["data"].map((x) => OrderDetailsModel.fromJson(x))),
     firstPageUrl: json["first_page_url"],
-    from: json["from"],
+    from: json["from"]??0,
     lastPage: json["last_page"],
     lastPageUrl: json["last_page_url"],
-    nextPageUrl: json["next_page_url"],
+    nextPageUrl: json["next_page_url"]??"0",
     path: json["path"],
     perPage: json["per_page"],
-    prevPageUrl: json["prev_page_url"],
-    to: json["to"],
+    prevPageUrl: json["prev_page_url"]??"",
+    to: json["to"]??0,
     total: json["total"],
   );
 }
