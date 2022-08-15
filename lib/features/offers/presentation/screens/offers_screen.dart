@@ -23,16 +23,12 @@ class _OffersScreenState extends State<OffersScreen> {
   @override
   void initState() {
     OffersCubit.get(context).getAllOffers();
-    // OffersCubit.get(context).getAvaliableOffers();
-    // CallApiForOffers().getAvailableOffers();
-    // CallApiForOffers.availableOffers;
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // log(CallApiForOffers.offers.length.toString());
     return Scaffold(
       body: BlocBuilder<OffersCubit, OffersState>(
         builder: (context, state) {
@@ -54,12 +50,13 @@ class _OffersScreenState extends State<OffersScreen> {
                 height: 15,
               ),
               ...List.generate(
-                  CallApiForOffers.availableOffers.length,
-                  (index) => AvailableOfferWidget(
-                        index: index,
-                        offers: CallApiForOffers.availableOffers,
-                        color: 0,
-                      )),
+                CallApiForOffers.availableOffers.length,
+                (index) => AvailableOfferWidget(
+                  index: index,
+                  offers: CallApiForOffers.availableOffers,
+                  color: 0,
+                ),
+              ),
               const SizedBox(
                 height: 30,
               ),
@@ -74,12 +71,13 @@ class _OffersScreenState extends State<OffersScreen> {
                 height: 15,
               ),
               ...List.generate(
-                  CallApiForOffers.expiredOffers.length,
-                  (index) => AvailableOfferWidget(
-                        index: index,
-                        offers: CallApiForOffers.expiredOffers,
-                        color: 1,
-                      )),
+                CallApiForOffers.expiredOffers.length,
+                (index) => AvailableOfferWidget(
+                  index: index,
+                  offers: CallApiForOffers.expiredOffers,
+                  color: 1,
+                ),
+              ),
             ],
           );
         },
