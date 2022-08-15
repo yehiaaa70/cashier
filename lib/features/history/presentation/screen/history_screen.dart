@@ -1,16 +1,11 @@
 import 'package:cashir/features/cancelled_orders/presentation/screens/cancelled_orders_screen.dart';
-import 'package:cashir/features/new_orders/presentation/screens/new_orders_screen.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
-import '../../../../core/widgets/error_widget.dart' as error_widget;
 import '../../../home_navigator/domain/entities/order_date.dart';
 import '../../../order_completed/presentation/screens/order_completed.dart';
-import '../../../order_progress/presentation/screens/progress_order.dart';
-import '../../../order_status_tabbars/presentation/cubit/tabbar_status_cubit.dart';
 import '../../../rejected_orders/presentation/screens/rejected_orders_screen.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -22,7 +17,7 @@ class HistoryScreen extends StatefulWidget {
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
-  int newIndex=0;
+  int newIndex = 0;
 
   @override
   Widget build(BuildContext context) {

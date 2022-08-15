@@ -16,6 +16,7 @@ class Routes {
   static const String addOffersRoute = '/addOffersRoute';
   static const String notificationRoute = '/notificationRoute';
   static const String localeRoute = '/localeRoute';
+  static const String logoutRoute = '/logoutRoute';
 }
 
 class AppRoutes {
@@ -23,7 +24,7 @@ class AppRoutes {
     switch (settings.name) {
       case Routes.initialRoute:
         return MaterialPageRoute(
-          builder: (context) => const LocaleScreen(),
+          builder: (context) => const LoginScreen(),
         );
       case Routes.loginRoute:
         return MaterialPageRoute(

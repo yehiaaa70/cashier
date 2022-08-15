@@ -1,3 +1,7 @@
+import 'package:cashir/features/home_navigator/presentation/cubit/home_navigator_cubit.dart';
+import 'package:cashir/features/login/presentation/cubit/login_cubit.dart';
+import 'package:cashir/features/logout/presentation/cubit/logout_cubit.dart';
+import 'package:cashir/features/offers/presentation/cubit/offers_cubit.dart';
 
 import 'package:cashir/core/network/network_info.dart';
 import 'package:cashir/features/home_navigator/data/data_sources/all_orders_data_sources.dart';
@@ -28,7 +32,8 @@ Future<void> setup() async {
   // Blocs
   serviceLocator.registerFactory(() => HomeNavigatorCubit(serviceLocator()));
   serviceLocator.registerFactory(() => TabBarStatusCubit(serviceLocator()));
-  serviceLocator.registerFactory(() => AcceptorCubit(serviceLocator(),serviceLocator()));
+  serviceLocator
+      .registerFactory(() => AcceptorCubit(serviceLocator(), serviceLocator()));
 
   // Use Cases
   serviceLocator.registerLazySingleton(
@@ -62,8 +67,7 @@ Future<void> setup() async {
       () => AllOrdersRemoteDataSource(apiConsumer: serviceLocator()));
 
   serviceLocator.registerLazySingleton<BaseAcceptOrderRemoteDataSource>(
-          () => AcceptOrderRemoteDataSource(serviceLocator()));
-
+      () => AcceptOrderRemoteDataSource(serviceLocator()));
 
   //! Core
   //Network
@@ -92,6 +96,8 @@ Future<void> setup() async {
   serviceLocator.registerLazySingleton(() => InternetConnectionChecker());
   // serviceLocator.registerFactory(() => TabBarStatusCubit());
   serviceLocator.registerFactory(() => LoginCubit());
+  serviceLocator.registerFactory(() => OffersCubit());
+  serviceLocator.registerFactory(() => LogoutCubit());
 
   // Local database sharedpreferences
   final sharedPreferences = await SharedPreferences.getInstance();
