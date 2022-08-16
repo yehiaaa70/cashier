@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cashir/config/local/app_localizations.dart';
 import 'package:cashir/core/utils/app_strings.dart';
 import 'package:cashir/features/offers/data/data_sources/call_api.dart';
 import 'package:cashir/features/offers/data/models/offers_model.dart';
@@ -22,7 +23,7 @@ class OffersScreen extends StatefulWidget {
 class _OffersScreenState extends State<OffersScreen> {
   @override
   void initState() {
-    OffersCubit.get(context).getAllOffers();
+    OffersCubit.get(context).getAllOffers(context);
 
     super.initState();
   }
@@ -40,7 +41,9 @@ class _OffersScreenState extends State<OffersScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             children: [
               Text(
-                AppStrings.availableOffers,
+                AppLocalizations.of(context)!
+                    .translate(AppStrings.availableOffers)
+                    .toString(),
                 style: Theme.of(context)
                     .textTheme
                     .headline5
@@ -61,7 +64,9 @@ class _OffersScreenState extends State<OffersScreen> {
                 height: 30,
               ),
               Text(
-                AppStrings.expiredOffers,
+                AppLocalizations.of(context)!
+                    .translate(AppStrings.expiredOffers)
+                    .toString(),
                 style: Theme.of(context)
                     .textTheme
                     .headline5

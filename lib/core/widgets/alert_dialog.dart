@@ -5,7 +5,7 @@ import '../utils/app_colors.dart';
 import '../utils/app_strings.dart';
 
 class CustomAlert {
-  static Alert alert({title,desc, context}) {
+  static Alert alert({title, desc, context}) {
     return Alert(
       onWillPopActive: true,
       content: TextFormField(
@@ -41,7 +41,7 @@ class CustomAlert {
           ),
         ),
         DialogButton(
-          border: Border.all(width: 1,color: AppColors.red),
+          border: Border.all(width: 1, color: AppColors.red),
           color: AppColors.transparent,
           onPressed: () => Navigator.pop(context),
           width: 120,

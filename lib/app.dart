@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cashir/features/home_navigator/presentation/cubit/home_navigator_cubit.dart';
+import 'package:cashir/features/language/presentation/bloc/language_bloc.dart';
 
 import 'package:cashir/features/login/presentation/cubit/login_cubit.dart';
 import 'package:cashir/features/logout/presentation/cubit/logout_cubit.dart';
@@ -50,17 +51,25 @@ class CashirApp extends StatelessWidget {
         BlocProvider<LogoutCubit>(
           create: (_) => serviceLocator<LogoutCubit>(),
         ),
+        BlocProvider<LanguageBloc>(
+          create: (_) => serviceLocator<LanguageBloc>(),
+        ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: AppStrings.appName,
-        // locale: state.locale,
-        theme: appTheme(),
-        onGenerateRoute: AppRoutes.onGenerateRoute,
-        supportedLocales: AppLocalizationsSetup.supportedLocales,
-        localeResolutionCallback:
-            AppLocalizationsSetup.localeResolutionCallback,
-        localizationsDelegates: AppLocalizationsSetup.localizationsDelegates,
+      child: BlocBuilder<LanguageBloc, LanguageState>(
+        builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: AppStrings.appName,
+            locale: state.locale,
+            theme: appTheme(),
+            onGenerateRoute: AppRoutes.onGenerateRoute,
+            supportedLocales: AppLocalizationsSetup.supportedLocales,
+            localeResolutionCallback:
+                AppLocalizationsSetup.localeResolutionCallback,
+            localizationsDelegates:
+                AppLocalizationsSetup.localizationsDelegates,
+          );
+        },
       ),
     );
   }

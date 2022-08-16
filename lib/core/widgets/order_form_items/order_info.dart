@@ -1,4 +1,7 @@
+import 'package:cashir/config/local/app_localizations.dart';
+import 'package:cashir/core/utils/app_strings.dart';
 import 'package:cashir/core/utils/assets_manager.dart';
+import 'package:cashir/core/utils/convert_numbers_method.dart';
 import 'package:cashir/core/widgets/order_item_details.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,7 +14,8 @@ class OrderInfo extends StatelessWidget {
       {Key? key,
       required this.customerName,
       required this.customerPhone,
-      required this.email, required this.items})
+      required this.email,
+      required this.items})
       : super(key: key);
 
   final String customerName;
@@ -36,7 +40,9 @@ class OrderInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              customerPhone,
+              AppLocalizations.of(context)!.isEnLocale
+                  ? customerPhone
+                  : replaceToArabicNumber(customerPhone),
               style: Theme.of(context)
                   .textTheme
                   .headline5
@@ -44,14 +50,13 @@ class OrderInfo extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
             InkWell(
-              onTap:() async {
-
+              onTap: () async {
                 final Uri launchUri = Uri(
                   scheme: 'tel',
                   path: customerPhone,
                 );
                 await launchUrl(launchUri);
-               // customerPhone.isNotEmpty? launch("tel://$customerPhone"):launch("tel://00112233445566");
+                // customerPhone.isNotEmpty? launch("tel://$customerPhone"):launch("tel://00112233445566");
               },
               child: Image.asset(ImageAssets.callIcon,
                   width: 30, height: 30, fit: BoxFit.fill),

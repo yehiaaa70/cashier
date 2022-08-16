@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cashir/config/local/app_localizations.dart';
 import 'package:cashir/core/secure_storage/secure_storage.dart';
 import 'package:cashir/core/widgets/app_bar_widget.dart';
 import 'package:cashir/features/home_navigator/domain/entities/order_date.dart';
@@ -28,8 +29,7 @@ class HomeNavigatorScreen extends StatefulWidget {
 }
 
 class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
-   int _currentTab = 2;
-
+  int _currentTab = 2;
 
   // void _selectTab(TabItem tabItem) {
   //   setState(() => _currentTab = tabItem);
@@ -43,9 +43,9 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeNavigatorCubit,HomeNavigatorState>(
+    return BlocBuilder<HomeNavigatorCubit, HomeNavigatorState>(
       builder: (BuildContext context, state) {
-        if(state is AllOrdersLoading){
+        if (state is AllOrdersLoading) {
           return Container(
             color: AppColors.background,
             child: Center(
@@ -54,12 +54,13 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
               ),
             ),
           );
-        }else if(state  is AllOrdersLoaded){
+        } else if (state is AllOrdersLoaded) {
           return Scaffold(
-              appBar:  AppBarWidget(currentTab: _currentTab,),
+              appBar: AppBarWidget(
+                currentTab: _currentTab,
+              ),
               bottomNavigationBar: CurvedNavigationBar(
-
-                index:2,
+                index: 2,
                 backgroundColor: AppColors.transparent,
                 buttonBackgroundColor: AppColors.darkPurple,
                 onTap: (index) {
@@ -81,7 +82,9 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                               ? AppColors.white
                               : Colors.grey[400]),
                       _currentTab != 0
-                          ? const Text("History")
+                          ? Text(AppLocalizations.of(context)!
+                              .translate(AppStrings.history)
+                              .toString())
                           : const SizedBox()
                     ],
                   ),
@@ -99,7 +102,9 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                               ? AppColors.white
                               : Colors.grey[400]),
                       _currentTab != 1
-                          ? const Text("cancelled")
+                          ? Text(AppLocalizations.of(context)!
+                              .translate(AppStrings.canceled)
+                              .toString())
                           : const SizedBox()
                     ],
                   ),
@@ -117,13 +122,15 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                               ? AppColors.white
                               : Colors.grey[400]),
                       _currentTab != 2
-                          ? const Text("orders")
+                          ? Text(AppLocalizations.of(context)!
+                              .translate(AppStrings.orders)
+                              .toString())
                           : const SizedBox()
                     ],
                   ),
                   Column(
                     children: [
-                      if (_currentTab !=3) ...{
+                      if (_currentTab != 3) ...{
                         const SizedBox(
                           height: 20,
                         ),
@@ -135,7 +142,9 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                               ? AppColors.white
                               : Colors.grey[400]),
                       _currentTab != 3
-                          ? const Text("offers")
+                          ? Text(AppLocalizations.of(context)!
+                              .translate(AppStrings.offers)
+                              .toString())
                           : const SizedBox()
                     ],
                   ),
@@ -153,15 +162,16 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                               ? AppColors.white
                               : Colors.grey[400]),
                       _currentTab != 4
-                          ? const Text("logout")
+                          ? Text(AppLocalizations.of(context)!
+                              .translate(AppStrings.logout)
+                              .toString())
                           : const SizedBox()
                     ],
                   ),
                 ],
-
               ),
               body: [
-                HistoryScreen( stateOrderList: [
+                HistoryScreen(stateOrderList: [
                   context.read<HomeNavigatorCubit>().delivery,
                   context.read<HomeNavigatorCubit>().takeAway,
                   context.read<HomeNavigatorCubit>().canceled,
@@ -179,9 +189,9 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                   context.read<HomeNavigatorCubit>().completed
                 ]),
                 const OffersScreen(),
-                const Center(child: Text("You have been signed out"))
+                const LogoutScreen(),
               ][_currentTab]);
-        }else {
+        } else {
           return Center(
             child: CircularProgressIndicator(
               color: AppColors.red,

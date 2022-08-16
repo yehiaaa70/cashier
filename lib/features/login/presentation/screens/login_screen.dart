@@ -1,13 +1,39 @@
 import 'dart:developer';
-
+import 'package:cashir/config/local/app_localizations.dart';
+import 'package:cashir/config/routes/app_routes.dart';
+import 'package:cashir/core/secure_storage/secure_storage.dart';
 import 'package:cashir/core/utils/app_colors.dart';
 import 'package:cashir/core/utils/app_strings.dart';
+import 'package:cashir/core/widgets/lang_switch.dart';
 import 'package:cashir/features/login/presentation/cubit/login_cubit.dart';
+import 'package:cashir/features/offers/presentation/cubit/offers_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
+
+  Future init() async {
+    OffersCubit.get(context).token = (await SecureStorage.getToken())!;
+    // log(userToken.toString());
+    if (OffersCubit.get(context).token.length > 800) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacementNamed(context, Routes.offersRoute);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,22 +49,27 @@ class LoginScreen extends StatelessWidget {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               children: [
-                const SizedBox(height: 80),
+                const SizedBox(height: 50),
+                const LangSwitch(),
                 Center(
                     child: Text(
-                  AppStrings.login,
+                  AppLocalizations.of(context)!
+                      .translate(AppStrings.appName)
+                      .toString(),
                   style: Theme.of(context).textTheme.headline3,
                 )),
                 const SizedBox(height: 30),
                 Text(
-                  AppStrings.emailAddress,
+                  AppLocalizations.of(context)!
+                      .translate(AppStrings.emailAddress)
+                      .toString(),
                   style: Theme.of(context).textTheme.headline5,
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
                   controller: LoginCubit.get(context).emailController,
                   validator: (value) =>
-                      LoginCubit.get(context).emailValidation(value),
+                      LoginCubit.get(context).emailValidation(value, context),
                   decoration: InputDecoration(
                       fillColor: AppColors.white,
                       filled: true,
@@ -48,14 +79,16 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 Text(
-                  AppStrings.password,
+                  AppLocalizations.of(context)!
+                      .translate(AppStrings.password)
+                      .toString(),
                   style: Theme.of(context).textTheme.headline5,
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
                   controller: LoginCubit.get(context).passwordController,
-                  validator: (value) =>
-                      LoginCubit.get(context).passwordValidation(value),
+                  validator: (value) => LoginCubit.get(context)
+                      .passwordValidation(value, context),
                   decoration: InputDecoration(
                       fillColor: AppColors.white,
                       filled: true,
@@ -70,6 +103,10 @@ class LoginScreen extends StatelessWidget {
                     var key = LoginCubit.get(context).formKeyLogin;
                     if (key.currentState!.validate()) {
                       LoginCubit.get(context).userLogin(context);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(AppLocalizations.of(context)!
+                              .translate(AppStrings.loginResponseSnackbar)
+                              .toString())));
                       LoginCubit.get(context).emailController.text = '';
                       LoginCubit.get(context).passwordController.text = '';
                     }
@@ -82,7 +119,9 @@ class LoginScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(50)),
                     child: Center(
                       child: Text(
-                        AppStrings.login,
+                        AppLocalizations.of(context)!
+                            .translate(AppStrings.login)
+                            .toString(),
                         style: Theme.of(context)
                             .textTheme
                             .headline6
