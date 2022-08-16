@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cashir/config/local/app_localizations.dart';
 import 'package:cashir/core/utils/app_strings.dart';
 import 'package:cashir/features/offers/data/data_sources/call_api.dart';
 import 'package:cashir/features/offers/data/models/offers_model.dart';
@@ -22,17 +23,13 @@ class OffersScreen extends StatefulWidget {
 class _OffersScreenState extends State<OffersScreen> {
   @override
   void initState() {
-    OffersCubit.get(context).getAllOffers();
-    // OffersCubit.get(context).getAvaliableOffers();
-    // CallApiForOffers().getAvailableOffers();
-    // CallApiForOffers.availableOffers;
+    OffersCubit.get(context).getAllOffers(context);
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // log(CallApiForOffers.offers.length.toString());
     return Scaffold(
       body: BlocBuilder<OffersCubit, OffersState>(
         builder: (context, state) {
@@ -44,7 +41,9 @@ class _OffersScreenState extends State<OffersScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             children: [
               Text(
-                AppStrings.availableOffers,
+                AppLocalizations.of(context)!
+                    .translate(AppStrings.availableOffers)
+                    .toString(),
                 style: Theme.of(context)
                     .textTheme
                     .headline5
@@ -54,17 +53,20 @@ class _OffersScreenState extends State<OffersScreen> {
                 height: 15,
               ),
               ...List.generate(
-                  CallApiForOffers.availableOffers.length,
-                  (index) => AvailableOfferWidget(
-                        index: index,
-                        offers: CallApiForOffers.availableOffers,
-                        color: 0,
-                      )),
+                CallApiForOffers.availableOffers.length,
+                (index) => AvailableOfferWidget(
+                  index: index,
+                  offers: CallApiForOffers.availableOffers,
+                  color: 0,
+                ),
+              ),
               const SizedBox(
                 height: 30,
               ),
               Text(
-                AppStrings.expiredOffers,
+                AppLocalizations.of(context)!
+                    .translate(AppStrings.expiredOffers)
+                    .toString(),
                 style: Theme.of(context)
                     .textTheme
                     .headline5
@@ -74,12 +76,13 @@ class _OffersScreenState extends State<OffersScreen> {
                 height: 15,
               ),
               ...List.generate(
-                  CallApiForOffers.expiredOffers.length,
-                  (index) => AvailableOfferWidget(
-                        index: index,
-                        offers: CallApiForOffers.expiredOffers,
-                        color: 1,
-                      )),
+                CallApiForOffers.expiredOffers.length,
+                (index) => AvailableOfferWidget(
+                  index: index,
+                  offers: CallApiForOffers.expiredOffers,
+                  color: 1,
+                ),
+              ),
             ],
           );
         },

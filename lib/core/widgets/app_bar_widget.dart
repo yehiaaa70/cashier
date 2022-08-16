@@ -1,3 +1,4 @@
+import 'package:cashir/config/local/app_localizations.dart';
 import 'package:cashir/core/utils/app_strings.dart';
 import 'package:cashir/features/home_navigator/presentation/cubit/home_navigator_cubit.dart';
 import 'package:flutter/material.dart';
@@ -51,13 +52,16 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
   Widget appBarTitle(context) {
     if (currentTab == 3) {
       return Padding(
-        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width / 4),
+        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width / 10),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(right: 10.0),
+              padding: const EdgeInsets.only(right: 20.0),
               child: Text(
-                AppStrings.offers,
+                AppLocalizations.of(context)!
+                    .translate(AppStrings.offers)
+                    .toString(),
                 style: Theme.of(context)
                     .textTheme
                     .headline3
@@ -69,7 +73,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
       );
     } else if (currentTab == 0) {
       return Text(
-        AppStrings.history,
+        AppLocalizations.of(context)!.translate(AppStrings.history).toString(),
         style: Theme.of(context)
             .textTheme
             .headline1
@@ -77,7 +81,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
       );
     } else if (currentTab == 1) {
       return Text(
-        AppStrings.cancelled,
+        AppLocalizations.of(context)!.translate(AppStrings.canceled).toString(),
         style: Theme.of(context)
             .textTheme
             .headline1
@@ -85,7 +89,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
       );
     } else if (currentTab == 2) {
       return Text(
-        AppStrings.orders,
+        AppLocalizations.of(context)!.translate(AppStrings.orders).toString(),
         style: Theme.of(context)
             .textTheme
             .headline1
@@ -93,7 +97,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
       );
     } else {
       return Text(
-        AppStrings.logout,
+        AppLocalizations.of(context)!.translate(AppStrings.logout).toString(),
         style: Theme.of(context)
             .textTheme
             .headline1

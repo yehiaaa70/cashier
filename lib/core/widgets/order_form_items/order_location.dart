@@ -1,3 +1,5 @@
+import 'package:cashir/config/local/app_localizations.dart';
+import 'package:cashir/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 
 import '../../../features/home_navigator/domain/entities/order_date.dart';
@@ -5,9 +7,10 @@ import '../../utils/app_colors.dart';
 import '../../utils/assets_manager.dart';
 
 class OrderLocationWidget extends StatefulWidget {
-  const OrderLocationWidget({Key? key, required this.orderDetails}) : super(key: key);
+  const OrderLocationWidget({Key? key, required this.orderDetails})
+      : super(key: key);
 
- final OrderDetails orderDetails;
+  final OrderDetails orderDetails;
 
   @override
   State<OrderLocationWidget> createState() => _OrderLocationWidgetState();
@@ -24,7 +27,7 @@ class _OrderLocationWidgetState extends State<OrderLocationWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Delivered To ",
+              "${AppLocalizations.of(context)!.translate(AppStrings.deliveredToText)} ",
               style: Theme.of(context).textTheme.headline5,
             ),
             InkWell(

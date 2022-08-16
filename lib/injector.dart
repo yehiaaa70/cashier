@@ -1,5 +1,8 @@
 import 'package:cashir/features/home_navigator/domain/use_cases/get_history_orders.dart';
+
+import 'package:cashir/config/local/app_localizations.dart';
 import 'package:cashir/features/home_navigator/presentation/cubit/home_navigator_cubit.dart';
+import 'package:cashir/features/language/presentation/bloc/language_bloc.dart';
 import 'package:cashir/features/login/presentation/cubit/login_cubit.dart';
 import 'package:cashir/features/logout/presentation/cubit/logout_cubit.dart';
 import 'package:cashir/features/new_orders/domain/use_cases/cancel_order_use_case.dart';
@@ -131,6 +134,7 @@ Future<void> setup() async {
   serviceLocator.registerFactory(() => LoginCubit());
   serviceLocator.registerFactory(() => OffersCubit());
   serviceLocator.registerFactory(() => LogoutCubit());
+  serviceLocator.registerFactory(() => LanguageBloc(LanguageState.initial()));
 
   // Local database sharedpreferences
   final sharedPreferences = await SharedPreferences.getInstance();

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cashir/config/local/app_localizations.dart';
 import 'package:cashir/core/secure_storage/secure_storage.dart';
 import 'package:cashir/core/widgets/app_bar_widget.dart';
 import 'package:cashir/features/home_navigator/domain/entities/order_date.dart';
@@ -45,9 +46,9 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeNavigatorCubit,HomeNavigatorState>(
+    return BlocBuilder<HomeNavigatorCubit, HomeNavigatorState>(
       builder: (BuildContext context, state) {
-        if(state is AllOrdersLoading){
+        if (state is AllOrdersLoading) {
           return Container(
             color: AppColors.background,
             child: Center(
@@ -56,13 +57,14 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
               ),
             ),
           );
-        }else if(state  is AllOrdersLoaded){
-          // context.read<HomeNavigatorCubit>().getHistoryOrders();
-          return Scaffold(
-              appBar:  AppBarWidget(currentTab: _currentTab,),
-              bottomNavigationBar: CurvedNavigationBar(
 
-                index:2,
+        } else if (state is AllOrdersLoaded) {
+          return Scaffold(
+              appBar: AppBarWidget(
+                currentTab: _currentTab,
+              ),
+              bottomNavigationBar: CurvedNavigationBar(
+                index: 2,
                 backgroundColor: AppColors.transparent,
                 buttonBackgroundColor: AppColors.darkPurple,
                 onTap: (index) {
@@ -84,7 +86,9 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                               ? AppColors.white
                               : Colors.grey[400]),
                       _currentTab != 0
-                          ? const Text("History")
+                          ? Text(AppLocalizations.of(context)!
+                              .translate(AppStrings.history)
+                              .toString())
                           : const SizedBox()
                     ],
                   ),
@@ -102,7 +106,9 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                               ? AppColors.white
                               : Colors.grey[400]),
                       _currentTab != 1
-                          ? const Text("cancelled")
+                          ? Text(AppLocalizations.of(context)!
+                              .translate(AppStrings.canceled)
+                              .toString())
                           : const SizedBox()
                     ],
                   ),
@@ -120,13 +126,15 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                               ? AppColors.white
                               : Colors.grey[400]),
                       _currentTab != 2
-                          ? const Text("orders")
+                          ? Text(AppLocalizations.of(context)!
+                              .translate(AppStrings.orders)
+                              .toString())
                           : const SizedBox()
                     ],
                   ),
                   Column(
                     children: [
-                      if (_currentTab !=3) ...{
+                      if (_currentTab != 3) ...{
                         const SizedBox(
                           height: 20,
                         ),
@@ -138,7 +146,9 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                               ? AppColors.white
                               : Colors.grey[400]),
                       _currentTab != 3
-                          ? const Text("offers")
+                          ? Text(AppLocalizations.of(context)!
+                              .translate(AppStrings.offers)
+                              .toString())
                           : const SizedBox()
                     ],
                   ),
@@ -156,12 +166,13 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                               ? AppColors.white
                               : Colors.grey[400]),
                       _currentTab != 4
-                          ? const Text("logout")
+                          ? Text(AppLocalizations.of(context)!
+                              .translate(AppStrings.logout)
+                              .toString())
                           : const SizedBox()
                     ],
                   ),
                 ],
-
               ),
               body: [
                 HistoryScreen( stateOrderList: [
@@ -169,6 +180,7 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                   context.read<HomeNavigatorCubit>().takeAwayHistory,
                   context.read<HomeNavigatorCubit>().canceledHistory,
                   context.read<HomeNavigatorCubit>().rejectedHistory,
+
                 ]),
                 CancelledOrdersTabBarScreen(
                   stateOrderList: [
@@ -184,9 +196,10 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                   context.read<HomeNavigatorCubit>().rejected,
                 ]),
                 const OffersScreen(),
-                const LogoutScreen()
+
+                const LogoutScreen(),
               ][_currentTab]);
-        }else {
+        } else {
           return Center(
             child: CircularProgressIndicator(
               color: AppColors.red,

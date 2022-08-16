@@ -1,10 +1,12 @@
 import 'package:cashir/core/utils/app_colors.dart';
+import 'package:cashir/core/utils/convert_numbers_method.dart';
 import 'package:cashir/features/order_completed/presentation/screens/order_completed.dart';
 import 'package:cashir/features/order_progress/presentation/screens/progress_order.dart';
 import 'package:cashir/features/order_status_tabbars/presentation/cubit/tabbar_status_cubit.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../config/local/app_localizations.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/error_widget.dart' as error_widget;
 import '../../../home_navigator/domain/entities/order_date.dart';
@@ -150,129 +152,56 @@ class _OrderStatusTabBarState extends State<OrderStatusTabBar> {
         } else if (state is AcceptorInitial) {
           return ContainedTabBarView(
             tabBarProperties: const TabBarProperties(height: 100),
-            tabs: [
-              Column(
-                children: [
-                  Text(
-                    "${context.read<AcceptorCubit>().pending.length}",
-                    style: Theme.of(context).textTheme.headline1?.copyWith(
-                        color:
-                            newIndex == 0 ? AppColors.primary : AppColors.grey),
-                  ),
-                  Text(AppStrings.newOrder,
-                      style: Theme.of(context).textTheme.headline6?.copyWith(
-                          color: newIndex == 0
-                              ? AppColors.primary
-                              : AppColors.grey)),
-                ],
-              ),
-              Column(
-                children: [
-                  Text(
-                    "${context.read<AcceptorCubit>().progress.length}",
-                    style: Theme.of(context).textTheme.headline1?.copyWith(
-                        color:
-                            newIndex == 1 ? AppColors.primary : AppColors.grey),
-                  ),
-                  Text(AppStrings.inProgressOrder,
-                      style: Theme.of(context).textTheme.headline6?.copyWith(
-                          color: newIndex == 1
-                              ? AppColors.primary
-                              : AppColors.grey)),
-                ],
-              ),
-              Column(
-                children: [
-                  Text(
-                    "${context.read<AcceptorCubit>().completed.length}",
-                    style: Theme.of(context).textTheme.headline1?.copyWith(
-                        color:
-                            newIndex == 2 ? AppColors.primary : AppColors.grey),
-                  ),
-                  Text(AppStrings.completedOrder,
-                      style: Theme.of(context).textTheme.headline6?.copyWith(
-                          color: newIndex == 2
-                              ? AppColors.primary
-                              : AppColors.grey)),
-                ],
-              ),
-            ],
-            views: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: NewOrdersScreen(
-                    orderDetails:
-                        BlocProvider.of<AcceptorCubit>(context).pending),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: OrderProgressScreen(
-                    orderDetails:
-                        BlocProvider.of<AcceptorCubit>(context).progress),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: OrderCompletedScreen(
-                    orderDetails:
-                        BlocProvider.of<AcceptorCubit>(context).completed),
-              ),
-            ],
-            onChange: (index) {
-              setState(() {
-                newIndex = index;
-              });
-            },
-          );
-        } else if(state is ProgressLoaded){
-          return ContainedTabBarView(
-            tabBarProperties: const TabBarProperties(height: 100),
-            tabs: [
-              Column(
-                children: [
-                  Text(
-                    "${context.read<AcceptorCubit>().pending.length}",
-                    style: Theme.of(context).textTheme.headline1?.copyWith(
-                        color:
-                        newIndex == 0 ? AppColors.primary : AppColors.grey),
-                  ),
-                  Text(AppStrings.newOrder,
-                      style: Theme.of(context).textTheme.headline6?.copyWith(
-                          color: newIndex == 0
-                              ? AppColors.primary
-                              : AppColors.grey)),
-                ],
-              ),
-              Column(
-                children: [
-                  Text(
-                    "${context.read<AcceptorCubit>().progress.length}",
-                    style: Theme.of(context).textTheme.headline1?.copyWith(
-                        color:
-                        newIndex == 1 ? AppColors.primary : AppColors.grey),
-                  ),
-                  Text(AppStrings.inProgressOrder,
-                      style: Theme.of(context).textTheme.headline6?.copyWith(
-                          color: newIndex == 1
-                              ? AppColors.primary
-                              : AppColors.grey)),
-                ],
-              ),
-              Column(
-                children: [
-                  Text(
-                    "${context.read<AcceptorCubit>().completed.length}",
-                    style: Theme.of(context).textTheme.headline1?.copyWith(
-                        color:
-                        newIndex == 2 ? AppColors.primary : AppColors.grey),
-                  ),
-                  Text(AppStrings.completedOrder,
-                      style: Theme.of(context).textTheme.headline6?.copyWith(
-                          color: newIndex == 2
-                              ? AppColors.primary
-                              : AppColors.grey)),
-                ],
-              ),
-            ],
+tabs: [
+        Column(
+          children: [
+            Text(
+              // "${widget.stateOrderList[0].length}",
+              "${AppLocalizations.of(context)!.isEnLocale ? widget.stateOrderList[0].length : replaceToArabicNumber(widget.stateOrderList[0].length.toString())}",
+              style: Theme.of(context).textTheme.headline1?.copyWith(
+                  color: newIndex == 0 ? AppColors.primary : AppColors.grey),
+            ),
+            Text(
+                AppLocalizations.of(context)!
+                    .translate(AppStrings.newOrder)
+                    .toString(),
+                style: Theme.of(context).textTheme.headline6?.copyWith(
+                    color: newIndex == 0 ? AppColors.primary : AppColors.grey)),
+          ],
+        ),
+        Column(
+          children: [
+            Text(
+              // "${widget.stateOrderList[1].length}",
+              "${AppLocalizations.of(context)!.isEnLocale ? widget.stateOrderList[1].length : replaceToArabicNumber(widget.stateOrderList[1].length.toString())}",
+              style: Theme.of(context).textTheme.headline1?.copyWith(
+                  color: newIndex == 1 ? AppColors.primary : AppColors.grey),
+            ),
+            Text(
+                AppLocalizations.of(context)!
+                    .translate(AppStrings.inProgressOrder)
+                    .toString(),
+                style: Theme.of(context).textTheme.headline6?.copyWith(
+                    color: newIndex == 1 ? AppColors.primary : AppColors.grey)),
+          ],
+        ),
+        Column(
+          children: [
+            Text(
+              // "${widget.stateOrderList[2].length}",
+              "${AppLocalizations.of(context)!.isEnLocale ? widget.stateOrderList[2].length : replaceToArabicNumber(widget.stateOrderList[2].length.toString())}",
+              style: Theme.of(context).textTheme.headline1?.copyWith(
+                  color: newIndex == 2 ? AppColors.primary : AppColors.grey),
+            ),
+            Text(
+                AppLocalizations.of(context)!
+                    .translate(AppStrings.completed)
+                    .toString(),
+                style: Theme.of(context).textTheme.headline6?.copyWith(
+                    color: newIndex == 2 ? AppColors.primary : AppColors.grey)),
+          ],
+        ),
+      ],
             views: [
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
@@ -306,6 +235,7 @@ class _OrderStatusTabBarState extends State<OrderStatusTabBar> {
             ),
           );
         }
+
       },
     );
   }

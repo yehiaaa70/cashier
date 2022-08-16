@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cashir/features/history/presentation/cubit/history_cubit.dart';
 import 'package:cashir/features/home_navigator/presentation/cubit/home_navigator_cubit.dart';
 import 'package:cashir/features/home_navigator/presentation/screens/home_navigator_screen.dart';
+import 'package:cashir/features/language/presentation/bloc/language_bloc.dart';
 
 import 'package:cashir/features/login/presentation/cubit/login_cubit.dart';
 import 'package:cashir/features/login/presentation/screens/login_screen.dart';
@@ -50,35 +51,25 @@ class CashirApp extends StatelessWidget {
         BlocProvider<LogoutCubit>(
           create: (_) => serviceLocator<LogoutCubit>(),
         ),
-        BlocProvider<ProgressCubit>(
-          create: (_) => serviceLocator<ProgressCubit>(),
-        ),
-        BlocProvider<HistoryCubit>(
-          create: (_) => serviceLocator<HistoryCubit>(),
+        BlocProvider<LanguageBloc>(
+          create: (_) => serviceLocator<LanguageBloc>(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: AppStrings.appName,
-        // locale: state.locale,
-        theme: appTheme(),
-        // home: BlocBuilder<LoginCubit, LoginState>(
-        //   buildWhen: (previous, current) => previous != current,
-        //   builder: (context, state) {
-        //     if (state is AuthStateAuthenticated) {
-        //       return const HomeNavigatorScreen();
-        //     } else if (state is AuthStateLogout) {
-        //       return const LoginScreen();
-        //     } else {
-        //       return const LoginScreen();
-        //     }
-        //   },
-        // ),
-        onGenerateRoute: AppRoutes.onGenerateRoute,
-        supportedLocales: AppLocalizationsSetup.supportedLocales,
-        localeResolutionCallback:
-            AppLocalizationsSetup.localeResolutionCallback,
-        localizationsDelegates: AppLocalizationsSetup.localizationsDelegates,
+      child: BlocBuilder<LanguageBloc, LanguageState>(
+        builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: AppStrings.appName,
+            locale: state.locale,
+            theme: appTheme(),
+            onGenerateRoute: AppRoutes.onGenerateRoute,
+            supportedLocales: AppLocalizationsSetup.supportedLocales,
+            localeResolutionCallback:
+                AppLocalizationsSetup.localeResolutionCallback,
+            localizationsDelegates:
+                AppLocalizationsSetup.localizationsDelegates,
+          );
+        },
       ),
     );
   }
