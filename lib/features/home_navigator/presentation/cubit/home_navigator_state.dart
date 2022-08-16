@@ -28,5 +28,25 @@ class AllOrdersError extends HomeNavigatorState {
   List<Object> get props => [message];
 }
 
-class OrdersChanges extends HomeNavigatorState {}
+
+class AllHistoryOrdersLoading extends HomeNavigatorState {}
+
+class AllHistoryOrdersLoaded extends HomeNavigatorState {
+  final AllCustomerOrders allCustomerOrders;
+
+  AllHistoryOrdersLoaded({required this.allCustomerOrders});
+
+  @override
+  List<Object> get props => [allCustomerOrders];
+}
+
+class AllHistoryOrdersError extends HomeNavigatorState {
+  final String message;
+
+  AllHistoryOrdersError({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
 

@@ -60,7 +60,6 @@ class _OrderFormState extends State<OrderForm> {
                     : false,
               ),
               const SizedBox(height: 10),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -69,8 +68,8 @@ class _OrderFormState extends State<OrderForm> {
                     height: 35,
                     child: IconButton(
                         onPressed: () {
-                          setState((){
-                            _openItem =!_openItem;
+                          setState(() {
+                            _openItem = !_openItem;
                           });
                         },
                         icon: _openItem
@@ -79,7 +78,6 @@ class _OrderFormState extends State<OrderForm> {
                   ),
                 ],
               ),
-
               SizedBox(
                 height: _openItem ? null : 0,
                 child: Column(
@@ -93,7 +91,7 @@ class _OrderFormState extends State<OrderForm> {
                       items: widget.orderDetails!.items,
                     ),
                     const SizedBox(height: 10),
-                    order(widget.orderDetails!, widget.orderKind, context)
+                    order(widget.orderDetails!, widget.orderKind)
                   ],
                 ),
               )
@@ -104,10 +102,12 @@ class _OrderFormState extends State<OrderForm> {
     );
   }
 
-  Widget order(OrderDetails orderDetails, orderKind, context) {
+  Widget order(OrderDetails orderDetails, orderKind) {
     if (orderDetails.state == "in-progress") {
       return InProgressItem(
         globalKey: globalKey,
+        orderDetails: orderDetails,
+        cubitContext: widget.cubitContext!,
       );
     } else if (orderDetails.state == "pending") {
       return PendingOrderItem(
@@ -116,16 +116,56 @@ class _OrderFormState extends State<OrderForm> {
         cubitContext: widget.cubitContext!,
       );
     } else if (orderDetails.state == "canceled") {
-      // return PendingOrderItem(globalKey: globalKey, orderDetails: orderDetails);
-      return OrderCompletedItem(
-        orderDetails: orderDetails,
-        printReceiptClick: () {},
+      return Column(
+        children: [
+          Text(
+            "The Reason ",
+            style: Theme.of(context).textTheme.headline2,
+          ),
+          Container(
+            width: double.infinity,
+            height: 80,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: AppColors.red, width: 1),
+            ),
+            child: Center(
+              child: Text(
+                orderDetails.cancellationReason,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5
+                    ?.copyWith(color: AppColors.grey),
+              ),
+            ),
+          )
+        ],
       );
     } else if (orderDetails.state == "rejected") {
-      // return PendingOrderItem(globalKey: globalKey, orderDetails: orderDetails);
-      return OrderCompletedItem(
-        orderDetails: orderDetails,
-        printReceiptClick: () {},
+      return Column(
+        children: [
+          Text(
+            "The Reason ",
+            style: Theme.of(context).textTheme.headline2,
+          ),
+          Container(
+            width: double.infinity,
+            height: 80,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: AppColors.red, width: 1),
+            ),
+            child: Center(
+              child: Text(
+                orderDetails.cancellationReason,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5
+                    ?.copyWith(color: AppColors.grey),
+              ),
+            ),
+          )
+        ],
       );
     } else {
       return OrderCompletedItem(

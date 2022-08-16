@@ -15,30 +15,27 @@ class OrdersDataRepo extends BaseOrderRepository{
 
   OrdersDataRepo({required this.networkInfo, required this.allOrdersRemoteDataSource});
 
-  // final BaseRandomQuoteLocalDataSource randomQuoteLocalDataSource;
-
-
   @override
-  Future<Either<Failure, AllCustomerOrders>> getAllCustomer() async {
-    // if (await networkInfo.isConnected) {
+  Future<Either<Failure, AllCustomerOrders>> getTodayOrders() async {
       try {
         final getAllOrderRemote =
             await allOrdersRemoteDataSource.getAllOrders();
-        // await randomQuoteLocalDataSource.cacheQuote(getAllOrderRemote);
         return Right(getAllOrderRemote);
       } on ServerException {
         return Left(ServerFailure());
       }
-    // }
-    // else {
-    //   try {
-    //     final cacheRandomQuote =
-    //         await randomQuoteLocalDataSource.getLastRandomQuote();
-    //     return Right(cacheRandomQuote);
-    //   } on CacheException {
-    //     return Left(CacheFailure());
-    //   }
-    // }
+
+  }
+
+  @override
+  Future<Either<Failure, AllCustomerOrders>> getHistoryOrders() async {
+    try {
+      final getHistoryOrders =
+          await allOrdersRemoteDataSource.getHistoryOrders();
+      return Right(getHistoryOrders);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 
 }

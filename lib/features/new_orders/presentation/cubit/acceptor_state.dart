@@ -19,11 +19,19 @@ class AcceptorLoaded extends AcceptorState {
   List<Object?> get props => [acceptor];
 }
 
+class ProgressLoaded extends AcceptorState {
+  final Completed completed;
+
+  ProgressLoaded(this.completed);
+
+  @override
+  List<Object?> get props => [completed];
+}
 
 class AcceptorError extends AcceptorState {
   final String message;
 
-   AcceptorError({required this.message});
+  AcceptorError({required this.message});
 
   @override
   List<Object> get props => [message];

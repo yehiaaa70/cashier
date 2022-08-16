@@ -29,17 +29,19 @@ class HomeNavigatorScreen extends StatefulWidget {
 
 class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
    int _currentTab = 2;
+   @override
+   void initState() {
+     super.initState();
+     BlocProvider.of<HomeNavigatorCubit>(context).getAllOrders();
+     init();
+   }
+
+   Future init() async {
+     final userToken = await SecureStorage.getToken();
+     log('toooooken ${userToken.toString()}');
+   }
 
 
-  // void _selectTab(TabItem tabItem) {
-  //   setState(() => _currentTab = tabItem);
-  // }
-
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<HomeNavigatorCubit>(context).getAllOrders();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,7 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
             ),
           );
         }else if(state  is AllOrdersLoaded){
+          // context.read<HomeNavigatorCubit>().getHistoryOrders();
           return Scaffold(
               appBar:  AppBarWidget(currentTab: _currentTab,),
               bottomNavigationBar: CurvedNavigationBar(
@@ -162,10 +165,10 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
               ),
               body: [
                 HistoryScreen( stateOrderList: [
-                  context.read<HomeNavigatorCubit>().delivery,
-                  context.read<HomeNavigatorCubit>().takeAway,
-                  context.read<HomeNavigatorCubit>().canceled,
-                  context.read<HomeNavigatorCubit>().rejected,
+                  context.read<HomeNavigatorCubit>().deliveryHistory,
+                  context.read<HomeNavigatorCubit>().takeAwayHistory,
+                  context.read<HomeNavigatorCubit>().canceledHistory,
+                  context.read<HomeNavigatorCubit>().rejectedHistory,
                 ]),
                 CancelledOrdersTabBarScreen(
                   stateOrderList: [
@@ -176,10 +179,12 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                 OrderStatusTabBar(stateOrderList: [
                   context.read<HomeNavigatorCubit>().pending,
                   context.read<HomeNavigatorCubit>().progress,
-                  context.read<HomeNavigatorCubit>().completed
+                  context.read<HomeNavigatorCubit>().completed,
+                  context.read<HomeNavigatorCubit>().canceled,
+                  context.read<HomeNavigatorCubit>().rejected,
                 ]),
                 const OffersScreen(),
-                const Center(child: Text("You have been signed out"))
+                const LogoutScreen()
               ][_currentTab]);
         }else {
           return Center(

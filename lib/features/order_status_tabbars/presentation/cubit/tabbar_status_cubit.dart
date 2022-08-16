@@ -16,12 +16,44 @@ part 'tabbar_status_state.dart';
 
 class TabBarStatusCubit extends Cubit<TabBarStatusState> {
   TabBarStatusCubit(this.getCustomerOrderUseCase) : super(AllOrdersInitial());
-
-  static TabBarStatusCubit get(context) => BlocProvider.of<TabBarStatusCubit>(context);
-
-
   final GetCustomerOrderUseCase getCustomerOrderUseCase;
-  List<OrderDetails> pending = [];
+  int pending = 0;
+  int progress = 0;
+  int completed = 0;
+  int canceled = 0;
+  int rejected = 0;
+
+  changeLength(int pending, int progress, int completed,String state,{int? canceled, int? rejected}) {
+    if(state == "progress"){
+      this.pending = pending;
+      this.progress = progress;
+      emit(OrdersChanges());
+    }else if(state == "completed"){
+      this.progress = progress;
+      this.completed = completed;
+      emit(OrdersChanges());
+    }else if(state == "canceled"){
+      this.pending = pending;
+      this.canceled = canceled??0;
+      emit(OrdersChanges());
+    }else if(state == "rejected"){
+      this.pending = pending;
+      this.rejected = rejected??0;
+      emit(OrdersChanges());
+    }else{
+      this.pending = pending;
+      this.progress = progress;
+      this.completed = completed;
+      this.canceled = canceled??0;
+      this.rejected = rejected??0;
+      emit(OrdersChanges());
+    }
+  }
+}
+
+/*
+
+ List<OrderDetails> pending = [];
   List<OrderDetails> progress = [];
   List<OrderDetails> completed = [];
   List<OrderDetails> canceled = [];
@@ -73,7 +105,13 @@ class TabBarStatusCubit extends Cubit<TabBarStatusState> {
     }
   }
 
-   changeList() {
+   changeList(OrderDetails details) {
+     progress.add(details);
+     pending.removeWhere((element) => element.id==details.id);
+   print("pending length");
+   print(pending.length);
+   print("change is done");
     emit(OrdersChanges());
   }
-}
+
+ */
