@@ -1,0 +1,14 @@
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
+
+part 'language_event.dart';
+part 'language_state.dart';
+
+class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
+  LanguageBloc(LanguageState languageState) : super(LanguageState.initial()) {
+    on<LoadLanguage>((event, emit) {
+      emit(LanguageState(locale: event.locale));
+    });
+  }
+}

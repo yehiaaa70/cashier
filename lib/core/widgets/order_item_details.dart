@@ -1,4 +1,7 @@
+import 'package:cashir/config/local/app_localizations.dart';
 import 'package:cashir/core/utils/app_colors.dart';
+import 'package:cashir/core/utils/app_strings.dart';
+import 'package:cashir/core/utils/convert_numbers_method.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/home_navigator/domain/entities/order_date.dart';
@@ -40,16 +43,24 @@ class OrderItemDetails extends StatelessWidget {
                     child: Column(
                       children: [
                         ItemDescription(
-                          title: 'Name ',
-                          details: items.nameEn,
+                          title:
+                              '${AppLocalizations.of(context)!.translate(AppStrings.nameText)} ',
+                          details: AppLocalizations.of(context)!.isEnLocale
+                              ? items.nameEn
+                              : items.nameAr,
                         ),
                         ItemDescription(
-                          title: 'Price ',
-                          details: "SR ${items.price}",
+                          title:
+                              '${AppLocalizations.of(context)!.translate(AppStrings.priceText)} ',
+                          details:
+                              "${AppLocalizations.of(context)!.translate(AppStrings.srText)} ${AppLocalizations.of(context)!.isEnLocale ? items.price : replaceToArabicNumber(items.price)}",
                         ),
                         ItemDescription(
-                          title: 'Calories ',
-                          details: items.calories,
+                          title:
+                              '${AppLocalizations.of(context)!.translate(AppStrings.caloriesText)} ',
+                          details: AppLocalizations.of(context)!.isEnLocale
+                              ? items.calories
+                              : replaceToArabicNumber(items.calories),
                         ),
                       ],
                     ),
@@ -69,12 +80,14 @@ class OrderItemDetails extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               if (items.doughType.isEmpty) ...{
-                const Text("No Dough Type")
+                Text(AppLocalizations.of(context)!
+                    .translate(AppStrings.noDoughText)
+                    .toString())
               } else ...{
                 Row(
                   children: [
                     Text(
-                      "Dough type",
+                      '${AppLocalizations.of(context)!.translate(AppStrings.doughTypeText)} ',
                       style: Theme.of(context)
                           .textTheme
                           .headline6
@@ -82,9 +95,10 @@ class OrderItemDetails extends StatelessWidget {
                     ),
                     const Spacer(),
                     ...List.generate(
-                      items.doughType.length,
-                      (index) => Text(items.doughType[index].nameEn),
-                    ),
+                        items.doughType.length,
+                        (index) => Text(AppLocalizations.of(context)!.isEnLocale
+                            ? items.doughType[index].nameEn
+                            : items.doughType[index].nameAr)),
                     const Spacer(),
                   ],
                 )
@@ -102,10 +116,14 @@ class OrderItemDetails extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               if (items.extras.isEmpty) ...{
-                const Text("No Extras")
+                Text(AppLocalizations.of(context)!
+                    .translate(AppStrings.noExtraText)
+                    .toString())
               } else ...{
                 Text(
-                  "Extras",
+                  AppLocalizations.of(context)!
+                      .translate(AppStrings.extraText)
+                      .toString(),
                   style: Theme.of(context)
                       .textTheme
                       .headline6
@@ -116,9 +134,12 @@ class OrderItemDetails extends StatelessWidget {
                   (index) => Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Name : ${items.extras[index].nameEn}"),
-                      Text("Price : ${items.extras[index].price}"),
-                      Text("Calories : ${items.extras[index].calories}"),
+                      Text(
+                          "${AppLocalizations.of(context)!.translate(AppStrings.nameText).toString()} : ${items.extras[index].nameEn}"),
+                      Text(
+                          "${AppLocalizations.of(context)!.translate(AppStrings.priceText).toString()} : ${AppLocalizations.of(context)!.isEnLocale ? items.extras[index].price : replaceToArabicNumber(items.extras[index].price)}"),
+                      Text(
+                          "${AppLocalizations.of(context)!.translate(AppStrings.caloriesText).toString()} : ${AppLocalizations.of(context)!.isEnLocale ? items.extras[index].calories : replaceToArabicNumber(items.extras[index].calories)}"),
                     ],
                   ),
                 ),
