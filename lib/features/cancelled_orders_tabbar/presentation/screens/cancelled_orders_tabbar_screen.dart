@@ -1,5 +1,6 @@
 import 'package:cashir/core/utils/app_colors.dart';
 import 'package:cashir/features/cancelled_orders/presentation/screens/cancelled_orders_screen.dart';
+import 'package:cashir/features/new_orders/presentation/cubit/acceptor_cubit.dart';
 import 'package:cashir/features/rejected_orders/presentation/screens/rejected_orders_screen.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
@@ -24,12 +25,76 @@ class CancelledOrdersTabBarScreen extends StatefulWidget {
 class _CancelledOrdersTabBarScreenState
     extends State<CancelledOrdersTabBarScreen> {
   int newIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    return ContainedTabBarView(
-      tabBarProperties: const TabBarProperties(height: 100),
-      tabs: [
-        Column(
+    return BlocBuilder<AcceptorCubit, AcceptorState>(
+        builder: (BuildContext context, state) {
+      if (state is AcceptorLoading) {
+        return Center(
+          child: CircularProgressIndicator(
+            color: AppColors.primary,
+          ),
+        );
+      }
+      else if (state is AcceptorLoaded) {
+        return  ContainedTabBarView(
+          tabBarProperties: const TabBarProperties(height: 100),
+          tabs: [
+            Column(
+              children: [
+                Text(
+                  "${context.read<AcceptorCubit>().canceled.length}",
+                  style: Theme.of(context).textTheme.headline1?.copyWith(
+                      color:
+                      newIndex == 0 ? AppColors.primary : AppColors.grey),
+                ),
+                Text(AppStrings.cancelled,
+                    style: Theme.of(context).textTheme.headline6?.copyWith(
+                        color: newIndex == 0
+                            ? AppColors.primary
+                            : AppColors.grey)),
+              ],
+            ),
+            Column(
+              children: [
+                Text(
+                  "${context.read<AcceptorCubit>().rejected.length}",
+                  style: Theme.of(context).textTheme.headline1?.copyWith(
+                      color:
+                      newIndex == 1 ? AppColors.primary : AppColors.grey),
+                ),
+                Text(AppStrings.rejected,
+                    style: Theme.of(context).textTheme.headline6?.copyWith(
+                        color: newIndex == 1
+                            ? AppColors.primary
+                            : AppColors.grey)),
+              ],
+            ),
+          ],
+          views: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: CancelledOrdersScreen(
+                  orderDetails: BlocProvider.of<AcceptorCubit>(context).canceled),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: RejectedOrdersScreen(
+                  orderDetails: BlocProvider.of<AcceptorCubit>(context).rejected),
+            ),
+          ],
+          onChange: (index) {
+            setState(() {
+              newIndex = index;
+            });
+          },
+        );
+      }else if (state is AcceptorInitial) {
+        return ContainedTabBarView(
+          tabBarProperties: const TabBarProperties(height: 100),
+          tabs: [
+          Column(
           children: [
             Text(
               // "${widget.stateOrderList[0].length}",
@@ -61,22 +126,32 @@ class _CancelledOrdersTabBarScreenState
                     color: newIndex == 1 ? AppColors.primary : AppColors.grey)),
           ],
         ),
-      ],
-      views: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          child: CancelledOrdersScreen(orderDetails: widget.stateOrderList[0]),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          child: RejectedOrdersScreen(orderDetails: widget.stateOrderList[1]),
-        ),
-      ],
-      onChange: (index) {
-        setState(() {
-          newIndex = index;
+          ],
+          views: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: CancelledOrdersScreen(
+                  orderDetails: widget.stateOrderList[0]),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: RejectedOrdersScreen(
+                  orderDetails: widget.stateOrderList[1]),
+            ),
+          ],
+          onChange: (index) {
+            setState(() {
+              newIndex = index;
+            });
+          },
+        );
+      }else{
+        return Center(
+          child: CircularProgressIndicator(
+            color: AppColors.red,
+          ),
+        );
+      }
         });
-      },
-    );
   }
 }

@@ -5,5 +5,6 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/error/failures.dart';
 
 abstract class BaseOrderRepository {
-  Future<Either<Failure, AllCustomerOrders>> getAllCustomer();
+  Future<Either<Failure, AllCustomerOrders>> getTodayOrders();
+  Future<Either<Failure, AllCustomerOrders>> getHistoryOrders();
 }

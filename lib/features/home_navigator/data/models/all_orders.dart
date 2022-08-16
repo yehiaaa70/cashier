@@ -6,9 +6,14 @@ import 'package:cashir/features/home_navigator/domain/entities/order_date.dart';
 class AllOrdersModel extends AllCustomerOrders{
   const AllOrdersModel({required super.success, required super.data, required super.message});
 
+  // factory AllOrdersModel.fromJson(Map<String, dynamic> json) => AllOrdersModel(
+  //   success: json["success"],
+  //   data: DataModel.fromJson(json["data"]),
+  //   message: json["message"],
+  // );
   factory AllOrdersModel.fromJson(Map<String, dynamic> json) => AllOrdersModel(
     success: json["success"],
-    data: DataModel.fromJson(json["data"]),
+    data: List<OrderDetails>.from(json["data"].map((x) => OrderDetailsModel.fromJson(x))),
     message: json["message"],
   );
 

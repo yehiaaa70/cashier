@@ -9,6 +9,7 @@ import '../../../../core/utils/app_strings.dart';
 
 abstract class BaseAllOrdersRemoteDataSource {
   Future<AllCustomerOrders> getAllOrders();
+  Future<AllCustomerOrders> getHistoryOrders();
 }
 
 class AllOrdersRemoteDataSource implements BaseAllOrdersRemoteDataSource {
@@ -18,11 +19,23 @@ class AllOrdersRemoteDataSource implements BaseAllOrdersRemoteDataSource {
 
   @override
   Future<AllCustomerOrders> getAllOrders() async {
-    final response = await apiConsumer.get(EndPoints.allOrdersUrl,
+    final response = await apiConsumer.get(EndPoints.allTodayOrders,
         options: Options(
           headers: {
             "authorization":
                 "Bearer ${AppStrings.token}",
+          },
+        ));
+    return AllOrdersModel.fromJson(response);
+  }
+
+  @override
+  Future<AllCustomerOrders> getHistoryOrders() async {
+    final response = await apiConsumer.get(EndPoints.allHistoryOrders,
+        options: Options(
+          headers: {
+            "authorization":
+            "Bearer ${AppStrings.token}",
           },
         ));
     return AllOrdersModel.fromJson(response);

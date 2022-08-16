@@ -68,13 +68,6 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
                     ?.copyWith(color: AppColors.darkBlue),
               ),
             ),
-            InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, Routes.addOffersRoute);
-                },
-                child: SvgPicture.asset(
-                  ImageAssets.addItem,
-                ))
           ],
         ),
       );

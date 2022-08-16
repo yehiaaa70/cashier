@@ -39,6 +39,7 @@ class LoginCubit extends Cubit<LoginState> {
     await CallApi()
         .login(emailController.text, passwordController.text, context);
 
+    emit(AuthStateAuthenticated());
     emit(LoadedLoginState());
   }
 }

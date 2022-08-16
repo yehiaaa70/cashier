@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 
 class AllCustomerOrders extends Equatable {
   final bool success;
-  final Data data;
+  final List<OrderDetails> data;
   final String message;
 
   const AllCustomerOrders(

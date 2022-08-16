@@ -18,42 +18,18 @@ class NewOrdersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AcceptorCubit, AcceptorState>(
-      builder: (BuildContext context, state) {
-        if(state is AcceptorLoading){
-          return Center(
-            child: CircularProgressIndicator(
-              color: AppColors.primary,
-            ),
+    return ListView.separated(
+        itemBuilder: (BuildContext context, int index) {
+          return OrderForm(
+            isDelivered:
+                orderDetails[index].serviceType == "delivery" ? true : false,
+            orderKind: OrderKind.newOrder,
+            orderDetails: orderDetails[index],
+            cubitContext: context,
           );
-        }else if(state is AcceptorLoaded){
-          return  ListView.separated(
-              itemBuilder: (BuildContext context, int index) {
-                return OrderForm(
-                  isDelivered: true,
-                  orderKind: OrderKind.newOrder,
-                  orderDetails: orderDetails[index],
-                  cubitContext: context,
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) =>
-              const SizedBox(height: 20),
-              itemCount: orderDetails.length);
-        } else {
-          return  ListView.separated(
-              itemBuilder: (BuildContext context, int index) {
-                return OrderForm(
-                  isDelivered: true,
-                  orderKind: OrderKind.newOrder,
-                  orderDetails: orderDetails[index],
-                  cubitContext: context,
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) =>
-              const SizedBox(height: 20),
-              itemCount: orderDetails.length);
-        }
-      },
-    );
+        },
+        separatorBuilder: (BuildContext context, int index) =>
+            const SizedBox(height: 20),
+        itemCount: orderDetails.length);
   }
 }

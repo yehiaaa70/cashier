@@ -52,25 +52,6 @@ class PendingOrderItem extends StatelessWidget {
                 ],
               ),
         const SizedBox(height: 20),
-        // Text(AppStrings.denyReason,
-        //     style: Theme.of(context).textTheme.headline6),
-        // TextFormField(
-        //   decoration: InputDecoration(
-        //       fillColor: AppColors.white,
-        //       filled: true,
-        //       border: OutlineInputBorder(
-        //         borderRadius: BorderRadius.circular(10),
-        //       )),
-        //   validator: (value) {
-        //     if (value != null && value.isNotEmpty) {
-        //       return null;
-        //     } else {
-        //       return AppStrings.insertReason;
-        //     }
-        //   },
-        //   onSaved: (value) {},
-        // ),
-        // const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -79,13 +60,12 @@ class PendingOrderItem extends StatelessWidget {
               text: 'Cancel',
               onClick: () {
                 CustomAlert.alert(
-                        title: "Cancel To Cancel Order \n Reject to Reject Order",
-                        context: context,
-                  desc: "hint : you should fill the Reason"
-                )
-                    .show();
-
-                // if (globalKey.currentState!.validate()) {}
+                  title: " Cancel .. OR .. Reject ",
+                  context: context,
+                  orderDetails: orderDetails,
+                  cubitContext: cubitContext,
+                  state: "pending"
+                ).show();
               },
               textColor: AppColors.red,
               buttonColor: AppColors.red,
