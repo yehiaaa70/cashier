@@ -80,7 +80,9 @@ class _OrderStatusTabBarState extends State<OrderStatusTabBar> {
               Column(
                 children: [
                   Text(
-                    "${AppLocalizations.of(context)!.isEnLocale ? widget.stateOrderList[0].length : replaceToArabicNumber(widget.stateOrderList[0].length.toString())}",
+                    "${AppLocalizations.of(context)!.isEnLocale ?  BlocProvider.of<AcceptorCubit>(context)
+                        .pending.length : replaceToArabicNumber( BlocProvider.of<AcceptorCubit>(context)
+                        .pending.length.toString())}",
                     style: Theme.of(context).textTheme.headline1?.copyWith(
                         color: newIndex == 0
                             ? AppColors.primary
@@ -99,7 +101,9 @@ class _OrderStatusTabBarState extends State<OrderStatusTabBar> {
               Column(
                 children: [
                   Text(
-                    "${AppLocalizations.of(context)!.isEnLocale ? widget.stateOrderList[1].length : replaceToArabicNumber(widget.stateOrderList[1].length.toString())}",
+                    "${AppLocalizations.of(context)!.isEnLocale ?  BlocProvider.of<AcceptorCubit>(context)
+                        .progress.length : replaceToArabicNumber( BlocProvider.of<AcceptorCubit>(context)
+                        .progress.length.toString())}",
                     style: Theme.of(context).textTheme.headline1?.copyWith(
                         color: newIndex == 1
                             ? AppColors.primary
@@ -118,7 +122,9 @@ class _OrderStatusTabBarState extends State<OrderStatusTabBar> {
               Column(
                 children: [
                   Text(
-                    "${AppLocalizations.of(context)!.isEnLocale ? widget.stateOrderList[2].length : replaceToArabicNumber(widget.stateOrderList[2].length.toString())}",
+                    "${AppLocalizations.of(context)!.isEnLocale ?  BlocProvider.of<AcceptorCubit>(context)
+                        .completed.length : replaceToArabicNumber( BlocProvider.of<AcceptorCubit>(context)
+                        .completed.length.toString())}",
                     style: Theme.of(context).textTheme.headline1?.copyWith(
                         color: newIndex == 2
                             ? AppColors.primary
@@ -274,6 +280,115 @@ class _OrderStatusTabBarState extends State<OrderStatusTabBar> {
                   child: OrderCompletedScreen(
                       orderDetails:
                           BlocProvider.of<AcceptorCubit>(context).completed),
+                ),
+              ),
+            ],
+            onChange: (index) {
+              setState(() {
+                newIndex = index;
+              });
+            },
+          );
+        }else if(state is ProgressLoaded){
+          return ContainedTabBarView(
+            tabBarProperties: const TabBarProperties(height: 100),
+            tabs: [
+              Column(
+                children: [
+                  Text(
+                    "${AppLocalizations.of(context)!.isEnLocale ?  BlocProvider.of<AcceptorCubit>(context)
+                        .pending.length : replaceToArabicNumber( BlocProvider.of<AcceptorCubit>(context)
+                        .pending.length.toString())}",
+                    style: Theme.of(context).textTheme.headline1?.copyWith(
+                        color: newIndex == 0
+                            ? AppColors.primary
+                            : AppColors.grey),
+                  ),
+                  Text(
+                      AppLocalizations.of(context)!
+                          .translate(AppStrings.newOrder)
+                          .toString(),
+                      style: Theme.of(context).textTheme.headline6?.copyWith(
+                          color: newIndex == 0
+                              ? AppColors.primary
+                              : AppColors.grey)),
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    "${AppLocalizations.of(context)!.isEnLocale ?  BlocProvider.of<AcceptorCubit>(context)
+                        .progress.length : replaceToArabicNumber( BlocProvider.of<AcceptorCubit>(context)
+                        .progress.length.toString())}",
+                    style: Theme.of(context).textTheme.headline1?.copyWith(
+                        color: newIndex == 1
+                            ? AppColors.primary
+                            : AppColors.grey),
+                  ),
+                  Text(
+                      AppLocalizations.of(context)!
+                          .translate(AppStrings.inProgressOrder)
+                          .toString(),
+                      style: Theme.of(context).textTheme.headline6?.copyWith(
+                          color: newIndex == 1
+                              ? AppColors.primary
+                              : AppColors.grey)),
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    "${AppLocalizations.of(context)!.isEnLocale ?  BlocProvider.of<AcceptorCubit>(context)
+                        .completed.length : replaceToArabicNumber( BlocProvider.of<AcceptorCubit>(context)
+                        .completed.length.toString())}",
+                    style: Theme.of(context).textTheme.headline1?.copyWith(
+                        color: newIndex == 2
+                            ? AppColors.primary
+                            : AppColors.grey),
+                  ),
+                  Text(
+                      AppLocalizations.of(context)!
+                          .translate(AppStrings.completed)
+                          .toString(),
+                      style: Theme.of(context).textTheme.headline6?.copyWith(
+                          color: newIndex == 2
+                              ? AppColors.primary
+                              : AppColors.grey)),
+                ],
+              ),
+            ],
+            views: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    context.read<HomeNavigatorCubit>().getAllOrders();
+                  },
+                  child: NewOrdersScreen(
+                      orderDetails:
+                      BlocProvider.of<AcceptorCubit>(context).pending),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    context.read<HomeNavigatorCubit>().getAllOrders();
+                  },
+                  child: OrderProgressScreen(
+                      orderDetails:
+                      BlocProvider.of<AcceptorCubit>(context).progress),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    context.read<HomeNavigatorCubit>().getAllOrders();
+                  },
+                  child: OrderCompletedScreen(
+                      orderDetails:
+                      BlocProvider.of<AcceptorCubit>(context).completed),
                 ),
               ),
             ],

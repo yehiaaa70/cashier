@@ -160,11 +160,13 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   String? s;
+  bool check = true;
 
   Future<bool> getTokenBool() async {
     s = await SecureStorage.getToken();
     if (s!.isEmpty) {
       print("empty");
+      context.read<LoginCubit>().checkToken = false;
       return false;
     } else {
       print("not empty");
@@ -375,6 +377,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         );
       },
+  
     );
   }
 }
