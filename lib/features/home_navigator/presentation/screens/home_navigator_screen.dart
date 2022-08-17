@@ -34,13 +34,9 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
    void initState() {
      super.initState();
      BlocProvider.of<HomeNavigatorCubit>(context).getAllOrders();
-     init();
    }
 
-   Future init() async {
-     final userToken = await SecureStorage.getToken();
-     log('toooooken ${userToken.toString()}');
-   }
+
 
 
 

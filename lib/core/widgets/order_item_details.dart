@@ -41,19 +41,36 @@ class OrderItemDetails extends StatelessWidget {
                   const SizedBox(width: 18),
                   Expanded(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        ItemDescription(
-                          title:
-                              '${AppLocalizations.of(context)!.translate(AppStrings.nameText)} ',
-                          details: AppLocalizations.of(context)!.isEnLocale
-                              ? items.nameEn
-                              : items.nameAr,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              "${AppLocalizations.of(context)!.translate(AppStrings.nameText)} :",
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
+                            Text(
+                              AppLocalizations.of(context)!.isEnLocale
+                                  ? items.nameEn
+                                  : items.nameAr,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2
+                                  ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                            ),
+                          ],
                         ),
                         ItemDescription(
                           title:
                               '${AppLocalizations.of(context)!.translate(AppStrings.priceText)} ',
                           details:
-                              "${AppLocalizations.of(context)!.translate(AppStrings.srText)} ${AppLocalizations.of(context)!.isEnLocale ? items.price : replaceToArabicNumber(items.price)}",
+                              " ${AppLocalizations.of(context)!.isEnLocale ? items.price : replaceToArabicNumber(items.price)}  ${AppLocalizations.of(context)!.translate(AppStrings.srText)}",
                         ),
                         ItemDescription(
                           title:
@@ -132,14 +149,14 @@ class OrderItemDetails extends StatelessWidget {
                 ...List.generate(
                   items.extras.length,
                   (index) => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Spacer(),
                       Text(
                           "${AppLocalizations.of(context)!.translate(AppStrings.nameText).toString()} : ${items.extras[index].nameEn}"),
+                      Spacer(),
                       Text(
                           "${AppLocalizations.of(context)!.translate(AppStrings.priceText).toString()} : ${AppLocalizations.of(context)!.isEnLocale ? items.extras[index].price : replaceToArabicNumber(items.extras[index].price)}"),
-                      Text(
-                          "${AppLocalizations.of(context)!.translate(AppStrings.caloriesText).toString()} : ${AppLocalizations.of(context)!.isEnLocale ? items.extras[index].calories : replaceToArabicNumber(items.extras[index].calories)}"),
+                      Spacer(),
                     ],
                   ),
                 ),

@@ -25,14 +25,35 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
   }
 
-  Future init() async {
-    OffersCubit.get(context).token = (await SecureStorage.getToken())!;
-    // log(userToken.toString());
-    if (OffersCubit.get(context).token.length > 800) {
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushReplacementNamed(context, Routes.offersRoute);
-      });
+  String? s;
+
+  Future<bool> getTokenBool() async {
+    s = await SecureStorage.getToken();
+    if (s!.isEmpty) {
+      print("empty");
+      return false;
+    } else {
+      print("not empty");
+      return true;
     }
+  }
+
+  Future init() async {
+    if (await getTokenBool() == true) {
+      if (s!.isNotEmpty) {
+        Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
+      } else {
+        Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
+      }
+    }
+    //
+    // LoginCubit.get(context).getTokenBool();
+    // // log(userToken.toString());
+    // if (OffersCubit.get(context).token.length > 800) {
+    //   SchedulerBinding.instance.addPostFrameCallback((_) {
+    //     Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
+    //   });
+    // }
   }
 
   @override
@@ -43,7 +64,6 @@ class _LoginScreenState extends State<LoginScreen> {
           if (state is LoadingLoginState) {
             return const Center(child: CircularProgressIndicator());
           }
-
           return Form(
             key: LoginCubit.get(context).formKeyLogin,
             child: ListView(

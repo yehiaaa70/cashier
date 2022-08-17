@@ -24,7 +24,7 @@ class AppRoutes {
     switch (settings.name) {
       case Routes.initialRoute:
         return MaterialPageRoute(
-          builder: (context) => const HomeNavigatorScreen(),
+          builder: (context) => const LoginScreen(),
         );
       case Routes.loginRoute:
         return MaterialPageRoute(
