@@ -192,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         if (state is LoadingLoginState) {
-          return const Center(child: CircularProgressIndicator());
+          return const Scaffold(body: Center(child: CircularProgressIndicator()));
         }
         return Scaffold(
           backgroundColor: AppColors.white,
