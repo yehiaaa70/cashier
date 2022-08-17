@@ -4,13 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import '../../config/local/app_localizations.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_strings.dart';
 
 class CustomAlert {
-  static Alert alert({title, context,required OrderDetails orderDetails,cubitContext,required String state}) {
+  static Alert alert(
+      {title,
+      context,
+      required OrderDetails orderDetails,
+      cubitContext,
+      required String state}) {
     GlobalKey<FormState> globalKey = GlobalKey();
-    TextEditingController reasonController =TextEditingController();
+    TextEditingController reasonController = TextEditingController();
 
     return Alert(
       style: AlertStyle(
@@ -29,7 +35,6 @@ class CustomAlert {
             SizedBox(height: 30),
             // Text("The Reason",style: Theme.of(context).textTheme.headline4,),
             TextFormField(
-
               maxLines: 10,
               minLines: 3,
               controller: reasonController,
@@ -55,45 +60,61 @@ class CustomAlert {
         ),
       ),
       context: context,
-      title: title,
-      desc: "hint : Canceled from Customer , Rejected From Cashier",
+      title: state == "pending"
+          ? title
+          : AppLocalizations.of(context)!
+              .translate(AppStrings.alertMessageProgress)
+              .toString(),
+      desc: state == "pending"
+          ? AppLocalizations.of(context)!
+              .translate(AppStrings.alertHintPending)
+              .toString()
+          : AppLocalizations.of(context)!
+              .translate(AppStrings.alertHintProgress)
+              .toString(),
       buttons: [
         DialogButton(
           color: AppColors.red,
           onPressed: () {
             if (globalKey.currentState!.validate()) {
-              BlocProvider.of<AcceptorCubit>(cubitContext).cancelOrders(orderDetails, reasonController.text,state);
+              BlocProvider.of<AcceptorCubit>(cubitContext)
+                  .cancelOrders(orderDetails, reasonController.text, state);
               Navigator.pop(context);
             }
           },
           width: 120,
           child: Text(
-            "Cancel",
+            AppLocalizations.of(context)!
+                .translate(AppStrings.cancelButton)
+                .toString(),
             style: Theme.of(context)
                 .textTheme
                 .bodyText1
                 ?.copyWith(color: AppColors.white, fontWeight: FontWeight.bold),
           ),
         ),
-       if(state=="pending")
-       DialogButton(
-          border: Border.all(width: 1, color: AppColors.red),
-          color: AppColors.transparent,
-          onPressed: () {
-            if (globalKey.currentState!.validate()) {
-              BlocProvider.of<AcceptorCubit>(cubitContext).rejectOrders(orderDetails, reasonController.text);
-              Navigator.pop(context);
-            }
-          },
-          width: 120,
-          child: Text(
-            "Reject",
-            style: Theme.of(context)
-                .textTheme
-                .bodyText1
-                ?.copyWith(color: AppColors.red, fontWeight: FontWeight.bold),
+        if (state == "pending")
+          DialogButton(
+            border: Border.all(width: 1, color: AppColors.red),
+            color: AppColors.transparent,
+            onPressed: () {
+              if (globalKey.currentState!.validate()) {
+                BlocProvider.of<AcceptorCubit>(cubitContext)
+                    .rejectOrders(orderDetails, reasonController.text);
+                Navigator.pop(context);
+              }
+            },
+            width: 120,
+            child: Text(
+              AppLocalizations.of(context)!
+                  .translate(AppStrings.rejectButton)
+                  .toString(),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  ?.copyWith(color: AppColors.red, fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
       ],
     );
   }

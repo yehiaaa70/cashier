@@ -36,20 +36,23 @@ class _CancelledOrdersTabBarScreenState
             color: AppColors.primary,
           ),
         );
-      }
-      else if (state is AcceptorLoaded) {
-        return  ContainedTabBarView(
-          tabBarProperties: const TabBarProperties(height: 100),
+      } else if (state is AcceptorLoaded) {
+        return ContainedTabBarView(
+
+          tabBarProperties:  TabBarProperties(indicatorColor: AppColors.primary,height: 100),
           tabs: [
             Column(
               children: [
                 Text(
-                  "${context.read<AcceptorCubit>().canceled.length}",
+                  "${AppLocalizations.of(context)!.isEnLocale ? context.read<AcceptorCubit>().canceled.length : replaceToArabicNumber(context.read<AcceptorCubit>().canceled.length.toString())}",
                   style: Theme.of(context).textTheme.headline1?.copyWith(
                       color:
-                      newIndex == 0 ? AppColors.primary : AppColors.grey),
+                          newIndex == 0 ? AppColors.primary : AppColors.grey),
                 ),
-                Text(AppStrings.cancelled,
+                Text(
+                    AppLocalizations.of(context)!
+                        .translate(AppStrings.canceled)
+                        .toString(),
                     style: Theme.of(context).textTheme.headline6?.copyWith(
                         color: newIndex == 0
                             ? AppColors.primary
@@ -59,12 +62,15 @@ class _CancelledOrdersTabBarScreenState
             Column(
               children: [
                 Text(
-                  "${context.read<AcceptorCubit>().rejected.length}",
+                  "${AppLocalizations.of(context)!.isEnLocale ? context.read<AcceptorCubit>().rejected.length : replaceToArabicNumber(context.read<AcceptorCubit>().rejected.length.toString())}",
                   style: Theme.of(context).textTheme.headline1?.copyWith(
                       color:
-                      newIndex == 1 ? AppColors.primary : AppColors.grey),
+                          newIndex == 1 ? AppColors.primary : AppColors.grey),
                 ),
-                Text(AppStrings.rejected,
+                Text(
+                    AppLocalizations.of(context)!
+                        .translate(AppStrings.rejected)
+                        .toString(),
                     style: Theme.of(context).textTheme.headline6?.copyWith(
                         color: newIndex == 1
                             ? AppColors.primary
@@ -76,12 +82,14 @@ class _CancelledOrdersTabBarScreenState
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: CancelledOrdersScreen(
-                  orderDetails: BlocProvider.of<AcceptorCubit>(context).canceled),
+                  orderDetails:
+                      BlocProvider.of<AcceptorCubit>(context).canceled),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: RejectedOrdersScreen(
-                  orderDetails: BlocProvider.of<AcceptorCubit>(context).rejected),
+                  orderDetails:
+                      BlocProvider.of<AcceptorCubit>(context).rejected),
             ),
           ],
           onChange: (index) {
@@ -90,53 +98,57 @@ class _CancelledOrdersTabBarScreenState
             });
           },
         );
-      }else if (state is AcceptorInitial) {
+      } else if (state is AcceptorInitial) {
         return ContainedTabBarView(
           tabBarProperties: const TabBarProperties(height: 100),
           tabs: [
-          Column(
-          children: [
-            Text(
-              // "${widget.stateOrderList[0].length}",
-              "${AppLocalizations.of(context)!.isEnLocale ? widget.stateOrderList[0].length : replaceToArabicNumber(widget.stateOrderList[0].length.toString())}",
-              style: Theme.of(context).textTheme.headline1?.copyWith(
-                  color: newIndex == 0 ? AppColors.primary : AppColors.grey),
+            Column(
+              children: [
+                Text(
+                  "${AppLocalizations.of(context)!.isEnLocale ? widget.stateOrderList[0].length : replaceToArabicNumber(widget.stateOrderList[0].length.toString())}",
+                  style: Theme.of(context).textTheme.headline1?.copyWith(
+                      color:
+                          newIndex == 0 ? AppColors.primary : AppColors.grey),
+                ),
+                Text(
+                    AppLocalizations.of(context)!
+                        .translate(AppStrings.canceled)
+                        .toString(),
+                    style: Theme.of(context).textTheme.headline6?.copyWith(
+                        color: newIndex == 0
+                            ? AppColors.primary
+                            : AppColors.grey)),
+              ],
             ),
-            Text(
-                AppLocalizations.of(context)!
-                    .translate(AppStrings.canceled)
-                    .toString(),
-                style: Theme.of(context).textTheme.headline6?.copyWith(
-                    color: newIndex == 0 ? AppColors.primary : AppColors.grey)),
-          ],
-        ),
-        Column(
-          children: [
-            Text(
-              // "${widget.stateOrderList[1].length}",
-              "${AppLocalizations.of(context)!.isEnLocale ? widget.stateOrderList[1].length : replaceToArabicNumber(widget.stateOrderList[1].length.toString())}",
-              style: Theme.of(context).textTheme.headline1?.copyWith(
-                  color: newIndex == 1 ? AppColors.primary : AppColors.grey),
+            Column(
+              children: [
+                Text(
+                  "${AppLocalizations.of(context)!.isEnLocale ? widget.stateOrderList[1].length : replaceToArabicNumber(widget.stateOrderList[1].length.toString())}",
+                  style: Theme.of(context).textTheme.headline1?.copyWith(
+                      color:
+                          newIndex == 1 ? AppColors.primary : AppColors.grey),
+                ),
+                Text(
+                    AppLocalizations.of(context)!
+                        .translate(AppStrings.rejected)
+                        .toString(),
+                    style: Theme.of(context).textTheme.headline6?.copyWith(
+                        color: newIndex == 1
+                            ? AppColors.primary
+                            : AppColors.grey)),
+              ],
             ),
-            Text(
-                AppLocalizations.of(context)!
-                    .translate(AppStrings.rejected)
-                    .toString(),
-                style: Theme.of(context).textTheme.headline6?.copyWith(
-                    color: newIndex == 1 ? AppColors.primary : AppColors.grey)),
-          ],
-        ),
           ],
           views: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
-              child: CancelledOrdersScreen(
-                  orderDetails: widget.stateOrderList[0]),
+              child:
+                  CancelledOrdersScreen(orderDetails: widget.stateOrderList[0]),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
-              child: RejectedOrdersScreen(
-                  orderDetails: widget.stateOrderList[1]),
+              child:
+                  RejectedOrdersScreen(orderDetails: widget.stateOrderList[1]),
             ),
           ],
           onChange: (index) {
@@ -145,13 +157,13 @@ class _CancelledOrdersTabBarScreenState
             });
           },
         );
-      }else{
+      } else {
         return Center(
           child: CircularProgressIndicator(
             color: AppColors.red,
           ),
         );
       }
-        });
+    });
   }
 }

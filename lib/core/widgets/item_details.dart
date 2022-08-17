@@ -10,20 +10,21 @@ class ItemDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        // Spacer(),
         Text(
           "$title :",
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
-        Expanded(
-          child: Text(
-            details,
-            textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .bodyText2
-                ?.copyWith(fontWeight: FontWeight.bold),
-          ),
+        Spacer(),
+        Text(
+          details,
+          textAlign: TextAlign.center,
+          style: Theme.of(context)
+              .textTheme
+              .bodyText2
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
+        Spacer(),
       ],
     );
   }

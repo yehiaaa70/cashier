@@ -17,6 +17,16 @@ class LoginCubit extends Cubit<LoginState> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  String? s;
+
+  Future<bool> getTokenBool() async {
+     s = await SecureStorage.getToken();
+    if(s!.isEmpty){
+      return false;
+    }else{
+      return true;
+    }
+  }
 
   String? emailValidation(String? value, context) {
     return RegExp(

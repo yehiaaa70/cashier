@@ -28,8 +28,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   void initState() {
     super.initState();
-    print("ooooooooooooooooooooooo");
-    print("heeeeeeeeeeeeer");
     BlocProvider.of<HistoryCubit>(context).getHistoryOrders();
   }
 
@@ -48,7 +46,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           );
         } else if (state is HistoryLoaded) {
           return ContainedTabBarView(
-            tabBarProperties: const TabBarProperties(height: 100),
+            tabBarProperties:  TabBarProperties(indicatorColor: AppColors.primary,height: 100),
           tabs: [
         Column(
           children: [

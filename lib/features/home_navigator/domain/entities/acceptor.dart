@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 class Acceptor extends Equatable {
@@ -40,27 +39,28 @@ class DataAcceptor extends Equatable {
     required this.orderFrom,
   });
 
-  int id;
-  final String customerId;
-  final String branchId;
-  final String serviceType;
-  final String subtotal;
-  final String taxes;
-  final String deliveryFees;
-  final String total;
-  final dynamic cancellationReason;
-  final String state;
-  final String points;
-  final dynamic deletedAt;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final dynamic createdBy;
-  final dynamic updatedBy;
-  final String addressId;
-  final String pointsPaid;
-  final dynamic offerType;
-  final String orderFrom;
+  DataAcceptor.empty();
 
+   int? id;
+   String? customerId;
+   String? branchId;
+   String? serviceType;
+   String? subtotal;
+   String? taxes;
+   String? deliveryFees;
+   String? total;
+   dynamic cancellationReason;
+   String? state;
+   String? points;
+   dynamic deletedAt;
+   DateTime? createdAt;
+   DateTime? updatedAt;
+   dynamic? createdBy;
+   dynamic? updatedBy;
+   String? addressId;
+   String? pointsPaid;
+   dynamic offerType;
+   String? orderFrom;
 
   @override
   List<Object?> get props => [
@@ -86,28 +86,26 @@ class DataAcceptor extends Equatable {
         orderFrom
       ];
 
-
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "customer_id": customerId,
-    "branch_id": branchId,
-    "service_type": serviceType,
-    "subtotal": subtotal,
-    "taxes": taxes,
-    "delivery_fees": deliveryFees,
-    "total": total,
-    "cancellation_reason": cancellationReason,
-    "state": state,
-    "points": points,
-    "deleted_at": deletedAt,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
-    "created_by": createdBy,
-    "updated_by": updatedBy,
-    "address_id": addressId,
-    "points_paid": pointsPaid,
-    "offer_type": offerType,
-    "order_from": orderFrom,
-  };
-
+        "id": id,
+        "customer_id": customerId,
+        "branch_id": branchId,
+        "service_type": serviceType,
+        "subtotal": subtotal,
+        "taxes": taxes,
+        "delivery_fees": deliveryFees,
+        "total": total,
+        "cancellation_reason": cancellationReason,
+        "state": state,
+        "points": points,
+        "deleted_at": deletedAt,
+        "created_at": createdAt!.toIso8601String(),
+        "updated_at": updatedAt!.toIso8601String(),
+        "created_by": createdBy,
+        "updated_by": updatedBy,
+        "address_id": addressId,
+        "points_paid": pointsPaid,
+        "offer_type": offerType,
+        "order_from": orderFrom,
+      };
 }

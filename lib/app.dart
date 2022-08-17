@@ -54,6 +54,9 @@ class CashirApp extends StatelessWidget {
         BlocProvider<LanguageBloc>(
           create: (_) => serviceLocator<LanguageBloc>(),
         ),
+        BlocProvider<HistoryCubit>(
+          create: (_) => serviceLocator<HistoryCubit>(),
+        ),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {

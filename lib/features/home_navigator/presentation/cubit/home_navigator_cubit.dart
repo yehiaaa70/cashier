@@ -16,6 +16,7 @@ part 'home_navigator_state.dart';
 class HomeNavigatorCubit extends Cubit<HomeNavigatorState> {
   final GetCustomerOrderUseCase getCustomerOrderUseCase;
   final GetHistoryOrderUseCase getHistoryOrderUseCase;
+
   List<OrderDetails> pending = [];
   List<OrderDetails> progress = [];
   List<OrderDetails> completed = [];
