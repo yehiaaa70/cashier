@@ -35,25 +35,27 @@ class CompletedData {
     required this.orderFrom,
   });
 
-  final int id;
-  final String customerId;
-  final String branchId;
-  final String serviceType;
-  final String subtotal;
-  final String taxes;
-  final String deliveryFees;
-  final String total;
-  final String cancellationReason;
-  final String state;
-  final String points;
-  final String deletedAt;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final String createdBy;
-  final String updatedBy;
-  final String addressId;
-  final String pointsPaid;
-  final String offerType;
-  final String offerValue;
-  final String orderFrom;
+  CompletedData.empty();
+
+   int? id;
+   String? customerId;
+   String? branchId;
+   String? serviceType;
+   String? subtotal;
+   String? taxes;
+   String? deliveryFees;
+   String? total;
+   String? cancellationReason;
+   String? state;
+   String? points;
+   String? deletedAt;
+   DateTime? createdAt;
+   DateTime? updatedAt;
+   String? createdBy;
+   String? updatedBy;
+   String? addressId;
+   String? pointsPaid;
+   String? offerType;
+   String? offerValue;
+   String? orderFrom;
 }

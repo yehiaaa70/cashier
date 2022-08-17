@@ -161,6 +161,65 @@ class _CancelledOrdersTabBarScreenState
             });
           },
         );
+      }else if(state is ProgressLoaded){
+        return ContainedTabBarView(
+          tabBarProperties: const TabBarProperties(height: 100),
+          tabs: [
+            Column(
+              children: [
+                Text(
+                  "${AppLocalizations.of(context)!.isEnLocale ? widget.stateOrderList[0].length : replaceToArabicNumber(widget.stateOrderList[0].length.toString())}",
+                  style: Theme.of(context).textTheme.headline1?.copyWith(
+                      color:
+                      newIndex == 0 ? AppColors.primary : AppColors.grey),
+                ),
+                Text(
+                    AppLocalizations.of(context)!
+                        .translate(AppStrings.canceled)
+                        .toString(),
+                    style: Theme.of(context).textTheme.headline6?.copyWith(
+                        color: newIndex == 0
+                            ? AppColors.primary
+                            : AppColors.grey)),
+              ],
+            ),
+            Column(
+              children: [
+                Text(
+                  "${AppLocalizations.of(context)!.isEnLocale ? widget.stateOrderList[1].length : replaceToArabicNumber(widget.stateOrderList[1].length.toString())}",
+                  style: Theme.of(context).textTheme.headline1?.copyWith(
+                      color:
+                      newIndex == 1 ? AppColors.primary : AppColors.grey),
+                ),
+                Text(
+                    AppLocalizations.of(context)!
+                        .translate(AppStrings.rejected)
+                        .toString(),
+                    style: Theme.of(context).textTheme.headline6?.copyWith(
+                        color: newIndex == 1
+                            ? AppColors.primary
+                            : AppColors.grey)),
+              ],
+            ),
+          ],
+          views: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child:
+              CancelledOrdersScreen(orderDetails: widget.stateOrderList[0]),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child:
+              RejectedOrdersScreen(orderDetails: widget.stateOrderList[1]),
+            ),
+          ],
+          onChange: (index) {
+            setState(() {
+              newIndex = index;
+            });
+          },
+        );
       } else {
         return Center(
           child: CircularProgressIndicator(
