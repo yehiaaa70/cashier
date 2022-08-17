@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 
 import '../../../../core/api/base_api_consumer.dart';
 import '../../../../core/api/end_points.dart';
+import '../../../../core/secure_storage/secure_storage.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../home_navigator/data/models/acceptor_model.dart';
 import '../../../home_navigator/domain/entities/acceptor.dart';
@@ -17,17 +18,31 @@ class CompletedOrderRemoteDataSource extends BaseCompletedOrderRemoteDataSource{
   final BaseApiConsumer apiConsumer;
 
   CompletedOrderRemoteDataSource(this.apiConsumer);
-
+  String? s;
+  Future<bool> getTokenBool() async {
+    s = await SecureStorage.getToken();
+    if (s==null||s=='') {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   @override
   Future<Completed> putCompleted(int id) async {
-    final response = await apiConsumer.put(EndPoints.orderState(id,"complete"),
-        options: Options(
-          headers: {
-            "authorization":
-            "Bearer ${AppStrings.token}",
-          },
-        ));
-    return CompletedModel.fromJson(response);
+    if (await getTokenBool() == true) {
+      final response = await apiConsumer.put(EndPoints.orderState(id,"complete"),
+          options: Options(
+            headers: {
+              "authorization":
+              "Bearer $s",
+            },
+          ));
+      return CompletedModel.fromJson(response);
+    } else {
+      return CompletedModel(
+          data: CompletedData.empty(), message: "", success: false);
+    }
+
   }
 }

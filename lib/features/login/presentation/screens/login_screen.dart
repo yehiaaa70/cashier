@@ -26,11 +26,13 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   String? s;
+  bool check = true;
 
   Future<bool> getTokenBool() async {
     s = await SecureStorage.getToken();
     if (s!.isEmpty) {
       print("empty");
+      context.read<LoginCubit>().checkToken = false;
       return false;
     } else {
       print("not empty");
@@ -42,18 +44,8 @@ class _LoginScreenState extends State<LoginScreen> {
     if (await getTokenBool() == true) {
       if (s!.isNotEmpty) {
         Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
-      } else {
-        Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
       }
     }
-    //
-    // LoginCubit.get(context).getTokenBool();
-    // // log(userToken.toString());
-    // if (OffersCubit.get(context).token.length > 800) {
-    //   SchedulerBinding.instance.addPostFrameCallback((_) {
-    //     Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
-    //   });
-    // }
   }
 
   @override
@@ -64,95 +56,98 @@ class _LoginScreenState extends State<LoginScreen> {
           if (state is LoadingLoginState) {
             return const Center(child: CircularProgressIndicator());
           }
-          return Form(
-            key: LoginCubit.get(context).formKeyLogin,
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              children: [
-                const SizedBox(height: 50),
-                const LangSwitch(),
-                Center(
-                    child: Text(
-                  AppLocalizations.of(context)!
-                      .translate(AppStrings.appName)
-                      .toString(),
-                  style: Theme.of(context).textTheme.headline3,
-                )),
-                const SizedBox(height: 30),
-                Text(
-                  AppLocalizations.of(context)!
-                      .translate(AppStrings.emailAddress)
-                      .toString(),
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  controller: LoginCubit.get(context).emailController,
-                  validator: (value) =>
-                      LoginCubit.get(context).emailValidation(value, context),
-                  decoration: InputDecoration(
-                      fillColor: AppColors.white,
-                      filled: true,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none)),
-                ),
-                const SizedBox(height: 30),
-                Text(
-                  AppLocalizations.of(context)!
-                      .translate(AppStrings.password)
-                      .toString(),
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  controller: LoginCubit.get(context).passwordController,
-                  validator: (value) => LoginCubit.get(context)
-                      .passwordValidation(value, context),
-                  decoration: InputDecoration(
-                      fillColor: AppColors.white,
-                      filled: true,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none)),
-                  obscureText: true,
-                ),
-                const SizedBox(height: 50),
-                InkWell(
-                  onTap: () {
-                    var key = LoginCubit.get(context).formKeyLogin;
-                    if (key.currentState!.validate()) {
-                      LoginCubit.get(context).userLogin(context);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(AppLocalizations.of(context)!
-                              .translate(AppStrings.loginResponseSnackbar)
-                              .toString())));
-                      LoginCubit.get(context).emailController.text = '';
-                      LoginCubit.get(context).passwordController.text = '';
-                    }
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: AppColors.grey,
-                        borderRadius: BorderRadius.circular(50)),
-                    child: Center(
-                      child: Text(
+          return context.read<LoginCubit>().checkToken == true
+              ? Form(
+                  key: LoginCubit.get(context).formKeyLogin,
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    children: [
+                      const SizedBox(height: 50),
+                      const LangSwitch(),
+                      Center(
+                          child: Text(
                         AppLocalizations.of(context)!
-                            .translate(AppStrings.login)
+                            .translate(AppStrings.appName)
                             .toString(),
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            ?.copyWith(color: AppColors.white),
+                        style: Theme.of(context).textTheme.headline3,
+                      )),
+                      const SizedBox(height: 30),
+                      Text(
+                        AppLocalizations.of(context)!
+                            .translate(AppStrings.emailAddress)
+                            .toString(),
+                        style: Theme.of(context).textTheme.headline5,
                       ),
-                    ),
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        controller: LoginCubit.get(context).emailController,
+                        validator: (value) => LoginCubit.get(context)
+                            .emailValidation(value, context),
+                        decoration: InputDecoration(
+                            fillColor: AppColors.white,
+                            filled: true,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none)),
+                      ),
+                      const SizedBox(height: 30),
+                      Text(
+                        AppLocalizations.of(context)!
+                            .translate(AppStrings.password)
+                            .toString(),
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        controller: LoginCubit.get(context).passwordController,
+                        validator: (value) => LoginCubit.get(context)
+                            .passwordValidation(value, context),
+                        decoration: InputDecoration(
+                            fillColor: AppColors.white,
+                            filled: true,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none)),
+                        obscureText: true,
+                      ),
+                      const SizedBox(height: 50),
+                      InkWell(
+                        onTap: () {
+                          var key = LoginCubit.get(context).formKeyLogin;
+                          if (key.currentState!.validate()) {
+                            LoginCubit.get(context).userLogin(context);
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text(AppLocalizations.of(context)!
+                                    .translate(AppStrings.loginResponseSnackbar)
+                                    .toString())));
+                            LoginCubit.get(context).emailController.text = '';
+                            LoginCubit.get(context).passwordController.text =
+                                '';
+                          }
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              color: AppColors.grey,
+                              borderRadius: BorderRadius.circular(50)),
+                          child: Center(
+                            child: Text(
+                              AppLocalizations.of(context)!
+                                  .translate(AppStrings.login)
+                                  .toString(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  ?.copyWith(color: AppColors.white),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 )
-              ],
-            ),
-          );
+              : const Center(child: CircularProgressIndicator());
         },
       ),
     );

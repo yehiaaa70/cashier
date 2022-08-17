@@ -17,6 +17,9 @@ class LoginCubit extends Cubit<LoginState> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  bool checkToken=true;
+
   String? s;
 
   Future<bool> getTokenBool() async {
