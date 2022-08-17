@@ -159,14 +159,14 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
   }
 
-  String? s;
+  String s='';
   bool check = true;
 
   Future<bool> getTokenBool() async {
-    s = await SecureStorage.getToken();
-    if (s!.isEmpty) {
+    s = await SecureStorage.getToken()??'';
+    if (s.isEmpty) {
       print("empty");
-      context.read<LoginCubit>().checkToken = false;
+      check = false;
       return false;
     } else {
       print("not empty");
@@ -176,9 +176,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future init() async {
     if (await getTokenBool() == true) {
-      if (s!.isNotEmpty) {
-        OffersCubit.get(context).token = s!;
-
+      if (s.isNotEmpty) {
+        OffersCubit.get(context).token = s;
         SchedulerBinding.instance.addPostFrameCallback((_) {
           Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
         });
@@ -192,8 +191,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         if (state is LoadingLoginState) {
-          return const Scaffold(
-              body: Center(child: CircularProgressIndicator()));
+
+          return const Scaffold(body: Center(child: CircularProgressIndicator()));
         }
         return Scaffold(
           backgroundColor: AppColors.white,

@@ -1,8 +1,6 @@
 import 'package:cashir/config/local/app_localizations.dart';
 import 'package:cashir/core/utils/app_strings.dart';
-import 'package:cashir/core/utils/assets_manager.dart';
 import 'package:cashir/core/utils/convert_numbers_method.dart';
-import 'package:cashir/core/widgets/order_status.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_colors.dart';
@@ -36,54 +34,97 @@ class OrderCompletedItem extends StatelessWidget {
               buttonColor: AppColors.secondary,
               radius: 12,
             ),
-            SizedBox(width: 8),
+            const SizedBox(width: 8),
             Expanded(
               flex: 2,
               child: Column(
                 children: [
                   TotalDetails(
-                      title: AppLocalizations.of(context)!
-                          .translate(AppStrings.supTotalText)
-                          .toString(),
-                    money:   "${AppLocalizations.of(context)!.isEnLocale ? orderDetails.subtotal : replaceToArabicNumber(orderDetails.subtotal.toString())}",
+                    title: AppLocalizations.of(context)!
+                        .translate(AppStrings.supTotalText)
+                        .toString(),
+                    money: AppLocalizations.of(context)!.isEnLocale
+                        ? orderDetails.subtotal
+                        : replaceToArabicNumber(
+                            orderDetails.subtotal.toString()),
                   ),
                   TotalDetails(
-                      title: AppLocalizations.of(context)!
-                          .translate(AppStrings.deliveryFeeText)
-                          .toString(),
-                      money:   "${AppLocalizations.of(context)!.isEnLocale ? orderDetails.deliveryFees : replaceToArabicNumber(orderDetails.deliveryFees.toString())}",
-
+                    title: AppLocalizations.of(context)!
+                        .translate(AppStrings.deliveryFeeText)
+                        .toString(),
+                    money: AppLocalizations.of(context)!.isEnLocale
+                        ? orderDetails.deliveryFees
+                        : replaceToArabicNumber(
+                            orderDetails.deliveryFees.toString()),
                   ),
-                  TotalDetails(
-                      title: AppLocalizations.of(context)!
-                          .translate(AppStrings.serviceText)
-                          .toString(),
-                      money: "+0+"),
                   TotalDetails(
                       title: AppLocalizations.of(context)!
                           .translate(AppStrings.taxText)
                           .toString(),
-                      money: "${AppLocalizations.of(context)!.isEnLocale ? orderDetails.taxes : replaceToArabicNumber(orderDetails.taxes.toString())}"),
+                      money: AppLocalizations.of(context)!.isEnLocale
+                          ? orderDetails.taxes
+                          : replaceToArabicNumber(
+                              orderDetails.taxes.toString())),
                   TotalDetails(
-                      title: AppLocalizations.of(context)!
-                          .translate(AppStrings.discountText)
-                          .toString(),
-                      money: "+0+"),
+                    title: AppLocalizations.of(context)!
+                        .translate(AppStrings.discountOfferText)
+                        .toString(),
+                    money: AppLocalizations.of(context)!.isEnLocale
+                        ? orderDetails.offerValue
+                        : replaceToArabicNumber(
+                            orderDetails.pointsPaid.toString()),
+                  ),
+                  TotalDetails(
+                    title: AppLocalizations.of(context)!
+                        .translate(AppStrings.discountPointText)
+                        .toString(),
+                    money: AppLocalizations.of(context)!.isEnLocale
+                        ? orderDetails.pointsPaid
+                        : replaceToArabicNumber(
+                            orderDetails.pointsPaid.toString()),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)!
+                            .translate(AppStrings.paymentType)
+                            .toString(),
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                      Expanded(
+                        child: Text(
+                          AppLocalizations.of(context)!.isEnLocale
+                              ? orderDetails.paymentType
+                              : orderDetails.paymentType == "cosh"
+                                  ? "كاش"
+                                  : "اونلاين",
+                          textAlign: TextAlign.end,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2
+                              ?.copyWith(
+                                  fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ),
+                    ],
+                  ),
                   Row(
                     children: [
                       Text(
                         "${AppLocalizations.of(context)!.translate(AppStrings.totalText).toString()} :   ",
-                        style: Theme.of(context).textTheme.bodyText2?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      Spacer(),
-                      Text(
-                        " ${AppLocalizations.of(context)!.isEnLocale ? orderDetails.total : replaceToArabicNumber(orderDetails.total)} ${AppLocalizations.of(context)!.translate(AppStrings.srText).toString()}",
                         style: Theme.of(context)
                             .textTheme
-                            .bodyText1
-                            ?.copyWith(color: AppColors.black,fontWeight: FontWeight.bold),
+                            .bodyText2
+                            ?.copyWith(fontWeight: FontWeight.bold),
                       ),
-                      Spacer(),
+                      const Spacer(),
+                      Text(
+                        " ${AppLocalizations.of(context)!.isEnLocale ? orderDetails.total : replaceToArabicNumber(orderDetails.total)} ${AppLocalizations.of(context)!.translate(AppStrings.srText).toString()}",
+                        style: Theme.of(context).textTheme.headline6?.copyWith(
+                            color: AppColors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const Spacer(),
                     ],
                   ),
                 ],
@@ -103,7 +144,7 @@ class OrderCompletedItem extends StatelessWidget {
                   Text(
                     AppLocalizations.of(context)!
                         .translate(AppStrings.pickedFrom)
-                        .toString() ,
+                        .toString(),
                     style: Theme.of(context)
                         .textTheme
                         .headline4
