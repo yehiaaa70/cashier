@@ -58,6 +58,8 @@ class AppStrings {
   static const String progressOn = 'progress';
   static const String newNotification = 'new_notification';
   static const String earlierNotification = 'earlier_notification';
+  static const String welcomeBackText = 'welcome_back_Text';
+  static const String loginToAccountText = 'login_to_account';
 
   //
   static const String fontFamily = 'Cairo';

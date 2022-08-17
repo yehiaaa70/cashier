@@ -55,5 +55,7 @@
   "logout_response": "تم تسجيل الخروج بنجاح",
   "login_response": "تم تسجيل الدخول بنجاح",
   "new_notification": "الإشعارات الجديده",
-  "earlier_notification": "اشعارات سابقة"
+  "earlier_notification": "اشعارات سابقة",
+  "welcome_back_Text": "مرحبا بعودتك",
+  "login_to_account": "الدخول الي حسابك"
 }

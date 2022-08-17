@@ -35,10 +35,10 @@ class LogoutScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Spacer(),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.22),
+                      // SizedBox(width: MediaQuery.of(context).size.width * 0.22),
                       Image.asset(
                         ImageAssets.logoutVector,
                         width: 200,
@@ -61,11 +61,13 @@ class LogoutScreen extends StatelessWidget {
                           .translate(AppStrings.logout)
                           .toString(),
                       style: Theme.of(context).textTheme.headline6!.copyWith(
-                            color: AppColors.blue,
+                            color: Colors.amber[800],
                             letterSpacing: 2,
                           ),
                     ),
                   ),
+                  const SizedBox(height: 20),
+                  const LangSwitch(),
                   const SizedBox(height: 200),
                   Spacer(),
                   const LangSwitch(),
