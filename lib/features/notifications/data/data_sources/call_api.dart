@@ -48,14 +48,14 @@ class CallApiForNotification {
           for (int i = 0; i < notifications.length; i++) {
             if (DateTime.parse(notifications[i].createdAt!)
                     .difference(DateTime.now())
-                    .inHours <=
-                3) {
+                    .inDays <
+                30) {
               newNotifications.add(notifications[i]);
             }
             if (DateTime.parse(notifications[i].createdAt!)
                     .difference(DateTime.now())
-                    .inHours >
-                3) {
+                    .inDays >
+                30) {
               earlierNotifications.add(notifications[i]);
             }
           }
