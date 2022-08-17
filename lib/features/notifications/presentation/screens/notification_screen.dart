@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cashir/config/local/app_localizations.dart';
 import 'package:cashir/core/secure_storage/secure_storage.dart';
 import 'package:cashir/features/notifications/data/data_sources/call_api.dart';
 import 'package:cashir/features/notifications/presentation/cubit/notification_cubit.dart';
@@ -41,7 +42,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Text(
-                    AppStrings.newNotification,
+                    AppLocalizations.of(context)!
+                        .translate(AppStrings.newNotification)
+                        .toString(),
                     style: Theme.of(context)
                         .textTheme
                         .headline6
@@ -61,7 +64,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 const SizedBox(height: 30),
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0),
-                  child: Text(AppStrings.earlierNotification,
+                  child: Text(
+                      AppLocalizations.of(context)!
+                          .translate(AppStrings.earlierNotification)
+                          .toString(),
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1

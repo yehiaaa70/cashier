@@ -39,30 +39,12 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future init() async {
-
-    OffersCubit.get(context).token = (await SecureStorage.getToken())!;
-    // log(userToken.toString());
-    if (OffersCubit.get(context).token.length > 800) {
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
-      });
-
     if (await getTokenBool() == true) {
       if (s!.isNotEmpty) {
-        Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
-      } else {
+        OffersCubit.get(context).token = s!;
         Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
       }
-
     }
-    //
-    // LoginCubit.get(context).getTokenBool();
-    // // log(userToken.toString());
-    // if (OffersCubit.get(context).token.length > 800) {
-    //   SchedulerBinding.instance.addPostFrameCallback((_) {
-    //     Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
-    //   });
-    // }
   }
 
   @override
@@ -79,7 +61,6 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               children: [
                 const SizedBox(height: 50),
-                const LangSwitch(),
                 Center(
                     child: Text(
                   AppLocalizations.of(context)!
@@ -126,7 +107,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderSide: BorderSide.none)),
                   obscureText: true,
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 20),
+                const LangSwitch(),
+                const SizedBox(height: 20),
                 InkWell(
                   onTap: () {
                     var key = LoginCubit.get(context).formKeyLogin;

@@ -50,5 +50,7 @@
   "email_validation": "من فضلك ادخل بريد الكتروني صحيح",
   "password_validation": "من فضلك ادخل كلمة مرور صحيحة",
   "logout_response": "تم تسجيل الخروج بنجاح",
-  "login_response": "تم تسجيل الدخول بنجاح"
+  "login_response": "تم تسجيل الدخول بنجاح",
+  "new_notification": "الإشعارات الجديده",
+  "earlier_notification": "اشعارات سابقة"
 }

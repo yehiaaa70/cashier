@@ -53,6 +53,8 @@ class AppStrings {
   static const String pickedFrom = 'picked_up_to_text';
   static const String pendingON = 'pending';
   static const String progressOn = 'progress';
+  static const String newNotification = 'new_notification';
+  static const String earlierNotification = 'earlier_notification';
 
   //
   static const String fontFamily = 'Cairo';
@@ -90,8 +92,6 @@ class AppStrings {
   static const String insertReason = 'Insert Reason';
   static const String denyReason = 'Deny Reason';
   static const String rejectedReason = 'Rejected Reason';
-  static const String newNotification = 'New Notification';
-  static const String earlierNotification = 'Earlier Notification';
   static const String couponCode = 'Coupon Code';
   static const String deactivate = 'Deactivate';
   static const String go = 'continue';
