@@ -1,6 +1,7 @@
 class AppStrings {
   // Localization keys
   static const String appName = 'app_name';
+  static const String cashier = 'Cashier';
   static const String login = 'login';
   static const String emailAddress = 'email_address';
   static const String password = 'password';
@@ -40,6 +41,18 @@ class AppStrings {
   static const String passwordValidationText = 'password_validation';
   static const String logoutResponseSnackbar = 'logout_response';
   static const String loginResponseSnackbar = 'login_response';
+  static const String deliveredButton = 'delivered_button';
+  static const String takenButton = 'taken_button';
+  static const String acceptButton = 'accept_button';
+  static const String cancelButton = 'cancel_button';
+  static const String rejectButton = 'reject_button';
+  static const String alertMessagePending = 'alert_message_pending';
+  static const String alertMessageProgress = 'alert_message_progress';
+  static const String alertHintPending = 'alert_hint_pending';
+  static const String alertHintProgress = 'alert_hint_progress';
+  static const String pickedFrom = 'picked_up_to_text';
+  static const String pendingON = 'pending';
+  static const String progressOn = 'progress';
 
   //
   static const String fontFamily = 'Cairo';

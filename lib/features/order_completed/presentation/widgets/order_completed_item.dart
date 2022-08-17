@@ -27,18 +27,16 @@ class OrderCompletedItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 35),
-              child: OrderButton(
-                text: AppLocalizations.of(context)!
-                    .translate(AppStrings.printReceiptText)
-                    .toString(),
-                onClick: printReceiptClick,
-                textColor: AppColors.white,
-                buttonColor: AppColors.secondary,
-                radius: 12,
-              ),
+            OrderButton(
+              text: AppLocalizations.of(context)!
+                  .translate(AppStrings.printReceiptText)
+                  .toString(),
+              onClick: printReceiptClick,
+              textColor: AppColors.white,
+              buttonColor: AppColors.secondary,
+              radius: 12,
             ),
+            SizedBox(width: 8),
             Expanded(
               flex: 2,
               child: Column(
@@ -47,12 +45,15 @@ class OrderCompletedItem extends StatelessWidget {
                       title: AppLocalizations.of(context)!
                           .translate(AppStrings.supTotalText)
                           .toString(),
-                      money: orderDetails.subtotal),
+                    money:   "${AppLocalizations.of(context)!.isEnLocale ? orderDetails.subtotal : replaceToArabicNumber(orderDetails.subtotal.toString())}",
+                  ),
                   TotalDetails(
                       title: AppLocalizations.of(context)!
                           .translate(AppStrings.deliveryFeeText)
                           .toString(),
-                      money: orderDetails.deliveryFees),
+                      money:   "${AppLocalizations.of(context)!.isEnLocale ? orderDetails.deliveryFees : replaceToArabicNumber(orderDetails.deliveryFees.toString())}",
+
+                  ),
                   TotalDetails(
                       title: AppLocalizations.of(context)!
                           .translate(AppStrings.serviceText)
@@ -62,26 +63,27 @@ class OrderCompletedItem extends StatelessWidget {
                       title: AppLocalizations.of(context)!
                           .translate(AppStrings.taxText)
                           .toString(),
-                      money: orderDetails.taxes),
+                      money: "${AppLocalizations.of(context)!.isEnLocale ? orderDetails.taxes : replaceToArabicNumber(orderDetails.taxes.toString())}"),
                   TotalDetails(
                       title: AppLocalizations.of(context)!
                           .translate(AppStrings.discountText)
                           .toString(),
                       money: "+0+"),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         "${AppLocalizations.of(context)!.translate(AppStrings.totalText).toString()} :   ",
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.bodyText2?.copyWith(fontWeight: FontWeight.bold),
                       ),
+                      Spacer(),
                       Text(
-                        "${AppLocalizations.of(context)!.translate(AppStrings.srText).toString()} ${AppLocalizations.of(context)!.isEnLocale ? orderDetails.total : replaceToArabicNumber(orderDetails.total)}",
+                        " ${AppLocalizations.of(context)!.isEnLocale ? orderDetails.total : replaceToArabicNumber(orderDetails.total)} ${AppLocalizations.of(context)!.translate(AppStrings.srText).toString()}",
                         style: Theme.of(context)
                             .textTheme
-                            .headline2
-                            ?.copyWith(color: AppColors.black),
+                            .bodyText1
+                            ?.copyWith(color: AppColors.black,fontWeight: FontWeight.bold),
                       ),
+                      Spacer(),
                     ],
                   ),
                 ],
@@ -99,7 +101,9 @@ class OrderCompletedItem extends StatelessWidget {
             : Column(
                 children: [
                   Text(
-                    "Picked Up From",
+                    AppLocalizations.of(context)!
+                        .translate(AppStrings.pickedFrom)
+                        .toString() ,
                     style: Theme.of(context)
                         .textTheme
                         .headline4

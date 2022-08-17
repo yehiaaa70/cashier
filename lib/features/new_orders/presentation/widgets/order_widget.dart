@@ -2,6 +2,7 @@ import 'package:cashir/features/new_orders/presentation/cubit/acceptor_cubit.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../config/local/app_localizations.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/assets_manager.dart';
@@ -36,7 +37,9 @@ class PendingOrderItem extends StatelessWidget {
             : Column(
                 children: [
                   Text(
-                    "Picked Up From",
+                    AppLocalizations.of(context)!
+                        .translate(AppStrings.pickedFrom)
+                        .toString(),
                     style: Theme.of(context)
                         .textTheme
                         .headline4
@@ -57,10 +60,14 @@ class PendingOrderItem extends StatelessWidget {
           children: [
             Expanded(
                 child: OrderButton(
-              text: 'Cancel',
+              text:  AppLocalizations.of(context)!
+                  .translate(AppStrings.cancelButton)
+                  .toString(),
               onClick: () {
                 CustomAlert.alert(
-                  title: " Cancel .. OR .. Reject ",
+                  title:  AppLocalizations.of(context)!
+                      .translate(AppStrings.alertMessagePending)
+                      .toString(),
                   context: context,
                   orderDetails: orderDetails,
                   cubitContext: cubitContext,
@@ -74,7 +81,9 @@ class PendingOrderItem extends StatelessWidget {
             const SizedBox(width: 8),
             Expanded(
                 child: OrderButton(
-              text: 'Accept',
+              text: AppLocalizations.of(context)!
+                  .translate(AppStrings.acceptButton)
+                  .toString(),
               onClick: () {
                 BlocProvider.of<AcceptorCubit>(cubitContext)
                     .acceptOrders(orderDetails);

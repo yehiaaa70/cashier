@@ -24,19 +24,14 @@ class CallApi {
             'password': password,
           }));
       if (respose.statusCode == 200) {
-        // final List decodedJson = json.decode(respose.body)['data'];
-        // final List<UserModel> usersCachir = decodedJson
-        //     .map<UserModel>(
-        //         (jsonPostModel) => UserModel.fromJson(jsonPostModel))
-        //     .toList();
-        // log(usersCachir[0].name.toString());
-
         var tokenValue = json.decode(respose.body)['data']['token'];
+        print("tokenValue");
+        print(tokenValue);
 
-        // log(tokenValue);
+        print("token");
+
         SecureStorage.saveToken(tokenValue);
-
-        Navigator.pushNamed(context, Routes.homeNavigatorRoute);
+        Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Something went wrong')));

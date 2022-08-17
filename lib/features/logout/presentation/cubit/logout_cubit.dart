@@ -14,7 +14,8 @@ class LogoutCubit extends Cubit<LogoutState> {
 
   userLogout() async {
     emit(LogoutLoadingState());
-    await SecureStorage.deleteToken();
+
+    SecureStorage.saveToken('');
     emit(LogoutLoadedState());
   }
 }

@@ -38,17 +38,25 @@ class _CancelledOrdersTabBarScreenState
         );
       } else if (state is AcceptorLoaded) {
         return ContainedTabBarView(
-          tabBarProperties: const TabBarProperties(height: 100),
+
+
+          tabBarProperties:  TabBarProperties(indicatorColor: AppColors.primary,height: 100),
+
           tabs: [
             Column(
               children: [
                 Text(
-                  "${context.read<AcceptorCubit>().canceled.length}",
+                  "${AppLocalizations.of(context)!.isEnLocale ? context.read<AcceptorCubit>().canceled.length : replaceToArabicNumber(context.read<AcceptorCubit>().canceled.length.toString())}",
                   style: Theme.of(context).textTheme.headline1?.copyWith(
                       color:
                           newIndex == 0 ? AppColors.primary : AppColors.grey),
                 ),
-                Text(AppStrings.canceled,
+
+                Text(
+                    AppLocalizations.of(context)!
+                        .translate(AppStrings.canceled)
+                        .toString(),
+
                     style: Theme.of(context).textTheme.headline6?.copyWith(
                         color: newIndex == 0
                             ? AppColors.primary
@@ -58,12 +66,15 @@ class _CancelledOrdersTabBarScreenState
             Column(
               children: [
                 Text(
-                  "${context.read<AcceptorCubit>().rejected.length}",
+                  "${AppLocalizations.of(context)!.isEnLocale ? context.read<AcceptorCubit>().rejected.length : replaceToArabicNumber(context.read<AcceptorCubit>().rejected.length.toString())}",
                   style: Theme.of(context).textTheme.headline1?.copyWith(
                       color:
                           newIndex == 1 ? AppColors.primary : AppColors.grey),
                 ),
-                Text(AppStrings.rejected,
+                Text(
+                    AppLocalizations.of(context)!
+                        .translate(AppStrings.rejected)
+                        .toString(),
                     style: Theme.of(context).textTheme.headline6?.copyWith(
                         color: newIndex == 1
                             ? AppColors.primary
@@ -98,7 +109,6 @@ class _CancelledOrdersTabBarScreenState
             Column(
               children: [
                 Text(
-                  // "${widget.stateOrderList[0].length}",
                   "${AppLocalizations.of(context)!.isEnLocale ? widget.stateOrderList[0].length : replaceToArabicNumber(widget.stateOrderList[0].length.toString())}",
                   style: Theme.of(context).textTheme.headline1?.copyWith(
                       color:
@@ -117,7 +127,6 @@ class _CancelledOrdersTabBarScreenState
             Column(
               children: [
                 Text(
-                  // "${widget.stateOrderList[1].length}",
                   "${AppLocalizations.of(context)!.isEnLocale ? widget.stateOrderList[1].length : replaceToArabicNumber(widget.stateOrderList[1].length.toString())}",
                   style: Theme.of(context).textTheme.headline1?.copyWith(
                       color:

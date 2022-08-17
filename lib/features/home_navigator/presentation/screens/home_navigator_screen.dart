@@ -29,14 +29,16 @@ class HomeNavigatorScreen extends StatefulWidget {
 }
 
 class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
-  int _currentTab = 2;
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<HomeNavigatorCubit>(context).getAllOrders();
 
-    init();
-  }
+   int _currentTab = 2;
+   @override
+   void initState() {
+     super.initState();
+     BlocProvider.of<HomeNavigatorCubit>(context).getAllOrders();
+     init();
+   }
+
+
 
   Future init() async {
     final userToken = await SecureStorage.getToken();

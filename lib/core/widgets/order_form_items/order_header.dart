@@ -37,12 +37,12 @@ class OrderHeader extends StatelessWidget {
     } else if (header == "pending") {
       statusColor = AppColors.lightGreen;
       title = AppLocalizations.of(context)!
-          .translate(AppStrings.completedOn)
+          .translate(AppStrings.pendingON)
           .toString();
     } else if (header == "in-progress") {
       statusColor = AppColors.secondary;
       title = AppLocalizations.of(context)!
-          .translate(AppStrings.inProgressOrder)
+          .translate(AppStrings.progressOn)
           .toString();
     } else if (header == "canceled") {
       statusColor = AppColors.red;
@@ -77,6 +77,7 @@ class OrderHeader extends StatelessWidget {
               style:
                   Theme.of(context).textTheme.headline5!.copyWith(fontSize: 18),
             ),
+            SizedBox(height: 8),
             OrderStatus(
                 containerColor: statusColor,
                 status: isDelivered
