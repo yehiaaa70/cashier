@@ -6,14 +6,14 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
 class AvailableOfferWidget extends StatelessWidget {
-  final int index;
-  final List<OffersModel> offers;
+  final OffersModel offers;
+  final int length;
   final int color;
   const AvailableOfferWidget({
     Key? key,
-    required this.index,
     required this.offers,
     required this.color,
+    required this.length,
   }) : super(key: key);
 
   @override
@@ -43,7 +43,7 @@ class AvailableOfferWidget extends StatelessWidget {
                   //       color: AppColors.darkBlue, fontWeight: FontWeight.bold),
                   // ),
                   Text(
-                    offers[index].title ?? '',
+                    offers.title ?? '',
                     style: Theme.of(context).textTheme.headline6?.copyWith(
                         color: AppColors.darkBlue, fontWeight: FontWeight.bold),
                   ),
@@ -58,7 +58,7 @@ class AvailableOfferWidget extends StatelessWidget {
               //       ?.copyWith(color: AppColors.darkBlue),
               // ),
               Text(
-                offers[index].descriptionAr ?? '',
+                offers.descriptionAr ?? '',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1

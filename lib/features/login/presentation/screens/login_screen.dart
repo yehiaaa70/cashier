@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // log(userToken.toString());
     if (OffersCubit.get(context).token.length > 800) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushReplacementNamed(context, Routes.offersRoute);
+        Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
       });
     }
   }

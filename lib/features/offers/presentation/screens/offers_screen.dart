@@ -49,14 +49,22 @@ class _OffersScreenState extends State<OffersScreen> {
                     .headline5
                     ?.copyWith(color: AppColors.darkBlue),
               ),
+              (CallApiForOffers.availableOffers.isEmpty)
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text('No available offers added yet.'),
+                      ],
+                    )
+                  : Container(),
               const SizedBox(
                 height: 15,
               ),
               ...List.generate(
                 CallApiForOffers.availableOffers.length,
                 (index) => AvailableOfferWidget(
-                  index: index,
-                  offers: CallApiForOffers.availableOffers,
+                  offers: CallApiForOffers.availableOffers[index],
+                  length: CallApiForOffers.availableOffers.length,
                   color: 0,
                 ),
               ),
@@ -72,14 +80,22 @@ class _OffersScreenState extends State<OffersScreen> {
                     .headline5
                     ?.copyWith(color: AppColors.darkBlue),
               ),
+              (CallApiForOffers.expiredOffers.isEmpty)
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text('No expired offers added yet.'),
+                      ],
+                    )
+                  : Container(),
               const SizedBox(
                 height: 15,
               ),
               ...List.generate(
                 CallApiForOffers.expiredOffers.length,
                 (index) => AvailableOfferWidget(
-                  index: index,
-                  offers: CallApiForOffers.expiredOffers,
+                  offers: CallApiForOffers.expiredOffers[index],
+                  length: CallApiForOffers.expiredOffers.length,
                   color: 1,
                 ),
               ),

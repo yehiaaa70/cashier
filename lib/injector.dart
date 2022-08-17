@@ -7,6 +7,7 @@ import 'package:cashir/features/login/presentation/cubit/login_cubit.dart';
 import 'package:cashir/features/logout/presentation/cubit/logout_cubit.dart';
 import 'package:cashir/features/new_orders/domain/use_cases/cancel_order_use_case.dart';
 import 'package:cashir/features/new_orders/domain/use_cases/rejected_order_use_case.dart';
+import 'package:cashir/features/notifications/presentation/cubit/notification_cubit.dart';
 import 'package:cashir/features/offers/presentation/cubit/offers_cubit.dart';
 
 import 'package:cashir/core/network/network_info.dart';
@@ -42,12 +43,13 @@ final serviceLocator = GetIt.instance;
 Future<void> setup() async {
   //! Features
   // Blocs
-  serviceLocator.registerFactory(() => HomeNavigatorCubit(serviceLocator(),serviceLocator()));
+  serviceLocator.registerFactory(
+      () => HomeNavigatorCubit(serviceLocator(), serviceLocator()));
   serviceLocator.registerFactory(() => TabBarStatusCubit(serviceLocator()));
-  serviceLocator.registerFactory(() => AcceptorCubit(
-      serviceLocator(), serviceLocator(), serviceLocator(), serviceLocator(),serviceLocator()));
+  serviceLocator.registerFactory(() => AcceptorCubit(serviceLocator(),
+      serviceLocator(), serviceLocator(), serviceLocator(), serviceLocator()));
   serviceLocator.registerFactory(() => ProgressCubit());
-  serviceLocator.registerFactory(() => HistoryCubit(serviceLocator()));
+  // serviceLocator.registerFactory(() => HistoryCubit(serviceLocator()));
 
   // Use Cases
   serviceLocator.registerLazySingleton(
@@ -64,9 +66,8 @@ Future<void> setup() async {
 
   serviceLocator
       .registerLazySingleton(() => RejectOrdersUseCase(serviceLocator()));
-  serviceLocator
-      .registerLazySingleton(() => GetHistoryOrderUseCase(orderRepository: serviceLocator()));
-
+  serviceLocator.registerLazySingleton(
+      () => GetHistoryOrderUseCase(orderRepository: serviceLocator()));
 
   // Data Sources
   serviceLocator.registerLazySingleton<AllOrdersRemoteDataSource>(
@@ -134,6 +135,8 @@ Future<void> setup() async {
   serviceLocator.registerFactory(() => LoginCubit());
   serviceLocator.registerFactory(() => OffersCubit());
   serviceLocator.registerFactory(() => LogoutCubit());
+  serviceLocator.registerFactory(() => NotificationCubit());
+  serviceLocator.registerFactory(() => HistoryCubit(serviceLocator()));
   serviceLocator.registerFactory(() => LanguageBloc(LanguageState.initial()));
 
   // Local database sharedpreferences

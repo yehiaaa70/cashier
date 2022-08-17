@@ -12,7 +12,7 @@ class CallApiForOffers {
     try {
       var headers = {
         'Authorization': 'Bearer ${OffersCubit.get(context).token}',
-        'Cookie': 'kop_session=0cb0UeREBmcwCw9I0N4EvsO3sdoIuJ4Rsbq3Ietc'
+        'Cookie': 'kop_session=Ro1RaKrOuWI5Ge1o7QuuwGmYfFoN2FuFbnTSQhEq'
       };
       var respose = await http.get(
         Uri.parse('https://itrplanet.com/Kop/public/api/offers/'),
@@ -24,6 +24,7 @@ class CallApiForOffers {
 
       // log(offers.length.toString());
       if (respose.statusCode == 200) {
+        log(respose.statusCode.toString());
         final data = json.decode(respose.body)['data'];
         // log(data.toString());
 

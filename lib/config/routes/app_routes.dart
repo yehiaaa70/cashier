@@ -1,6 +1,7 @@
 import 'package:cashir/features/add_offer/presentation/screens/add_offer_screen.dart';
 import 'package:cashir/features/locale/presentation/screens/locale_screen.dart';
 import 'package:cashir/features/login/presentation/screens/login_screen.dart';
+import 'package:cashir/features/logout/presentation/pages/logout.dart';
 import 'package:cashir/features/notifications/presentation/screens/notification_screen.dart';
 import 'package:cashir/features/offers/presentation/screens/offers_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class AppRoutes {
     switch (settings.name) {
       case Routes.initialRoute:
         return MaterialPageRoute(
-          builder: (context) => const HomeNavigatorScreen(),
+          builder: (context) => const LoginScreen(),
         );
       case Routes.loginRoute:
         return MaterialPageRoute(

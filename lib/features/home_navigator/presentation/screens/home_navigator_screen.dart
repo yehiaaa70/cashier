@@ -29,20 +29,19 @@ class HomeNavigatorScreen extends StatefulWidget {
 }
 
 class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
-   int _currentTab = 2;
-   @override
-   void initState() {
-     super.initState();
-     BlocProvider.of<HomeNavigatorCubit>(context).getAllOrders();
-     init();
-   }
+  int _currentTab = 2;
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<HomeNavigatorCubit>(context).getAllOrders();
 
-   Future init() async {
-     final userToken = await SecureStorage.getToken();
-     log('toooooken ${userToken.toString()}');
-   }
+    init();
+  }
 
-
+  Future init() async {
+    final userToken = await SecureStorage.getToken();
+    log('toooooken ${userToken.toString()}');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +56,6 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
               ),
             ),
           );
-
         } else if (state is AllOrdersLoaded) {
           return Scaffold(
               appBar: AppBarWidget(
@@ -175,12 +173,11 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                 ],
               ),
               body: [
-                HistoryScreen( stateOrderList: [
+                HistoryScreen(stateOrderList: [
                   context.read<HomeNavigatorCubit>().deliveryHistory,
                   context.read<HomeNavigatorCubit>().takeAwayHistory,
                   context.read<HomeNavigatorCubit>().canceledHistory,
                   context.read<HomeNavigatorCubit>().rejectedHistory,
-
                 ]),
                 CancelledOrdersTabBarScreen(
                   stateOrderList: [
@@ -196,7 +193,6 @@ class _HomeNavigatorScreenState extends State<HomeNavigatorScreen> {
                   context.read<HomeNavigatorCubit>().rejected,
                 ]),
                 const OffersScreen(),
-
                 const LogoutScreen(),
               ][_currentTab]);
         } else {
