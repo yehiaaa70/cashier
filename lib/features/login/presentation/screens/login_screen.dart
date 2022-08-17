@@ -43,6 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Future init() async {
     if (await getTokenBool() == true) {
       if (s!.isNotEmpty) {
+        OffersCubit.get(context).token = s!;
         Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
       }
     }

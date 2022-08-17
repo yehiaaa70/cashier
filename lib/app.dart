@@ -23,6 +23,7 @@ import 'config/routes/app_routes.dart';
 import 'config/themes/app_theme.dart';
 import 'core/utils/app_strings.dart';
 import 'features/new_orders/presentation/cubit/acceptor_cubit.dart';
+import 'features/notifications/presentation/cubit/notification_cubit.dart';
 import 'features/splash/presentation/pages/splash_screen.dart';
 import 'injector.dart';
 
@@ -57,6 +58,12 @@ class CashirApp extends StatelessWidget {
         BlocProvider<HistoryCubit>(
           create: (_) => serviceLocator<HistoryCubit>(),
         ),
+
+        BlocProvider<NotificationCubit>(
+          create: (_) => serviceLocator<NotificationCubit>(),
+        ),
+
+
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
