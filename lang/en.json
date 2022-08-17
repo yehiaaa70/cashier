@@ -1,7 +1,7 @@
 {
   "app_name": "Cashier",
-  "login": "LOGIN",
-  "email_address": "Email Address",
+  "login": "Login",
+  "email_address": "Email",
   "password": "Password",
   "offers": "Offers",
   "available_offers": "Available Offers",
@@ -52,5 +52,7 @@
   "logout_response": "You have logged out successfully",
   "login_response": "You have logged in successfully",
   "new_notification": "New Notification",
-  "earlier_notification": "Earlier Notification"
+  "earlier_notification": "Earlier Notification",
+  "welcome_back_Text": "Welcome back",
+  "login_to_account": "Login to your account"
 }
