@@ -50,5 +50,7 @@
   "email_validation": "Please provide a valid email",
   "password_validation": "Please provide a valid password",
   "logout_response": "You have logged out successfully",
-  "login_response": "You have logged in successfully"
+  "login_response": "You have logged in successfully",
+  "new_notification": "New Notification",
+  "earlier_notification": "Earlier Notification"
 }
