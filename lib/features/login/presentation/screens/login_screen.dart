@@ -191,6 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         if (state is LoadingLoginState) {
+
           return const Scaffold(body: Center(child: CircularProgressIndicator()));
         }
         return Scaffold(
@@ -376,7 +377,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         );
       },
-  
     );
   }
 }
