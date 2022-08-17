@@ -84,25 +84,24 @@ class OrderItemDetails extends StatelessWidget {
                   )
                 ],
               ),
+
               const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width - 200,
-                    height: 1,
-                    color: AppColors.grey,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-              if (items.doughType.isEmpty) ...{
-                Text(AppLocalizations.of(context)!
-                    .translate(AppStrings.noDoughText)
-                    .toString())
+              if (items.pivot.doughTypeEn.isEmpty&&items.pivot.doughTypeAr.isEmpty) ...{
+               Container()
               } else ...{
                 Row(
                   children: [
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width - 200,
+                          height: 1,
+                          color: AppColors.grey,
+                        ),
+                      ],
+                    ),
                     Text(
                       '${AppLocalizations.of(context)!.translate(AppStrings.doughTypeText)} ',
                       style: Theme.of(context)
@@ -111,14 +110,12 @@ class OrderItemDetails extends StatelessWidget {
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const Spacer(),
-                    ...List.generate(
-                        items.doughType.length,
-                        (index) => Text(AppLocalizations.of(context)!.isEnLocale
-                            ? items.doughType[index].nameEn
-                            : items.doughType[index].nameAr)),
+                    Text(AppLocalizations.of(context)!.isEnLocale
+                        ? items.pivot.doughTypeEn
+                        : items.pivot.doughTypeAr),
                     const Spacer(),
                   ],
-                )
+                ),
               },
               const SizedBox(height: 8),
               Row(
