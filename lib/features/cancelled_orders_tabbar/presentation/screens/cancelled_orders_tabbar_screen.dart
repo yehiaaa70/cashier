@@ -39,7 +39,9 @@ class _CancelledOrdersTabBarScreenState
       } else if (state is AcceptorLoaded) {
         return ContainedTabBarView(
 
+
           tabBarProperties:  TabBarProperties(indicatorColor: AppColors.primary,height: 100),
+
           tabs: [
             Column(
               children: [
@@ -49,10 +51,12 @@ class _CancelledOrdersTabBarScreenState
                       color:
                           newIndex == 0 ? AppColors.primary : AppColors.grey),
                 ),
+
                 Text(
                     AppLocalizations.of(context)!
                         .translate(AppStrings.canceled)
                         .toString(),
+
                     style: Theme.of(context).textTheme.headline6?.copyWith(
                         color: newIndex == 0
                             ? AppColors.primary

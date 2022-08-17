@@ -39,12 +39,21 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future init() async {
+
+    OffersCubit.get(context).token = (await SecureStorage.getToken())!;
+    // log(userToken.toString());
+    if (OffersCubit.get(context).token.length > 800) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
+      });
+
     if (await getTokenBool() == true) {
       if (s!.isNotEmpty) {
         Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
       } else {
         Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
       }
+
     }
     //
     // LoginCubit.get(context).getTokenBool();
