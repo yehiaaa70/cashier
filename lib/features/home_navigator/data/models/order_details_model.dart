@@ -1,13 +1,13 @@
-
 import 'package:cashir/features/home_navigator/domain/entities/order_date.dart';
 
 import 'customer_model.dart';
 
 class OrderDetailsModel extends OrderDetails {
-  const OrderDetailsModel(
+  OrderDetailsModel(
       {required super.id,
       required super.customerId,
       required super.branchId,
+      required super.paymentType,
       required super.serviceType,
       required super.subtotal,
       required super.taxes,
@@ -22,6 +22,7 @@ class OrderDetailsModel extends OrderDetails {
       required super.updatedBy,
       required super.addressId,
       required super.pointsPaid,
+      required super.offerValue,
       required super.offerType,
       required super.orderFrom,
       required super.customer,
@@ -40,14 +41,16 @@ class OrderDetailsModel extends OrderDetails {
         deliveryFees: json["delivery_fees"],
         total: json["total"],
         state: json["state"],
-        cancellationReason: json["cancellation_reason"]??"NO Reason",
+        cancellationReason: json["cancellation_reason"] ?? "NO Reason",
         deletedAt: json["deleted_at"],
         createdAt: DateTime.parse(json["created_at"]).toString(),
         updatedAt: DateTime.parse(json["updated_at"]).toString(),
         createdBy: json["created_by"],
         updatedBy: json["updated_by"],
-        addressId: json["address_id"]??"null",
+        addressId: json["address_id"] ?? "null",
         pointsPaid: json["points_paid"],
+        offerValue: json["offer_value"],
+        paymentType: json["payment_type"],
         offerType: json["offer_type"],
         orderFrom: json["order_from"],
         customer: CustomerModel.fromJson(json["customer"]),
@@ -55,13 +58,12 @@ class OrderDetailsModel extends OrderDetails {
         items: List<ItemModel>.from(
             json["items"].map((x) => ItemModel.fromJson(x))),
         // address: AddressModel.fromJson(json["address"]??""),
-        address: json["address"] == null ? null : Address.fromJson(json["address"]),
+        address:
+            json["address"] == null ? null : Address.fromJson(json["address"]),
 
         // address: json["address"] == null ? null : AddressModel.fromJson(json["address"]),
-
       );
 }
-
 
 class ItemModel extends Items {
   const ItemModel(
@@ -166,10 +168,10 @@ class PivotModel extends Pivot {
   factory PivotModel.fromJson(Map<String, dynamic> json) => PivotModel(
         orderId: json["order_id"],
         itemId: json["item_id"],
-        itemExtras: json["item_extras"]??"null",
-        itemWithouts: json["item_withouts"]??"null",
-        doughTypeAr: json["dough_type_ar"]??"null",
-        doughTypeEn: json["dough_type_en"]??"null",
+        itemExtras: json["item_extras"] ?? "",
+        itemWithouts: json["item_withouts"] ?? "",
+        doughTypeAr: json["dough_type_ar"] ?? "",
+        doughTypeEn: json["dough_type_en"] ?? "",
         price: json["price"],
         offerPrice: json["offer_price"],
         quantity: json["quantity"],
@@ -206,7 +208,7 @@ class BranchModel extends Branch {
         addressDescription: json["address_description"],
         addressDescriptionEn: json["address_description_en"],
         firstPhone: json["first_phone"],
-        secondPhone: json["second_phone"]??"null",
+        secondPhone: json["second_phone"] ?? "null",
         email: json["email"],
         deliveryFees: json["delivery_fees"],
         serviceType: json["service_type"],

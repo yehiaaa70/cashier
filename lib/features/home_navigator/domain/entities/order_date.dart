@@ -1,4 +1,3 @@
-
 import 'package:cashir/features/home_navigator/data/models/address_model.dart';
 import 'package:cashir/features/home_navigator/data/models/city_model.dart';
 import 'package:equatable/equatable.dart';
@@ -21,9 +20,11 @@ class OrderDetails extends Equatable {
   final Null updatedBy;
   final String addressId;
   final String pointsPaid;
+  final String offerValue;
   final Null offerType;
   final String orderFrom;
   final Customer customer;
+  final String paymentType;
   final Branch branch;
   final List<Items> items;
   final Address? address;
@@ -31,7 +32,8 @@ class OrderDetails extends Equatable {
   const OrderDetails(
       {required this.id,
       required this.customerId,
-      required this.branchId,
+        required this.paymentType,
+        required this.branchId,
       required this.serviceType,
       required this.subtotal,
       required this.taxes,
@@ -46,6 +48,7 @@ class OrderDetails extends Equatable {
       required this.updatedBy,
       required this.addressId,
       required this.pointsPaid,
+      required this.offerValue,
       required this.offerType,
       required this.orderFrom,
       required this.customer,
@@ -68,6 +71,7 @@ class OrderDetails extends Equatable {
         updatedBy,
         addressId,
         pointsPaid,
+        offerValue,
         offerType,
         orderFrom,
         customer,
@@ -401,21 +405,21 @@ class Address extends Equatable {
       required this.area});
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
-    id: json["id"],
-    name: json["name"],
-    street: json["street"],
-    buildingNumber: json["building_number"]??"no data",
-    floorNumber: json["floor_number"]??"no data",
-    landmark: json["landmark"],
-    cityId: json["city_id"],
-    areaId: json["area_id"],
-    customerId: json["customer_id"],
-    deletedAt: json["deleted_at"]??"no data",
-    createdAt:json["created_at"]??"no data",
-    updatedAt: json["updated_at"]??"no data",
-    city: CityModel.fromJson(json["city"]),
-    area: AreaModel.fromJson(json["area"]),
-  );
+        id: json["id"],
+        name: json["name"],
+        street: json["street"],
+        buildingNumber: json["building_number"] ?? "no data",
+        floorNumber: json["floor_number"] ?? "no data",
+        landmark: json["landmark"],
+        cityId: json["city_id"],
+        areaId: json["area_id"],
+        customerId: json["customer_id"],
+        deletedAt: json["deleted_at"] ?? "no data",
+        createdAt: json["created_at"] ?? "no data",
+        updatedAt: json["updated_at"] ?? "no data",
+        city: CityModel.fromJson(json["city"]),
+        area: AreaModel.fromJson(json["area"]),
+      );
 
   @override
   List<Object?> get props => [

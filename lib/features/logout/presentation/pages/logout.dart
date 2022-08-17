@@ -35,7 +35,7 @@ class LogoutScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const LangSwitch(),
+                  Spacer(),
                   Row(
                     children: [
                       SizedBox(width: MediaQuery.of(context).size.width * 0.22),
@@ -67,6 +67,9 @@ class LogoutScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 200),
+                  Spacer(),
+                  const LangSwitch(),
+                  Spacer(),
                 ],
               ),
             ),

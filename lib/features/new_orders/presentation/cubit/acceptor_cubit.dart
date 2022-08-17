@@ -99,6 +99,7 @@ class AcceptorCubit extends Cubit<AcceptorState> {
         branchId: pendingOrder.branchId,
         cancellationReason: pendingOrder.cancellationReason,
         createdAt: pendingOrder.createdAt,
+        paymentType: pendingOrder.paymentType,
         createdBy: pendingOrder.createdBy,
         customer: pendingOrder.customer,
         customerId: pendingOrder.customerId,
@@ -113,7 +114,7 @@ class AcceptorCubit extends Cubit<AcceptorState> {
         taxes: pendingOrder.taxes,
         total: pendingOrder.total,
         updatedAt: pendingOrder.updatedAt,
-        updatedBy: pendingOrder.updatedBy);
+        updatedBy: pendingOrder.updatedBy, offerValue: pendingOrder.offerValue);
 
     progress.add(progressOrder);
 
@@ -145,13 +146,15 @@ class AcceptorCubit extends Cubit<AcceptorState> {
           items: pendingOrder.items,
           offerType: pendingOrder.offerType,
           orderFrom: pendingOrder.orderFrom,
+          paymentType: pendingOrder.paymentType,
           pointsPaid: pendingOrder.pointsPaid,
           serviceType: pendingOrder.serviceType,
           subtotal: pendingOrder.subtotal,
           taxes: pendingOrder.taxes,
           total: pendingOrder.total,
           updatedAt: pendingOrder.updatedAt,
-          updatedBy: pendingOrder.updatedBy);
+          updatedBy: pendingOrder.updatedBy
+          , offerValue: pendingOrder.offerValue);
       canceled.add(cancelOrder);
       pending.removeWhere((element) => element.id == accept.data.id);
     }else if(state=="progress"){
@@ -166,6 +169,7 @@ class AcceptorCubit extends Cubit<AcceptorState> {
           branch: pendingOrder.branch,
           branchId: pendingOrder.branchId,
           createdAt: pendingOrder.createdAt,
+          paymentType: pendingOrder.paymentType,
           createdBy: pendingOrder.createdBy,
           customer: pendingOrder.customer,
           customerId: pendingOrder.customerId,
@@ -180,7 +184,8 @@ class AcceptorCubit extends Cubit<AcceptorState> {
           taxes: pendingOrder.taxes,
           total: pendingOrder.total,
           updatedAt: pendingOrder.updatedAt,
-          updatedBy: pendingOrder.updatedBy);
+          updatedBy: pendingOrder.updatedBy,
+          offerValue: pendingOrder.offerValue);
       canceled.add(cancelOrder);
       progress.removeWhere((element) => element.id == accept.data.id);
     }else{
@@ -205,6 +210,7 @@ class AcceptorCubit extends Cubit<AcceptorState> {
         id: pendingOrder.id,
         state: "rejected",
         cancellationReason: reason,
+         paymentType: pendingOrder.paymentType,
         address: pendingOrder.address,
         addressId: pendingOrder.addressId,
         branch: pendingOrder.branch,
@@ -224,7 +230,7 @@ class AcceptorCubit extends Cubit<AcceptorState> {
         taxes: pendingOrder.taxes,
         total: pendingOrder.total,
         updatedAt: pendingOrder.updatedAt,
-        updatedBy: pendingOrder.updatedBy);
+        updatedBy: pendingOrder.updatedBy, offerValue: pendingOrder.offerValue);
 
     rejected.add(rejectOrder);
 
@@ -266,7 +272,7 @@ class AcceptorCubit extends Cubit<AcceptorState> {
         taxes: progressOrder.taxes,
         total: progressOrder.total,
         updatedAt: progressOrder.updatedAt,
-        updatedBy: progressOrder.updatedBy);
+        updatedBy: progressOrder.updatedBy, offerValue: progressOrder.offerValue, paymentType: progressOrder.paymentType);
 
     completed.add(completedOrder);
 

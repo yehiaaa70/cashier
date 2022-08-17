@@ -33,6 +33,9 @@ class AppStrings {
   static const String deliveryFeeText = 'delivery_fee_text';
   static const String serviceText = 'service_text';
   static const String taxText = 'tax_text';
+  static const String discountOfferText = 'discount_offer_text';
+  static const String discountPointText = 'discount_point_text';
+  static const String paymentType = 'payment_type';
   static const String discountText = 'discount_text';
   static const String totalText = 'total_text';
   static const String srText = 'sr_text';

@@ -25,14 +25,14 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
   }
 
-  String? s;
+  String s='';
   bool check = true;
 
   Future<bool> getTokenBool() async {
-    s = await SecureStorage.getToken();
-    if (s!.isEmpty) {
+    s = await SecureStorage.getToken()??'';
+    if (s.isEmpty) {
       print("empty");
-      context.read<LoginCubit>().checkToken = false;
+      check = false;
       return false;
     } else {
       print("not empty");
@@ -42,8 +42,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future init() async {
     if (await getTokenBool() == true) {
-      if (s!.isNotEmpty) {
-        OffersCubit.get(context).token = s!;
+      if (s.isNotEmpty) {
+        OffersCubit.get(context).token = s;
         Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
       }
     }
@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
           if (state is LoadingLoginState) {
             return const Center(child: CircularProgressIndicator());
           }
-          return context.read<LoginCubit>().checkToken == true
+          return check == false
               ? Form(
                   key: LoginCubit.get(context).formKeyLogin,
                   child: ListView(

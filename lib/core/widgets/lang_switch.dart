@@ -31,7 +31,7 @@ class _LangSwitchState extends State<LangSwitch> {
               }
             });
           },
-          activeColor: AppColors.grey,
+          activeColor: AppColors.primary,
         ),
         const Text('ar'),
       ],
