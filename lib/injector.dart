@@ -1,6 +1,4 @@
 import 'package:cashir/features/home_navigator/domain/use_cases/get_history_orders.dart';
-
-import 'package:cashir/config/local/app_localizations.dart';
 import 'package:cashir/features/home_navigator/presentation/cubit/home_navigator_cubit.dart';
 import 'package:cashir/features/language/presentation/bloc/language_bloc.dart';
 import 'package:cashir/features/login/presentation/cubit/login_cubit.dart';
@@ -9,20 +7,17 @@ import 'package:cashir/features/new_orders/domain/use_cases/cancel_order_use_cas
 import 'package:cashir/features/new_orders/domain/use_cases/rejected_order_use_case.dart';
 import 'package:cashir/features/notifications/presentation/cubit/notification_cubit.dart';
 import 'package:cashir/features/offers/presentation/cubit/offers_cubit.dart';
-
 import 'package:cashir/core/network/network_info.dart';
 import 'package:cashir/features/home_navigator/data/data_sources/all_orders_data_sources.dart';
 import 'package:cashir/features/home_navigator/data/repositories/order_data_repo.dart';
 import 'package:cashir/features/home_navigator/domain/repositories/base_orders_repositories.dart';
 import 'package:cashir/features/home_navigator/domain/use_cases/get_all_order_use_case.dart';
-import 'package:cashir/features/login/presentation/cubit/login_cubit.dart';
 import 'package:cashir/features/order_progress/domain/use_cases/progress_use_case.dart';
 import 'package:cashir/features/order_progress/presentation/cubit/progress_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'core/api/app_interceptors.dart';
 import 'core/api/base_api_consumer.dart';
 import 'core/api/dio_consumer.dart';

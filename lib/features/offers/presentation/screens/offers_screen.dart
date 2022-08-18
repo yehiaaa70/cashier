@@ -23,9 +23,8 @@ class OffersScreen extends StatefulWidget {
 class _OffersScreenState extends State<OffersScreen> {
   @override
   void initState() {
-    OffersCubit.get(context).getAllOffers(context);
-
     super.initState();
+    OffersCubit.get(context).getAllOffers(context);
   }
 
   @override
@@ -40,21 +39,15 @@ class _OffersScreenState extends State<OffersScreen> {
           return ListView(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             children: [
-              Text(
-                AppLocalizations.of(context)!
-                    .translate(AppStrings.availableOffers)
-                    .toString(),
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5
-                    ?.copyWith(color: AppColors.darkBlue),
-              ),
-              (CallApiForOffers.availableOffers.isEmpty)
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text('No available offers added yet.'),
-                      ],
+              CallApiForOffers.availableOffers.isNotEmpty
+                  ? Text(
+                      AppLocalizations.of(context)!
+                          .translate(AppStrings.availableOffers)
+                          .toString(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5
+                          ?.copyWith(color: AppColors.darkBlue),
                     )
                   : Container(),
               const SizedBox(
@@ -71,21 +64,15 @@ class _OffersScreenState extends State<OffersScreen> {
               const SizedBox(
                 height: 30,
               ),
-              Text(
-                AppLocalizations.of(context)!
-                    .translate(AppStrings.expiredOffers)
-                    .toString(),
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5
-                    ?.copyWith(color: AppColors.darkBlue),
-              ),
-              (CallApiForOffers.expiredOffers.isEmpty)
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text('No expired offers added yet.'),
-                      ],
+              CallApiForOffers.expiredOffers.isNotEmpty
+                  ? Text(
+                      AppLocalizations.of(context)!
+                          .translate(AppStrings.expiredOffers)
+                          .toString(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5
+                          ?.copyWith(color: AppColors.darkBlue),
                     )
                   : Container(),
               const SizedBox(

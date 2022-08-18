@@ -6,6 +6,7 @@ import 'package:cashir/features/offers/presentation/cubit/offers_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class CallApiForNotification {
   static List<NotificationModel> notifications = [];
@@ -42,6 +43,7 @@ class CallApiForNotification {
           notifications = (data as List)
               .map((data) => NotificationModel.fromJson(data))
               .toList();
+
           earlierNotifications = [];
           newNotifications = [];
 

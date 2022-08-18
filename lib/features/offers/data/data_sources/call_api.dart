@@ -41,6 +41,7 @@ class CallApiForOffers {
 
           offers =
               (data as List).map((data) => OffersModel.fromJson(data)).toList();
+
           availableOffers = [];
           expiredOffers = [];
           for (int i = 0; i < offers.length; i++) {
