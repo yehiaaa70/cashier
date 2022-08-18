@@ -7,8 +7,9 @@ class LanguageState extends Equatable {
   });
 
   factory LanguageState.initial() => const LanguageState(locale: Locale('en'));
-  LanguageState copyWith({Locale? locale}) =>
-      LanguageState(locale: locale ?? this.locale);
+  LanguageState copyWith({Locale? locale}) {
+    return LanguageState(locale: locale ?? this.locale);
+  }
 
   @override
   List<Object?> get props => [locale];

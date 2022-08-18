@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:cashir/config/local/app_localizations.dart';
+import 'package:cashir/core/secure_storage/secure_storage.dart';
 import 'package:cashir/core/utils/app_colors.dart';
 import 'package:cashir/features/language/presentation/bloc/language_bloc.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +16,12 @@ class LangSwitch extends StatefulWidget {
 }
 
 class _LangSwitchState extends State<LangSwitch> {
-  bool lang = false;
+  late int lang = 0;
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -23,7 +31,7 @@ class _LangSwitchState extends State<LangSwitch> {
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 10),
             child: ToggleSwitch(
-              initialLabelIndex: 0,
+              initialLabelIndex: lang,
               totalSwitches: 2,
               activeBgColor: [AppColors.secondary],
               activeFgColor: Colors.white,
@@ -38,7 +46,7 @@ class _LangSwitchState extends State<LangSwitch> {
                     ],
               onToggle: (index) {
                 if (AppLocalizations.of(context)!.isEnLocale) {
-                  if (index == 0) {
+                  if (index == lang) {
                     BlocProvider.of<LanguageBloc>(context)
                         .add(LoadLanguage(locale: const Locale('en')));
                   } else {
@@ -46,7 +54,7 @@ class _LangSwitchState extends State<LangSwitch> {
                         .add(LoadLanguage(locale: const Locale('ar')));
                   }
                 } else {
-                  if (index == 1) {
+                  if (index != lang) {
                     BlocProvider.of<LanguageBloc>(context)
                         .add(LoadLanguage(locale: const Locale('en')));
                   } else {
