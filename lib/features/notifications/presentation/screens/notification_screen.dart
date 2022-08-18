@@ -35,52 +35,73 @@ class _NotificationScreenState extends State<NotificationScreen> {
           if (state is NotificationIsLoading) {
             return const Center(child: CircularProgressIndicator());
           }
-          return Padding(
+          return ListView(
             padding: const EdgeInsets.all(20.0),
-            child: ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: Text(
-                    AppLocalizations.of(context)!
-                        .translate(AppStrings.newNotification)
-                        .toString(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        ?.copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Column(
-                  children: [
-                    ...List.generate(
-                        CallApiForNotification.newNotifications.length,
-                        (index) => NotificationContainerWidget(
-                              notification: CallApiForNotification
-                                  .newNotifications[index],
-                            )),
-                  ],
-                ),
-                const SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: Text(
-                      AppLocalizations.of(context)!
-                          .translate(AppStrings.earlierNotification)
-                          .toString(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          ?.copyWith(fontWeight: FontWeight.bold)),
-                ),
-                ...List.generate(
-                    CallApiForNotification.earlierNotifications.length,
-                    (index) => NotificationContainerWidget(
-                          notification: CallApiForNotification
-                              .earlierNotifications[index],
-                        ))
-              ],
-            ),
+            children: [
+              CallApiForNotification.newNotifications.isEmpty &&
+                      CallApiForNotification.earlierNotifications.isEmpty
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!
+                              .translate(AppStrings.notification)
+                              .toString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2
+                              ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.black),
+                        ),
+                      ],
+                    )
+                  : Container(),
+              CallApiForNotification.newNotifications.isNotEmpty
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: Text(
+                        AppLocalizations.of(context)!
+                            .translate(AppStrings.newNotification)
+                            .toString(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  : Container(),
+              Column(
+                children: [
+                  ...List.generate(
+                      CallApiForNotification.newNotifications.length,
+                      (index) => NotificationContainerWidget(
+                            notification:
+                                CallApiForNotification.newNotifications[index],
+                          )),
+                ],
+              ),
+              const SizedBox(height: 30),
+              CallApiForNotification.earlierNotifications.isNotEmpty
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: Text(
+                          AppLocalizations.of(context)!
+                              .translate(AppStrings.earlierNotification)
+                              .toString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1
+                              ?.copyWith(fontWeight: FontWeight.bold)),
+                    )
+                  : Container(),
+              ...List.generate(
+                  CallApiForNotification.earlierNotifications.length,
+                  (index) => NotificationContainerWidget(
+                        notification:
+                            CallApiForNotification.earlierNotifications[index],
+                      ))
+            ],
           );
         },
       ),

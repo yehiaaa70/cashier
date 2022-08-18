@@ -84,12 +84,12 @@ class OrderItemDetails extends StatelessWidget {
                   )
                 ],
               ),
-
               const SizedBox(height: 8),
-              if (items.pivot.doughTypeEn.isEmpty&&items.pivot.doughTypeAr.isEmpty) ...{
-               Container()
+              if (items.pivot.doughTypeEn.isEmpty &&
+                  items.pivot.doughTypeAr.isEmpty) ...{
+                Container()
               } else ...{
-                Row(
+                Column(
                   children: [
                     const SizedBox(height: 8),
                     Row(
@@ -102,20 +102,24 @@ class OrderItemDetails extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Text(
-                      '${AppLocalizations.of(context)!.translate(AppStrings.doughTypeText)} ',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          ?.copyWith(fontWeight: FontWeight.bold),
+                    Row(
+                      children: [
+                        Text(
+                          '${AppLocalizations.of(context)!.translate(AppStrings.doughTypeText)} ',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        const Spacer(),
+                        Text(AppLocalizations.of(context)!.isEnLocale
+                            ? items.pivot.doughTypeEn
+                            : items.pivot.doughTypeAr),
+                        const Spacer(),
+                      ],
                     ),
-                    const Spacer(),
-                    Text(AppLocalizations.of(context)!.isEnLocale
-                        ? items.pivot.doughTypeEn
-                        : items.pivot.doughTypeAr),
-                    const Spacer(),
                   ],
-                ),
+                )
               },
               const SizedBox(height: 8),
               Row(

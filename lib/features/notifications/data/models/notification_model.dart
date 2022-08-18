@@ -1,3 +1,5 @@
+import 'package:cashir/features/home_navigator/data/models/customer_model.dart';
+
 class NotificationModel {
   int? id;
   String? userId;
@@ -7,6 +9,7 @@ class NotificationModel {
   String? type;
   String? createdAt;
   String? updatedAt;
+  CustomerModel? customerModel;
 
   NotificationModel({
     this.id,
@@ -17,17 +20,21 @@ class NotificationModel {
     this.type,
     this.createdAt,
     this.updatedAt,
+    this.customerModel,
   });
 
   NotificationModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    userId = json['user_id'];
-    chatId = json['chat_id'];
-    body = json['body'];
-    data = json['data'];
-    type = json['type'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    id = json['id'] ?? '';
+    userId = json['user_id'] ?? '';
+    chatId = json['chat_id'] ?? '';
+    body = json['body'] ?? '';
+    data = json['data'] ?? [];
+    type = json['type'] ?? '';
+    createdAt = json['created_at'] ?? '';
+    updatedAt = json['updated_at'] ?? '';
+    customerModel = json['customer'] != null
+        ? CustomerModel.fromJson(json['customer'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -40,6 +47,7 @@ class NotificationModel {
     data['type'] = type;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['customer'] = customerModel;
     return data;
   }
 }

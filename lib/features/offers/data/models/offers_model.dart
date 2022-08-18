@@ -30,19 +30,19 @@ class OffersModel {
   });
 
   OffersModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    serviceType = json['service_type'];
-    dateFrom = json['date_from'];
-    dateTo = json['date_to'];
-    description = json['description'];
-    image = json['image'];
-    offerType = json['offer_type'];
-    titleAr = json['title_ar'];
-    descriptionAr = json['description_ar'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    createdBy = json['created_by'];
+    id = json['id'] ?? '';
+    title = json['title'] ?? '';
+    serviceType = json['service_type'] ?? '';
+    dateFrom = json['date_from'] ?? '';
+    dateTo = json['date_to'] ?? '';
+    description = json['description'] ?? '';
+    image = json['image'] ?? '';
+    offerType = json['offer_type'] ?? '';
+    titleAr = json['title_ar'] ?? '';
+    descriptionAr = json['description_ar'] ?? '';
+    createdAt = json['created_at'] ?? '';
+    updatedAt = json['updated_at'] ?? '';
+    createdBy = json['created_by'] ?? '';
   }
 
   Map<String, dynamic> toJson() {

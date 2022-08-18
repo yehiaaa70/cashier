@@ -26,6 +26,13 @@ class NotificationContainerWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
+              notification.customerModel!.name,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
               notification.body.toString(),
               style: Theme.of(context).textTheme.headline6,
             ),

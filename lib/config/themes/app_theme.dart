@@ -7,7 +7,7 @@ ThemeData appTheme() {
   return ThemeData(
     primaryColor: AppColors.primary,
     colorScheme: ColorScheme.light(
-      primary: AppColors.primary,
+      primary: AppColors.primary!,
       secondary: AppColors.secondary,
     ),
     scaffoldBackgroundColor: AppColors.background,
@@ -15,7 +15,7 @@ ThemeData appTheme() {
       centerTitle: true,
       elevation: 0.0,
       backgroundColor: AppColors.transparent,
-      iconTheme: IconThemeData(color: AppColors.blue),
+      iconTheme: IconThemeData(color: AppColors.primary),
     ),
     brightness: Brightness.light,
     fontFamily: AppStrings.fontFamily,
