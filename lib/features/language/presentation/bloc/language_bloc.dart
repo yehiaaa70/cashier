@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:cashir/core/secure_storage/secure_storage.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'language_event.dart';
 part 'language_state.dart';

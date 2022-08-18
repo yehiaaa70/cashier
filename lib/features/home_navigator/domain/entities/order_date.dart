@@ -88,7 +88,7 @@ class Customer extends Equatable {
   final String middleName;
   final String lastName;
   final String firstPhone;
-  final Null secondPhone;
+  final String secondPhone;
   final String image;
   final String email;
   final String age;

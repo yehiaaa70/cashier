@@ -66,8 +66,6 @@ class LogoutScreen extends StatelessWidget {
                           ),
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  const LangSwitch(),
                   const SizedBox(height: 200),
                 ],
               ),
