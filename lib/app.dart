@@ -4,6 +4,7 @@ import 'package:cashir/features/history/presentation/cubit/history_cubit.dart';
 import 'package:cashir/features/home_navigator/presentation/cubit/home_navigator_cubit.dart';
 import 'package:cashir/features/home_navigator/presentation/screens/home_navigator_screen.dart';
 import 'package:cashir/features/language/presentation/bloc/language_bloc.dart';
+import 'package:cashir/features/locale/presentation/cubit/language_cubit.dart';
 
 import 'package:cashir/features/login/presentation/cubit/login_cubit.dart';
 import 'package:cashir/features/login/presentation/screens/login_screen.dart';
@@ -62,10 +63,12 @@ class CashirApp extends StatelessWidget {
         BlocProvider<NotificationCubit>(
           create: (_) => serviceLocator<NotificationCubit>(),
         ),
-
+        BlocProvider<LanguageCubit>(
+          create: (_) => serviceLocator<LanguageCubit>()..getSavedLanguage(),
+        ),
 
       ],
-      child: BlocBuilder<LanguageBloc, LanguageState>(
+      child: BlocBuilder<LanguageCubit, LanguagesState>(
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,

@@ -3,6 +3,8 @@ import 'package:cashir/features/home_navigator/domain/use_cases/get_history_orde
 import 'package:cashir/config/local/app_localizations.dart';
 import 'package:cashir/features/home_navigator/presentation/cubit/home_navigator_cubit.dart';
 import 'package:cashir/features/language/presentation/bloc/language_bloc.dart';
+import 'package:cashir/features/locale/domain/repositories/base_language_repositories.dart';
+import 'package:cashir/features/locale/presentation/cubit/language_cubit.dart';
 import 'package:cashir/features/login/presentation/cubit/login_cubit.dart';
 import 'package:cashir/features/logout/presentation/cubit/logout_cubit.dart';
 import 'package:cashir/features/new_orders/domain/use_cases/cancel_order_use_case.dart';
@@ -28,6 +30,10 @@ import 'core/api/base_api_consumer.dart';
 import 'core/api/dio_consumer.dart';
 import 'features/history/presentation/cubit/history_cubit.dart';
 import 'features/home_navigator/presentation/cubit/home_navigator_cubit.dart';
+import 'features/locale/domain/use_cases/save_language.dart';
+import 'features/login/data/data_sources/langauge_data_source.dart';
+import 'features/locale/data/repositories/langauge_repositories.dart';
+import 'features/locale/domain/use_cases/change_language.dart';
 import 'features/new_orders/data/data_sources/accept_order_data_source.dart';
 import 'features/new_orders/data/repositories/accept_order_data_repo.dart';
 import 'features/new_orders/domain/repositories/base_accept_repositories.dart';
@@ -66,8 +72,15 @@ Future<void> setup() async {
 
   serviceLocator
       .registerLazySingleton(() => RejectOrdersUseCase(serviceLocator()));
+
   serviceLocator.registerLazySingleton(
       () => GetHistoryOrderUseCase(orderRepository: serviceLocator()));
+
+  serviceLocator.registerLazySingleton(
+          () => GetSavedLanguageUseCase(languageRepository: serviceLocator()));
+
+ serviceLocator.registerLazySingleton(
+          () => ChangeLanguageUseCase(languageRepository: serviceLocator()));
 
   // Data Sources
   serviceLocator.registerLazySingleton<AllOrdersRemoteDataSource>(
@@ -96,6 +109,11 @@ Future<void> setup() async {
         networkInfo: serviceLocator()),
   );
 
+  serviceLocator.registerLazySingleton<BaseLanguageRepository>(
+        () => LanguageRepository(
+      languageLocaleDataSource: serviceLocator(),
+    ),
+  );
   // Data Sources
   serviceLocator.registerLazySingleton<BaseAllOrdersRemoteDataSource>(
       () => AllOrdersRemoteDataSource(apiConsumer: serviceLocator()));
@@ -105,6 +123,9 @@ Future<void> setup() async {
 
   serviceLocator.registerLazySingleton<BaseCompletedOrderRemoteDataSource>(
       () => CompletedOrderRemoteDataSource(serviceLocator()));
+
+  serviceLocator.registerLazySingleton<BaseLanguageLocaleDataSource>(
+          () => LanguageLocaleDataSource(sharedPreferences: serviceLocator()));
 
   //! Core
   //Network
@@ -134,6 +155,7 @@ Future<void> setup() async {
   // serviceLocator.registerFactory(() => TabBarStatusCubit());
   serviceLocator.registerFactory(() => LoginCubit());
   serviceLocator.registerFactory(() => OffersCubit());
+  serviceLocator.registerFactory(() => LanguageCubit(getSavedLanguageUseCase: serviceLocator(),changeLanguageUseCase: serviceLocator()));
   serviceLocator.registerFactory(() => LogoutCubit());
   serviceLocator.registerFactory(() => NotificationCubit());
   serviceLocator.registerFactory(() => HistoryCubit(serviceLocator()));

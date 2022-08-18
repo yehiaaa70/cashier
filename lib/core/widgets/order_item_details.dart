@@ -89,33 +89,35 @@ class OrderItemDetails extends StatelessWidget {
               if (items.pivot.doughTypeEn.isEmpty&&items.pivot.doughTypeAr.isEmpty) ...{
                Container()
               } else ...{
-                Row(
-                  children: [
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width - 200,
-                          height: 1,
-                          color: AppColors.grey,
-                        ),
-                      ],
-                    ),
-                    Text(
-                      '${AppLocalizations.of(context)!.translate(AppStrings.doughTypeText)} ',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    const Spacer(),
-                    Text(AppLocalizations.of(context)!.isEnLocale
-                        ? items.pivot.doughTypeEn
-                        : items.pivot.doughTypeAr),
-                    const Spacer(),
-                  ],
-                ),
+                Column(children: [
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width - 200,
+                        height: 1,
+                        color: AppColors.grey,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        '${AppLocalizations.of(context)!.translate(AppStrings.doughTypeText)} ',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      const Spacer(),
+                      Text(AppLocalizations.of(context)!.isEnLocale
+                          ? items.pivot.doughTypeEn
+                          : items.pivot.doughTypeAr),
+                      const Spacer(),
+                    ],
+                  ),
+                ],)
               },
               const SizedBox(height: 8),
               Row(

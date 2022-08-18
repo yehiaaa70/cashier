@@ -28,17 +28,24 @@ class OrderInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          customerName,
-          style: Theme.of(context)
-              .textTheme
-              .headline4
-              ?.copyWith(color: AppColors.darkBlue),
-          overflow: TextOverflow.ellipsis,
+        Row(
+          children: [
+            Icon(Icons.person),
+            SizedBox(width: 18,),
+            Text(
+              customerName,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4
+                  ?.copyWith(color: AppColors.darkBlue),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Icon(Icons.phone),
+            SizedBox(width: 18,),
             Text(
               AppLocalizations.of(context)!.isEnLocale
                   ? customerPhone
@@ -49,6 +56,8 @@ class OrderInfo extends StatelessWidget {
                   ?.copyWith(color: AppColors.darkBlue, fontSize: 14),
               overflow: TextOverflow.ellipsis,
             ),
+            Spacer(),
+            // Spacer(),
             InkWell(
               onTap: () async {
                 final Uri launchUri = Uri(
@@ -59,17 +68,23 @@ class OrderInfo extends StatelessWidget {
                 // customerPhone.isNotEmpty? launch("tel://$customerPhone"):launch("tel://00112233445566");
               },
               child: Image.asset(ImageAssets.callIcon,
-                  width: 30, height: 30, fit: BoxFit.fill),
+                  width: 25, height: 25, fit: BoxFit.fill),
             )
           ],
         ),
-        Text(
-          email,
-          style: Theme.of(context)
-              .textTheme
-              .headline5
-              ?.copyWith(color: AppColors.darkBlue, fontSize: 15),
-          overflow: TextOverflow.ellipsis,
+        Row(
+          children: [
+            Icon(Icons.email_outlined),
+            SizedBox(width: 18,),
+            Text(
+              email,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5
+                  ?.copyWith(color: AppColors.darkBlue, fontSize: 15),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
         ),
         const SizedBox(
           height: 10,

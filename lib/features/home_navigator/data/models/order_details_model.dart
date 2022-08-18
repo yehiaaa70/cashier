@@ -49,7 +49,7 @@ class OrderDetailsModel extends OrderDetails {
         updatedBy: json["updated_by"],
         addressId: json["address_id"] ?? "null",
         pointsPaid: json["points_paid"],
-        offerValue: json["offer_value"],
+        offerValue: json["offer_value"]??"",
         paymentType: json["payment_type"],
         offerType: json["offer_type"],
         orderFrom: json["order_from"],

@@ -10,3 +10,9 @@ class LoadLanguage extends LanguageEvent {
     required this.locale,
   });
 }
+class ChangeLocaleState extends LanguageEvent {
+  final Locale locale;
+  ChangeLocaleState({
+    required this.locale,
+  });
+}

@@ -1,9 +1,12 @@
 import 'package:cashir/config/local/app_localizations.dart';
 import 'package:cashir/core/utils/app_colors.dart';
 import 'package:cashir/features/language/presentation/bloc/language_bloc.dart';
+import 'package:cashir/features/locale/presentation/cubit/language_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+
+import '../../features/login/presentation/cubit/login_cubit.dart';
 
 class LangSwitch extends StatefulWidget {
   const LangSwitch({Key? key}) : super(key: key);
@@ -39,19 +42,28 @@ class _LangSwitchState extends State<LangSwitch> {
               onToggle: (index) {
                 if (AppLocalizations.of(context)!.isEnLocale) {
                   if (index == 0) {
-                    BlocProvider.of<LanguageBloc>(context)
-                        .add(LoadLanguage(locale: const Locale('en')));
+                    context.read<LanguageCubit>().toEnglish();
+                    print("dnvbsd");
+
+                    // BlocProvider.of<LanguageBloc>(context)
+                    //     .add(LoadLanguage(locale: const Locale('en')));
                   } else {
-                    BlocProvider.of<LanguageBloc>(context)
-                        .add(LoadLanguage(locale: const Locale('ar')));
+                    context.read<LanguageCubit>().toArabic();
+
+                    // BlocProvider.of<LanguageBloc>(context)
+                    //     .add(LoadLanguage(locale: const Locale('ar')));
                   }
                 } else {
                   if (index == 1) {
-                    BlocProvider.of<LanguageBloc>(context)
-                        .add(LoadLanguage(locale: const Locale('en')));
+                    // BlocProvider.of<LanguageBloc>(context)
+                    //     .add(LoadLanguage(locale: const Locale('en')));
+                    context.read<LanguageCubit>().toEnglish();
+
                   } else {
-                    BlocProvider.of<LanguageBloc>(context)
-                        .add(LoadLanguage(locale: const Locale('ar')));
+                    context.read<LanguageCubit>().toArabic();
+
+                    // BlocProvider.of<LanguageBloc>(context)
+                    //     .add(LoadLanguage(locale: const Locale('ar')));
                   }
                 }
               },
