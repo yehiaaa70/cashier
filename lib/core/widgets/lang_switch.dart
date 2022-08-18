@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:cashir/config/local/app_localizations.dart';
+import 'package:cashir/core/secure_storage/secure_storage.dart';
 import 'package:cashir/core/utils/app_colors.dart';
 import 'package:cashir/features/language/presentation/bloc/language_bloc.dart';
 import 'package:cashir/features/locale/presentation/cubit/language_cubit.dart';
@@ -16,7 +19,11 @@ class LangSwitch extends StatefulWidget {
 }
 
 class _LangSwitchState extends State<LangSwitch> {
-  bool lang = false;
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -47,6 +54,7 @@ class _LangSwitchState extends State<LangSwitch> {
 
                     // BlocProvider.of<LanguageBloc>(context)
                     //     .add(LoadLanguage(locale: const Locale('en')));
+
                   } else {
                     context.read<LanguageCubit>().toArabic();
 
@@ -58,6 +66,7 @@ class _LangSwitchState extends State<LangSwitch> {
                     // BlocProvider.of<LanguageBloc>(context)
                     //     .add(LoadLanguage(locale: const Locale('en')));
                     context.read<LanguageCubit>().toEnglish();
+
 
                   } else {
                     context.read<LanguageCubit>().toArabic();

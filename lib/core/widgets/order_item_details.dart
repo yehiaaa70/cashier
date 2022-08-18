@@ -84,10 +84,10 @@ class OrderItemDetails extends StatelessWidget {
                   )
                 ],
               ),
-
               const SizedBox(height: 8),
-              if (items.pivot.doughTypeEn.isEmpty&&items.pivot.doughTypeAr.isEmpty) ...{
-               Container()
+              if (items.pivot.doughTypeEn.isEmpty &&
+                  items.pivot.doughTypeAr.isEmpty) ...{
+                Container()
               } else ...{
                 Column(children: [
                   const SizedBox(height: 8),

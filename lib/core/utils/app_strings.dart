@@ -60,6 +60,7 @@ class AppStrings {
   static const String earlierNotification = 'earlier_notification';
   static const String welcomeBackText = 'welcome_back_Text';
   static const String loginToAccountText = 'login_to_account';
+  static const String notification = 'notifications';
 
   //
   static const String fontFamily = 'Cairo';

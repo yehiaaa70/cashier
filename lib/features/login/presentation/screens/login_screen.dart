@@ -25,7 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
     BlocProvider.of<LoginCubit>(context).getToken();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -197,25 +196,24 @@ class _LoginScreenState extends State<LoginScreen> {
                                       child: Container(
                                         width: double.infinity,
                                         height: 60,
-                                        decoration: BoxDecoration(
-                                            color: Colors.amber[800],
-                                            borderRadius:
-                                                BorderRadius.circular(50)),
-                                        child: Center(
-                                          child: Text(
-                                            AppLocalizations.of(context)!
-                                                .translate(AppStrings.login)
-                                                .toString(),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline6
-                                                ?.copyWith(
-                                                    color: AppColors.white),
-                                          ),
+                                      decoration: BoxDecoration(
+                                          color: AppColors.primary,
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                      child: Center(
+                                        child: Text(
+                                          AppLocalizations.of(context)!
+                                              .translate(AppStrings.login)
+                                              .toString(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline6
+                                              ?.copyWith(
+                                                  color: AppColors.white),
                                         ),
                                       ),
                                     ),
-                                  ],
+                                    )],
                                 ),
                               ),
                             ],
