@@ -20,150 +20,17 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // @override
-  // void initState() {
-  //   init();
-  //   super.initState();
-  // }
-
-  // String? s;
-
-  // Future<bool> getTokenBool() async {
-  //   s = await SecureStorage.getToken();
-  //   if (s!.isEmpty) {
-  //     print("empty");
-  //     return false;
-  //   } else {
-  //     print("not empty");
-  //     return true;
-  //   }
-  // }
-
-  // Future init() async {
-  //   if (await getTokenBool() == true) {
-  //     if (s!.isNotEmpty) {
-  //       OffersCubit.get(context).token = s!;
-  //       Navigator.pushReplacementNamed(context, Routes.homeNavigatorRoute);
-  //     }
-  //   }
-  // }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-//       child: Scaffold(
-//         body: BlocBuilder<LoginCubit, LoginState>(
-//           builder: (context, state) {
-//             if (state is LoadingLoginState) {
-//               return const Center(child: CircularProgressIndicator());
-//             }
-//             return Form(
-//               key: LoginCubit.get(context).formKeyLogin,
-//               child: ListView(
-//                 padding: const EdgeInsets.symmetric(horizontal: 30),
-//                 children: [
-//                   const SizedBox(height: 50),
-//                   Center(
-//                       child: Text(
-//                     AppLocalizations.of(context)!
-//                         .translate(AppStrings.appName)
-//                         .toString(),
-//                     style: Theme.of(context).textTheme.headline3,
-//                   )),
-//                   const SizedBox(height: 30),
-//                   Text(
-//                     AppLocalizations.of(context)!
-//                         .translate(AppStrings.emailAddress)
-//                         .toString(),
-//                     style: Theme.of(context).textTheme.headline5,
-//                   ),
-//                   const SizedBox(height: 10),
-//                   TextFormField(
-//                     controller: LoginCubit.get(context).emailController,
-//                     validator: (value) =>
-//                         LoginCubit.get(context).emailValidation(value, context),
-//                     decoration: InputDecoration(
-//                         fillColor: AppColors.white,
-//                         filled: true,
-//                         border: OutlineInputBorder(
-//                             borderRadius: BorderRadius.circular(10),
-//                             borderSide: BorderSide.none)),
-//                   ),
-//                   const SizedBox(height: 30),
-//                   Text(
-//                     AppLocalizations.of(context)!
-//                         .translate(AppStrings.password)
-//                         .toString(),
-//                     style: Theme.of(context).textTheme.headline5,
-//                   ),
-//                   const SizedBox(height: 10),
-//                   TextFormField(
-//                     controller: LoginCubit.get(context).passwordController,
-//                     validator: (value) => LoginCubit.get(context)
-//                         .passwordValidation(value, context),
-//                     decoration: InputDecoration(
-//                         fillColor: AppColors.white,
-//                         filled: true,
-//                         border: OutlineInputBorder(
-//                             borderRadius: BorderRadius.circular(10),
-//                             borderSide: BorderSide.none)),
-//                     obscureText: true,
-//                   ),
-//                   const SizedBox(height: 20),
-//                   const LangSwitch(),
-//                   const SizedBox(height: 20),
-//                   InkWell(
-//                     onTap: () {
-//                       var key = LoginCubit.get(context).formKeyLogin;
-//                       if (key.currentState!.validate()) {
-//                         LoginCubit.get(context).userLogin(context);
-//                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-//                             content: Text(AppLocalizations.of(context)!
-//                                 .translate(AppStrings.loginResponseSnackbar)
-//                                 .toString())));
-//                         LoginCubit.get(context).emailController.text = '';
-//                         LoginCubit.get(context).passwordController.text = '';
-//                       }
-//                     },
-//                     child: Container(
-//                       width: double.infinity,
-//                       height: 50,
-//                       decoration: BoxDecoration(
-//                           color: AppColors.grey,
-//                           borderRadius: BorderRadius.circular(50)),
-//                       child: Center(
-//                         child: Text(
-//                           AppLocalizations.of(context)!
-//                               .translate(AppStrings.login)
-//                               .toString(),
-//                           style: Theme.of(context)
-//                               .textTheme
-//                               .headline6
-//                               ?.copyWith(color: AppColors.white),
-//                         ),
-//                       ),
-//                     ),
-//                   )
-//                 ],
-//               ),
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
   @override
   void initState() {
     init();
     super.initState();
   }
 
-  String s='';
+  String s = '';
   bool check = true;
 
   Future<bool> getTokenBool() async {
-    s = await SecureStorage.getToken()??'';
+    s = await SecureStorage.getToken() ?? '';
     if (s.isEmpty) {
       print("empty");
       check = false;
@@ -191,8 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         if (state is LoadingLoginState) {
-
-          return const Scaffold(body: Center(child: CircularProgressIndicator()));
+          return const Scaffold(
+              body: Center(child: CircularProgressIndicator()));
         }
         return Scaffold(
           backgroundColor: AppColors.white,
