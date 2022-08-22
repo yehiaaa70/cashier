@@ -89,53 +89,53 @@ class OrderItemDetails extends StatelessWidget {
                   items.pivot.doughTypeAr.isEmpty) ...{
                 Container()
               } else ...{
-                Column(children: [
-                  const SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width - 200,
-                        height: 1,
-                        color: AppColors.grey,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '${AppLocalizations.of(context)!.translate(AppStrings.doughTypeText)} ',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      const Spacer(),
-                      Text(AppLocalizations.of(context)!.isEnLocale
-                          ? items.pivot.doughTypeEn
-                          : items.pivot.doughTypeAr),
-                      const Spacer(),
-                    ],
-                  ),
-                ],)
+                Column(
+                  children: [
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width - 200,
+                          height: 1,
+                          color: AppColors.grey,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          '${AppLocalizations.of(context)!.translate(AppStrings.doughTypeText)} ',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        const Spacer(),
+                        Text(AppLocalizations.of(context)!.isEnLocale
+                            ? items.pivot.doughTypeEn
+                            : items.pivot.doughTypeAr),
+                        const Spacer(),
+                      ],
+                    ),
+                  ],
+                )
               },
               const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width - 200,
-                    height: 1,
-                    color: AppColors.grey,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
               if (items.extras.isEmpty) ...{
-                Text(AppLocalizations.of(context)!
-                    .translate(AppStrings.noExtraText)
-                    .toString())
+                Container()
               } else ...{
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width - 200,
+                      height: 1,
+                      color: AppColors.grey,
+                    ),
+                  ],
+                ),
                 Text(
                   AppLocalizations.of(context)!
                       .translate(AppStrings.extraText)
@@ -149,15 +149,39 @@ class OrderItemDetails extends StatelessWidget {
                   items.extras.length,
                   (index) => Row(
                     children: [
-                      Spacer(),
+                      const Spacer(),
                       Text(
                           "${AppLocalizations.of(context)!.translate(AppStrings.nameText).toString()} : ${items.extras[index].nameEn}"),
-                      Spacer(),
+                      const Spacer(),
                       Text(
                           "${AppLocalizations.of(context)!.translate(AppStrings.priceText).toString()} : ${AppLocalizations.of(context)!.isEnLocale ? items.extras[index].price : replaceToArabicNumber(items.extras[index].price)}"),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
+                ),
+              },
+              if (items.extras.isEmpty) ...{
+                Container()
+              } else ...{
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width - 200,
+                      height: 1,
+                      color: AppColors.grey,
+                    ),
+                  ],
+                ),
+                Text(
+                  AppLocalizations.of(context)!
+                      .translate(AppStrings.withoutText)
+                      .toString(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               },
             ],

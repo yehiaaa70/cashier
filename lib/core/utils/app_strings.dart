@@ -26,6 +26,7 @@ class AppStrings {
   static const String caloriesText = 'calories_text';
   static const String doughTypeText = 'dough_type_text';
   static const String extraText = 'extra_text';
+  static const String withoutText = 'without_text';
   static const String noDoughText = 'no_dough_text';
   static const String noExtraText = 'no_dough_text';
   static const String printReceiptText = 'print_receipt_text';

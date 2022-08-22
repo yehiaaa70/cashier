@@ -174,9 +174,9 @@ class PivotModel extends Pivot {
         doughTypeAr: json["dough_type_ar"] ?? "",
         doughTypeEn: json["dough_type_en"] ?? "",
         price: json["price"],
-        offerPrice: json["offer_price"],
+        offerPrice: json["offer_price"]??"",
         quantity: json["quantity"],
-        offerId: json["offer_id"],
+        offerId: json["offer_id"]??"",
       );
 }
 

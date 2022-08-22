@@ -44,6 +44,7 @@ class CallApiForNotification {
               .map((data) => NotificationModel.fromJson(data))
               .toList();
 
+
           earlierNotifications = [];
           newNotifications = [];
 

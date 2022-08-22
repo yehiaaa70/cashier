@@ -341,9 +341,9 @@ class Pivot extends Equatable {
   final String doughTypeAr;
   final String doughTypeEn;
   final String price;
-  final Null offerPrice;
+  final String offerPrice;
   final String quantity;
-  final Null offerId;
+  final String offerId;
 
   const Pivot(
       {required this.orderId,
