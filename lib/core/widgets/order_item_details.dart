@@ -145,8 +145,7 @@ class OrderItemDetails extends StatelessWidget {
                       .headline6
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
-                ...List.generate(
-                  items.extras.length,
+
                   (index) => Row(
                     children: [
                       Spacer(),
